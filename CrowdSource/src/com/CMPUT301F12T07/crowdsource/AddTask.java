@@ -1,26 +1,22 @@
 package com.CMPUT301F12T07.crowdsource;
 
-import java.sql.Date;
 import java.util.Calendar;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AddTask extends Activity {
 
 	private Button calendar;
+	private TextView textDate;
 	private int year;
 	private int month;
 	private int day;
@@ -30,7 +26,7 @@ public class AddTask extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
         
-        initializeDates();
+        //initializeDates();
         initializeListeners();
     }
 
@@ -46,10 +42,16 @@ public class AddTask extends Activity {
     	year = cal.get(Calendar.YEAR);
     	month = cal.get(Calendar.MONTH);
     	day = cal.get(Calendar.DAY_OF_MONTH);
+    	
     }
     
     private void initializeListeners() {
     	calendar = (Button) findViewById(R.id.calendar);
+    	textDate = (TextView) findViewById(R.id.textDate);
+    	
+    	initializeDates();
+    	
+    	textDate.setText((month+1) + "/" + day + "/" + year);
     	
     	calendar.setOnClickListener(new OnClickListener() {
     		
@@ -68,6 +70,8 @@ public class AddTask extends Activity {
 	    	year = inyear;
 	        month = inmonth;
 	        day = inday;
+	        
+	        textDate.setText((month+1) + "/" + day + "/" + year);
 	        
 	        Toast.makeText(v.getContext(), "Date set to: " + (month+1) + "/" + day + "/" + year, Toast.LENGTH_SHORT).show();
 	    }
