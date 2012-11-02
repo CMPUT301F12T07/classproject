@@ -1,11 +1,10 @@
 package com.CMPUT301F12T07.crowdsource;
 
 import android.R;
+import android.R.string;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
-import android.view.View.OnFocusChangeListener;
 import android.widget.TextView;
 
 public class ViewTask extends Activity {
@@ -17,8 +16,9 @@ public class ViewTask extends Activity {
 	private TextView taskTitle;
 	private TextView startDate;
 	private TextView endDate;
-	private TextView taskDesc;
 	private TextView taskContent;
+	private TextView taskDesc;
+	
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,12 +27,35 @@ public class ViewTask extends Activity {
         
         Task curentTask = getIntent().getExtras().getParcelable(@string/TaskObject);
         
+        // Getting the task title field
+        this.taskTitle = (TextView) findViewById(R.id.textViewTitle);
+        // unknown implimentation of task getters
+        string titleStr = this.currentTask.getTitle();
+        taskDesc.setText(titleStr));
+        
         // Getting the start Date field
         this.startDate = (TextView) findViewById(R.id.textViewCreatedDate);
-
-        // unknown implimentation of task date getter
+        // unknown implimentation of task getters
         int startDateValue = this.currentTask.getStart();
         startDate.setText(Integer.toString(startDateValue));
+        
+        // Getting the end Date field
+        this.endDate = (TextView) findViewById(R.id.textViewDueDate);
+        // unknown implimentation of task getters
+        int endDateValue = this.currentTask.getEnd();
+        endDate.setText(Integer.toString(endDateValue));
+        
+        // Getting the task content field
+        this.taskContent = (TextView) findViewById(R.id.textViewContent);
+        // unknown implimentation of task getters
+        string contentStr = this.currentTask.getContent();
+        taskDesc.setText(contentStr));
+        
+        // Getting the task description field
+        this.taskDesc = (TextView) findViewById(R.id.textViewDescription);
+        // unknown implimentation of task getters
+        string descStr = this.currentTask.getDesc();
+        taskDesc.setText(descStr));
         
         /*
         timeEdit.setOnFocusChangeListener(new OnFocusChangeListener() {
@@ -43,47 +66,6 @@ public class ViewTask extends Activity {
         		}
         	}
         }); */
-
-        /*
-        // Getting and Setting of Start Battery field
-        this.startEdit = (TextView) findViewById(R.id.taskStartBattery);
-        double startValue = this.currentTask.getStart();
-        startEdit.setText(Double.toString(startValue));
-        startEdit.setOnFocusChangeListener(new OnFocusChangeListener() {
-        	public void onFocusChange(View v, boolean hasFocus){
-        		if (!hasFocus){
-        			currentTask.setStart(Double.parseDouble(startEdit.getText().toString()));
-        			db.updateTask(currentTask);
-        		}
-        	}
-        });
-
-        // Getting and Setting of End Battery field
-        this.endEdit = (TextView) findViewById(R.id.taskEndBattery);
-        double endValue = this.currentTask.getEnd();
-        endEdit.setText(Double.toString(endValue));
-        endEdit.setOnFocusChangeListener(new OnFocusChangeListener() {
-        	public void onFocusChange(View v, boolean hasFocus){
-        		if (!hasFocus){
-        			currentTask.setEnd(Double.parseDouble(endEdit.getText().toString()));
-        			db.updateTask(currentTask);
-        		}
-        	}
-        });
-
-        // Getting and Setting of Description field
-        this.descEdit = (TextView) findViewById(R.id.taskDesc);
-        String descValue = this.currentTask.getDesc();
-        descEdit.setText(descValue);
-        descEdit.setOnFocusChangeListener(new OnFocusChangeListener() {
-        	public void onFocusChange(View v, boolean hasFocus){
-        		if (!hasFocus){
-        			currentTask.setDesc(descEdit.getText().toString());
-        			db.updateTask(currentTask);
-        		}
-        	}
-        });
-        */
     }
 
     @Override
