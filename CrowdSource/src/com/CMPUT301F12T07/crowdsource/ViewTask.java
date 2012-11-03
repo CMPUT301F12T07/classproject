@@ -24,37 +24,37 @@ public class ViewTask extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_task);
         
-        Task curentTask = getIntent().getExtras().getParcelable("taskObject");
+        this.currentTask = getIntent().getExtras().getParcelable("taskObject");
         
         // Getting the task title field
         this.taskTitle = (TextView) findViewById(R.id.textViewTitle);
         // unknown implimentation of task getters
-        String titleStr = this.currentTask.get_title();
-        taskDesc.setText(titleStr);
+        String titleStr = currentTask.get_title();
+        taskTitle.setText(titleStr);
         
         // Getting the start Date field
         this.startDate = (TextView) findViewById(R.id.textViewCreatedDate);
         // unknown implimentation of task getters
-        int startDateValue = Integer.parseInt(this.currentTask.get_dateCreate());
+        int startDateValue = Integer.parseInt(currentTask.get_dateCreate());
         startDate.setText(Integer.toString(startDateValue));
         
         // Getting the end Date field
         this.endDate = (TextView) findViewById(R.id.textViewDueDate);
         // unknown implimentation of task getters
-        int endDateValue = Integer.parseInt(this.currentTask.get_dateDue());
+        int endDateValue = Integer.parseInt(currentTask.get_dateDue());
         endDate.setText(Integer.toString(endDateValue));
         
         // Getting the task content field
         // type? content?
         this.taskContent = (TextView) findViewById(R.id.textViewContent);
         // unknown implimentation of task getters
-        String contentStr = this.currentTask.get_type();
+        String contentStr = currentTask.get_type();
         taskDesc.setText(contentStr);
         
         // Getting the task description field
         this.taskDesc = (TextView) findViewById(R.id.textViewDescription);
         // unknown implimentation of task getters
-        String descStr = this.currentTask.get_description();
+        String descStr = currentTask.get_description();
         taskDesc.setText(descStr);
         
         /*
