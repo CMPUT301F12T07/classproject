@@ -1,11 +1,16 @@
 package com.CMPUT301F12T07.crowdsource;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.io.Serializable;
 
-public class Task implements Parcelable { 
+public class Task implements Serializable { 
 	  
-    /** private variables */
+    /**
+	 * Serialize ID
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
+	/** private variables */
     int _tid; 
     int _uid;
     String _title;
@@ -119,20 +124,5 @@ public class Task implements Parcelable {
 		this._quantity = _quantity;
 	}
 
-	/*
-	 * Parcelable Interface Requirements
-	 */
-	
-	@Override
-	public int describeContents() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		// TODO Auto-generated method stub
-		
-	} 
 
 }
