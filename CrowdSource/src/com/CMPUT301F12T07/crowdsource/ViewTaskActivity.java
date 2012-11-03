@@ -35,14 +35,12 @@ public class ViewTaskActivity extends Activity {
         // Getting the start Date field
         this.startDate = (TextView) findViewById(R.id.textViewCreatedDate);
         // unknown implimentation of task getters
-        int startDateValue = Integer.parseInt(currentTask.get_dateCreate());
-        startDate.setText(Integer.toString(startDateValue));
+        startDate.setText(currentTask.get_dateCreate());
         
         // Getting the end Date field
         this.endDate = (TextView) findViewById(R.id.textViewDueDate);
         // unknown implimentation of task getters
-        int endDateValue = Integer.parseInt(currentTask.get_dateDue());
-        endDate.setText(Integer.toString(endDateValue));
+        endDate.setText(currentTask.get_dateDue());
         
         // Getting the task content field
         // type? content?

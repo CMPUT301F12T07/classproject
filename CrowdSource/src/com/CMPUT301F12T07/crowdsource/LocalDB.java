@@ -197,7 +197,7 @@ public class LocalDB extends SQLiteOpenHelper {
 	
 	/* Deletes all data from Database, useful for testing */
 	public void emptyDatabase() {
-		String emptyQuery = "DELETE FROM " + TABLE_TASKS;
+		String emptyQuery = "DELETE * FROM " + TABLE_TASKS;
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.rawQuery(emptyQuery, null);
 	}
