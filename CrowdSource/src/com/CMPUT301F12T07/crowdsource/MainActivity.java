@@ -5,7 +5,9 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -31,7 +33,7 @@ public class MainActivity extends Activity {
         myList.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		//Intent intent = new Intent(this, ViewTask.class);
-        		//intent.putExtra(); ## TODO: Add Database Connection here
+        		//intent.putExtra("", ); ## TODO: Add Database Connection here
         		//startActivity(intent);
         	}
         });
@@ -41,5 +43,19 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+     switch (item.getItemId()) {
+        case R.id.addTask:
+        	Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            return true;
+        default:
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
+     }
+
     }
 }
