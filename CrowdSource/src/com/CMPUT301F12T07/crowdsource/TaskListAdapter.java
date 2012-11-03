@@ -26,14 +26,14 @@ public class TaskListAdapter extends BaseAdapter {
     }
  
     @Override
-        //get the data of an item from a specific position
-        //i represents the position of the item in the list
+    //get the data of an item from a specific position
+    //i represents the position of the item in the list
     public Object getItem(int i) {
         return null;
     }
  
     @Override
-        //get the position id of the item from the list
+    //get the position id of the item from the list
     public long getItemId(int i) {
         return 0;
     }

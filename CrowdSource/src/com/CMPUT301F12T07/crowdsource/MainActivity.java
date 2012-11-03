@@ -1,14 +1,12 @@
 package com.CMPUT301F12T07.crowdsource;
 
-<<<<<<< HEAD
 import android.R;
 import android.app.Activity;
-=======
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
->>>>>>> Home-Screen
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
