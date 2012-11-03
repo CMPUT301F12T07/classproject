@@ -188,6 +188,13 @@ public class LocalDB extends SQLiteOpenHelper {
 			Log.d("Task: ", log); 
 		}
 	}
+	
+	/* Creates a RandomTask with data, useful for testing */
+	public void createRandomTask() {
+		Task task = new Task(1234567890, "TITLE", "DESCRIPTION", "DATECREATED", "DATEDUE", "TYPE", 1, 1);
+		createTask(task);
+	}
+	
 
 }
 
