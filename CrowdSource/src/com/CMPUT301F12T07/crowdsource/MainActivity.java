@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
      switch (item.getItemId()) {
         case R.id.addTask:
-        	Intent intent = new Intent(this, MainActivity.class);
+        	Intent intent = new Intent(this, AddTask.class);
             startActivity(intent);
             return true;
         default:
