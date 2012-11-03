@@ -7,5 +7,6 @@
     <string name="title_activity_view_task">ViewTask</string>
     <string name="TaskObject">taskObject</string>
     <string name="addtask_actionbar">+</string>
+    <string name="title_activity_add_task">AddTask</string>
 
 </resources>
