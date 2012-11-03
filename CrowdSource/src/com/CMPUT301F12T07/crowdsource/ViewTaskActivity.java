@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TextView;
 
-public class ViewTask extends Activity {
+public class ViewTaskActivity extends Activity {
 
 
 	private Task currentTask;

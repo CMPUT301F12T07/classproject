@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
         // Adds listener for when a Task is clicked in the ListView
         myList.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-        		Intent intent = new Intent(MainActivity.this, ViewTask.class);
+        		Intent intent = new Intent(MainActivity.this, ViewTaskActivity.class);
         		intent.putExtra("taskObject", tasks.get(position));
         		startActivity(intent);
         	}

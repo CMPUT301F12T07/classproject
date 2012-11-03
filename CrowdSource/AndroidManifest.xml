@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ViewTask"
+            android:name=".ViewTaskActivity"
             android:label="@string/title_activity_view_task" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
