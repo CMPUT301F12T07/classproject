@@ -24,7 +24,7 @@ public class ViewTask extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_task);
         
-        Task curentTask = getIntent().getExtras().getParcelable(@string/TaskObject);
+        Task curentTask = getIntent().getExtras().getParcelable(@strings/TaskObject);
         
         // Getting the task title field
         this.taskTitle = (TextView) findViewById(R.id.textViewTitle);
@@ -35,13 +35,13 @@ public class ViewTask extends Activity {
         // Getting the start Date field
         this.startDate = (TextView) findViewById(R.id.textViewCreatedDate);
         // unknown implimentation of task getters
-        int startDateValue = this.currentTask.get_dateCreate().toString();
+        int startDateValue = Integer.parseInt(this.currentTask.get_dateCreate());
         startDate.setText(Integer.toString(startDateValue));
         
         // Getting the end Date field
         this.endDate = (TextView) findViewById(R.id.textViewDueDate);
         // unknown implimentation of task getters
-        int endDateValue = this.currentTask.get_dateDue();
+        int endDateValue = Integer.parseInt(this.currentTask.get_dateDue());
         endDate.setText(Integer.toString(endDateValue));
         
         // Getting the task content field
