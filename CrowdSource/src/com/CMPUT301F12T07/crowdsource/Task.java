@@ -1,6 +1,9 @@
 package com.CMPUT301F12T07.crowdsource;
 
-public class Task { 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Task implements Parcelable { 
 	  
     /** private variables */
     int _tid; 
@@ -99,7 +102,7 @@ public class Task {
 	public void set_type(String _type) {
 		this._type = _type;
 	}
-
+	
 	public int get_visibility() {
 		return _visibility;
 	}
@@ -107,13 +110,29 @@ public class Task {
 	public void set_visibility(int _visibility) {
 		this._visibility = _visibility;
 	}
-
+	
 	public int get_quantity() {
 		return _quantity;
 	}
 
 	public void set_quantity(int _quantity) {
 		this._quantity = _quantity;
+	}
+
+	/*
+	 * Parcelable Interface Requirements
+	 */
+	
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
+		
 	} 
 
 }

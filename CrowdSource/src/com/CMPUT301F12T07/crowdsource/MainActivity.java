@@ -32,9 +32,9 @@ public class MainActivity extends Activity {
         // Adds listener for when a Task is clicked in the ListView
         myList.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-        		//Intent intent = new Intent(this, ViewTask.class);
-        		//intent.putExtra("", ); ## TODO: Add Database Connection here
-        		//startActivity(intent);
+        		Intent intent = new Intent(MainActivity.this, ViewTask.class);
+        		intent.putExtra("taskObject", tasks.get(position));
+        		startActivity(intent);
         	}
         });
     }
@@ -47,15 +47,15 @@ public class MainActivity extends Activity {
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-     switch (item.getItemId()) {
-        case R.id.addTask:
-        	Intent intent = new Intent(this, AddTask.class);
-            startActivity(intent);
-            return true;
-        default:
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
-     }
+    	switch (item.getItemId()) {
+        	case R.id.addTask:
+        		Intent intent = new Intent(this, AddTask.class);
+        		startActivity(intent);
+        		return true;
+        	default:
+        		NavUtils.navigateUpFromSameTask(this);
+        		return true;
+    	}
 
     }
 }
