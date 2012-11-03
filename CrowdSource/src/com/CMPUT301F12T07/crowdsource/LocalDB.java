@@ -191,10 +191,16 @@ public class LocalDB extends SQLiteOpenHelper {
 	
 	/* Creates a RandomTask with data, useful for testing */
 	public void createRandomTask() {
-		Task task = new Task(1234567890, "TITLE", "DESCRIPTION", "DATECREATED", "DATEDUE", "TYPE", 1, 1);
+		Task task = new Task(1234567890, "TITLE", "DESCRIPTION", "1", "1", "TYPE", 1, 1);
 		createTask(task);
 	}
 	
+	/* Deletes all data from Database, useful for testing */
+	public void emptyDatabase() {
+		String emptyQuery = "DELETE FROM " + TABLE_TASKS;
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.rawQuery(emptyQuery, null);
+	}
 
 }
 

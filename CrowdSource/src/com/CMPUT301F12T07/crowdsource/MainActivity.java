@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         
         LocalDB db = new LocalDB(this);
+        db.emptyDatabase();
         db.createRandomTask();
         
         this.tasks = db.getAllTasks();
