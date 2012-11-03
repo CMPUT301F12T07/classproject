@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddTask"
+            android:name=".AddTaskActivity"
             android:label="@string/title_activity_add_task" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

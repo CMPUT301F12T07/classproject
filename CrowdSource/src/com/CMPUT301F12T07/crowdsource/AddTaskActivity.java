@@ -13,7 +13,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AddTask extends Activity {
+public class AddTaskActivity extends Activity {
 
 	private Button calendar;
 	private TextView textDate;
