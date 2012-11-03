@@ -1,6 +1,5 @@
 package com.CMPUT301F12T07.crowdsource;
 
-import android.R;
 import android.R.string;
 import android.app.Activity;
 import android.os.Bundle;
@@ -30,13 +29,13 @@ public class ViewTask extends Activity {
         // Getting the task title field
         this.taskTitle = (TextView) findViewById(R.id.textViewTitle);
         // unknown implimentation of task getters
-        string titleStr = this.currentTask.get_title();
-        taskDesc.setText(titleStr));
+        String titleStr = this.currentTask.get_title();
+        taskDesc.setText(titleStr);
         
         // Getting the start Date field
         this.startDate = (TextView) findViewById(R.id.textViewCreatedDate);
         // unknown implimentation of task getters
-        int startDateValue = this.currentTask.get_dateCreate();
+        int startDateValue = this.currentTask.get_dateCreate().toString();
         startDate.setText(Integer.toString(startDateValue));
         
         // Getting the end Date field
@@ -49,14 +48,14 @@ public class ViewTask extends Activity {
         // type? content?
         this.taskContent = (TextView) findViewById(R.id.textViewContent);
         // unknown implimentation of task getters
-        string contentStr = this.currentTask.get_type();
-        taskDesc.setText(contentStr));
+        String contentStr = this.currentTask.get_type();
+        taskDesc.setText(contentStr);
         
         // Getting the task description field
         this.taskDesc = (TextView) findViewById(R.id.textViewDescription);
         // unknown implimentation of task getters
-        string descStr = this.currentTask.get_description();
-        taskDesc.setText(descStr));
+        String descStr = this.currentTask.get_description();
+        taskDesc.setText(descStr);
         
         /*
         timeEdit.setOnFocusChangeListener(new OnFocusChangeListener() {
