@@ -41,5 +41,7 @@
     <string name="Update">Update</string>
     <string name="MakePublic">Make Public</string>
     <string name="title_activity_update_task">UpdateTaskActivity</string>
+    <string name="Save">Save</string>
+    <string name="Cancel">Cancel</string>
 
 </resources>

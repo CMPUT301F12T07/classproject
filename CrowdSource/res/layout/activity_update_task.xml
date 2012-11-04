@@ -59,29 +59,22 @@
         android:hint="Description"
         tools:context=".UpdateTaskActivity" />
 
-    <Button
-        android:id="@+id/buttonDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/Delete" />
 
     <Button
-        android:id="@+id/buttonFulfill"
+        android:id="@+id/buttonCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="@string/Fulfill" />
+        android:text="@string/Cancel" />
 
     <Button
-        android:id="@+id/buttonUpdate"
+        android:id="@+id/buttonSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/Update" />
+        android:text="@string/Save" />
 
     <Button
         android:id="@+id/buttonPublic"
