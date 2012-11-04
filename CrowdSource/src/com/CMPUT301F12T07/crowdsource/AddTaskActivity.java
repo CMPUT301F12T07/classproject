@@ -210,8 +210,10 @@ public class AddTaskActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				LocalDB db = new LocalDB(v.getContext());
 				Task newTask = new Task(deviceId, title, description, dateCreate, dateDue, type, visibility, quantity);
 				
+				db.createTask(newTask);
 			}
     		
     	});
