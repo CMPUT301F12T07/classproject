@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -17,15 +18,14 @@ public class MainActivity extends Activity {
 
 	private ListView myList;
 	private List<Task> tasks;
+	private LocalDB db;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        LocalDB db = new LocalDB(this);
-        db.emptyDatabase();
-        db.createRandomTask();
+        db = new LocalDB(this);
         
         this.tasks = db.getAllTasks();
         
@@ -40,6 +40,24 @@ public class MainActivity extends Activity {
         		startActivity(intent);
         	}
         });
+        
+        final Button EmptyDB = (Button) findViewById(R.id.DBDEBUG);
+        EmptyDB.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View v) {
+        		db.emptyDatabase();
+        		finish();
+        		startActivity(getIntent());
+        	}
+        });
+        
+        final Button RandomTaskGen = (Button) findViewById(R.id.RandTask);
+        RandomTaskGen.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View v) {
+        		db.createRandomTask();
+        		finish();
+        		startActivity(getIntent());
+        	}
+        });
     }
 
     @Override
@@ -51,15 +69,14 @@ public class MainActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	switch (item.getItemId()) {
-        	case R.id.addTask:
-        		Intent intent = new Intent(this, AddTaskActivity.class);
-        		startActivity(intent);
-        		return true;
-        	default:
-        		NavUtils.navigateUpFromSameTask(this);
-        		return true;
+    		case R.id.addTask:
+    			Intent intent = new Intent(this, AddTaskActivity.class);
+    			startActivity(intent);
+    			return true;
+    		default:
+    			NavUtils.navigateUpFromSameTask(this);
+    			return true;
     	}
-
     }
-
+    
 }

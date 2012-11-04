@@ -68,7 +68,7 @@ public class ViewTaskActivity extends Activity {
         Update.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	Intent intent = new Intent(ViewTaskActivity.this, UpdateTaskActivity.class);
-        		intent.putExtra("taskObject", currentTask);
+        		intent.putExtra("taskObject", (int) currentTask.get_tid());
         		startActivity(intent);
             }
         });

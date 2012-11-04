@@ -21,5 +21,23 @@
 	    android:layout_alignParentLeft="true"
 	    android:layout_alignParentTop="true"
 	    android:text="My Tasks" />
+	
+	<Button
+	    android:id="@+id/DBDEBUG"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="false"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignParentTop="true"
+	    android:text="Empty DB" />
+
+	<Button
+	    android:id="@+id/RandTask"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true"
+	    android:layout_toLeftOf="@+id/DBDEBUG"
+	    android:layout_toRightOf="@+id/button1"
+	    android:text="Random Task" />
 
 </RelativeLayout>
