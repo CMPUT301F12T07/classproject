@@ -88,7 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textViewCreatedDate"
+        android:layout_below="@+id/textEditCreatedDate"
         android:text="@string/MakePublic" />
 
 </RelativeLayout>
