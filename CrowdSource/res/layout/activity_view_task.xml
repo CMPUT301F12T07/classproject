@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="@strings/Delete" />
+        android:text="@string/Delete" />
 
     <Button
         android:id="@+id/buttonFulfill"
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="@strings/Fulfill" />
+        android:text="@string/Fulfill" />
 
     <Button
         android:id="@+id/buttonUpdate"
@@ -80,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@strings/Update" />
+        android:text="@string/Update" />
 
     <Button
         android:id="@+id/buttonPublic"
@@ -88,6 +88,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textViewCreatedDate"
-        android:text="@strings/MakePublic" />
+        android:text="@string/MakePublic" />
 
 </RelativeLayout>
