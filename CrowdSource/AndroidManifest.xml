@@ -4,7 +4,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="10"
         android:targetSdkVersion="15" />
 
     <application
@@ -32,15 +32,6 @@
         <activity
             android:name=".AddTaskActivity"
             android:label="@string/title_activity_add_task" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".MyTasksActivity"
-            android:label="@string/title_activity_my_tasks" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
