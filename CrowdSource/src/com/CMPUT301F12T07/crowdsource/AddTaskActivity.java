@@ -39,10 +39,6 @@ public class AddTaskActivity extends Activity {
 	
 	private Button save;
 	
-//	private Button selectQuantity;
-//	private TextView selectedQuantity;
-//	private int quantity;
-	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,29 +176,11 @@ public class AddTaskActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				
+				//Task newTask = Task();
 				
 			}
     		
     	});
     }
-//    private void initializeQuantity() {
-//    	quantity = 0;
-//    	
-//
-//    	selectQuantity = (Button) findViewById(R.id.selectQuantityButton);
-//    	selectedQuantity = (TextView) findViewById(R.id.quantityTextView);
-//    	
-//   	selectedQuantity.setText(0);
-//    	
-//    	selectQuantity.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View arg0) {
-//				NumberPicker
-//				
-//			}
-//    		
-//    	});
-//    }
+
 }
