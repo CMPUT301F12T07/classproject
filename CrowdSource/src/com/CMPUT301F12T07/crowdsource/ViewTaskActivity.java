@@ -23,7 +23,8 @@ public class ViewTaskActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_task);
         
-        this.currentTask = (Task) getIntent().getParcelableExtra("taskObject");
+        LocalDB db = new LocalDB(this);
+        this.currentTask = db.getTask(getIntent().getExtras().getInt("taskObject"));
         
         // Getting the task title field
         this.taskTitle = (TextView) findViewById(R.id.textViewTitle);
