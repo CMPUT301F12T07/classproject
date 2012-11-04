@@ -23,6 +23,8 @@
 	<string name="quantityButton_text">Choose Quantity</string>
 	<string name="quantityChosenTextView_text">Choose Quantity</string>
 	<string name="checkbox_text">Make Task Private</string>
+	<string name="enterQuanity_text">Enter quantity of task.</string>
+	<string name="save_text">Save</string>
 	
     <string-array name = "typeArray">
         <item>Text</item>
