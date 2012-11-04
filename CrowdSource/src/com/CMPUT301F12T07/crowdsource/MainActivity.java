@@ -2,6 +2,8 @@ package com.CMPUT301F12T07.crowdsource;
 
 import java.util.List;
 
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        
         db = new LocalDB(this);
         
         this.tasks = db.getAllTasks();
@@ -36,7 +39,7 @@ public class MainActivity extends Activity {
         myList.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		Intent intent = new Intent(MainActivity.this, ViewTaskActivity.class);
-        		intent.putExtra("taskObject", (int) tasks.get(position).get_tid());
+        		intent.putExtra("taskObject", tasks.get(position).get_tid());
         		startActivity(intent);
         	}
         });

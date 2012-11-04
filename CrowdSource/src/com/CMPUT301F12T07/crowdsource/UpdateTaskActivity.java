@@ -2,6 +2,7 @@ package com.CMPUT301F12T07.crowdsource;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.EditText;
 
@@ -21,8 +22,9 @@ public class UpdateTaskActivity extends Activity {
 //        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         LocalDB db = new LocalDB(this);
-        this.currentTask = db.getTask(getIntent().getExtras().getInt("taskObject"));
-
+        this.currentTask = db.getTask(getIntent().getExtras().getInt("taskID"));
+        db.close();
+        
         // Getting the task title field
         this.taskTitle = (EditText) findViewById(R.id.textEditTitle);
         //String titleStr = currentTask.get_title();

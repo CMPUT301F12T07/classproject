@@ -102,10 +102,11 @@ public class LocalDB extends SQLiteOpenHelper {
 			cursor.moveToFirst(); 
 
 		Task task = new Task(
-				cursor.getString(1), 
-				cursor.getString(2), cursor.getString(3), 
-				cursor.getString(4), cursor.getString(5),
-				cursor.getString(6), cursor.getInt(7), 
+				Integer.parseInt(cursor.getString(0)), 
+				cursor.getString(1), cursor.getString(2), 
+				cursor.getString(3), cursor.getString(4),
+				cursor.getString(5), cursor.getString(6), 
+				Integer.parseInt(cursor.getString(7)),
 				Integer.parseInt(cursor.getString(8))); 
 		db.close();
 		return task; 

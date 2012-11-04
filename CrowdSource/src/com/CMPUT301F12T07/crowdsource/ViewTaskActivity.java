@@ -26,11 +26,11 @@ public class ViewTaskActivity extends Activity {
         
         LocalDB db = new LocalDB(this);
         this.currentTask = db.getTask(getIntent().getExtras().getInt("taskObject"));
+        db.close();
         
         // Getting the task title field
         this.taskTitle = (TextView) findViewById(R.id.textViewTitle);
         //String titleStr = currentTask.get_title();
-        System.out.println(currentTask.get_title());
         taskTitle.setText(currentTask.get_title());
         
         // Getting the start Date field
@@ -66,7 +66,7 @@ public class ViewTaskActivity extends Activity {
         Update.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	Intent intent = new Intent(ViewTaskActivity.this, UpdateTaskActivity.class);
-        		intent.putExtra("taskObject", (int) currentTask.get_tid());
+        		intent.putExtra("taskID", currentTask.get_tid());
         		startActivity(intent);
             }
         });
