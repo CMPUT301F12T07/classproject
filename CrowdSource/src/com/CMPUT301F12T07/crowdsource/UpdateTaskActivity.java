@@ -63,7 +63,6 @@ public class UpdateTaskActivity extends Activity {
         Button Save = (Button) findViewById(R.id.buttonSave);
         Save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	// a lot of work
             	currentTask.set_title(taskTitle.getText().toString());
             	currentTask.set_dateCreate(startDate.getText().toString());
             	currentTask.set_dateDue(endDate.getText().toString());
@@ -71,6 +70,8 @@ public class UpdateTaskActivity extends Activity {
             	currentTask.set_description(taskDesc.getText().toString());
             	
             	db.updateTask(currentTask);
+            	
+            	finish();
             }
         });
     }

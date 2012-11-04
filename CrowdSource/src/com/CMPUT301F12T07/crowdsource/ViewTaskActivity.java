@@ -17,6 +17,7 @@ public class ViewTaskActivity extends Activity {
 	private TextView endDate;
 	private TextView taskContent;
 	private TextView taskDesc;
+	private LocalDB db;
 
 
     @Override
@@ -24,7 +25,7 @@ public class ViewTaskActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_task);
         
-        LocalDB db = new LocalDB(this);
+        db = new LocalDB(this);
         this.currentTask = db.getTask(getIntent().getExtras().getInt("taskObject"));
         db.close();
         
@@ -70,11 +71,26 @@ public class ViewTaskActivity extends Activity {
         		startActivity(intent);
             }
         });
+
     }
 
     @Override
+    public void onResume() {
+    	super.onResume();
+
+    	this.currentTask = db.getTask(getIntent().getExtras().getInt("taskObject"));
+    	
+    	taskTitle.setText(currentTask.get_title());
+    	startDate.setText(currentTask.get_dateCreate());
+    	endDate.setText(currentTask.get_dateDue());
+    	taskContent.setText(currentTask.get_type());
+    	taskDesc.setText(currentTask.get_description());
+    }
+    
+    
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_view_task, menu);
-        return true;
+    	getMenuInflater().inflate(R.menu.activity_view_task, menu);
+    	return true;
     }
 }
