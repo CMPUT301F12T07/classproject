@@ -142,6 +142,36 @@ public class LocalDB extends SQLiteOpenHelper {
 
 		return taskList; 
 	} 
+	
+	/* Getting All tasks by uid*/
+	public List<Task> getAllTasksByUid(int uid) { 
+		List<Task> taskList = new ArrayList<Task>(); 
+
+		String selectQuery = "SELECT * FROM " + TABLE_TASKS + " WHERE " + KEY_UID + "='" + uid + "'";
+
+		SQLiteDatabase db = this.getWritableDatabase(); 
+		Cursor cursor = db.rawQuery(selectQuery, null); 
+
+		// looping through all rows and adding to list 
+		if (cursor.moveToFirst()) { 
+			do { 
+				Task task = new Task(); 
+				task.set_tid(Integer.parseInt(cursor.getString(0))); 
+				task.set_uid(Integer.parseInt(cursor.getString(1))); 
+				task.set_title(cursor.getString(2)); 
+				task.set_description(cursor.getString(3)); 
+				task.set_dateCreate(cursor.getString(4)); 
+				task.set_dateDue(cursor.getString(5)); 
+				task.set_type(cursor.getString(6)); 
+				task.set_visibility(cursor.getInt(7));
+				task.set_quantity(cursor.getInt(8));
+				// Adding contact to list 
+				taskList.add(task); 
+			} while (cursor.moveToNext()); 
+		} 
+
+		return taskList; 
+	} 
 
 	/* Updating single task */
 	public int updateTask(Task task) { 
@@ -175,6 +205,27 @@ public class LocalDB extends SQLiteOpenHelper {
 	public void printAllTasks(){
 		Log.d("Print: ", "Printing all tasks..."); 
 		List<Task> tasks = this.getAllTasks();        
+
+		for (Task n : tasks) { 
+			String log = "Tid: " + n.get_tid() 
+					+ ", Uid: " + n.get_uid()
+					+ ", Title: " + n.get_title() 
+					+ ", Description: " + n.get_description()
+					+ ", DateCreate: " + n.get_dateCreate()
+					+ ", DateDue: " + n.get_dateDue()
+					+ ", Type: " + n.get_type()
+					+ ", Visibility: " + n.get_visibility()
+					+ ", Quantity: " + n.get_quantity();
+			
+			// Printing Tasks to log 
+			Log.d("Task: ", log); 
+		}
+	}
+	
+	/* Print all tasks by uid to logcat (for debug purpose) */
+	public void printAllTasksByUid(int uid){
+		Log.d("Print: ", "Printing all tasks..."); 
+		List<Task> tasks = this.getAllTasksByUid(uid);        
 
 		for (Task n : tasks) { 
 			String log = "Tid: " + n.get_tid() 
