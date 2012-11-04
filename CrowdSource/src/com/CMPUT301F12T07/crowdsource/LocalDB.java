@@ -102,7 +102,7 @@ public class LocalDB extends SQLiteOpenHelper {
 			cursor.moveToFirst(); 
 
 		Task task = new Task(
-				Integer.parseInt(cursor.getString(1)), 
+				cursor.getString(1), 
 				cursor.getString(2), cursor.getString(3), 
 				cursor.getString(4), cursor.getString(5),
 				cursor.getString(6), cursor.getInt(7), 
@@ -125,7 +125,7 @@ public class LocalDB extends SQLiteOpenHelper {
 			do { 
 				Task task = new Task(); 
 				task.set_tid(Integer.parseInt(cursor.getString(0))); 
-				task.set_uid(Integer.parseInt(cursor.getString(1))); 
+				task.set_uid(cursor.getString(1)); 
 				task.set_title(cursor.getString(2)); 
 				task.set_description(cursor.getString(3)); 
 				task.set_dateCreate(cursor.getString(4)); 
@@ -157,7 +157,7 @@ public class LocalDB extends SQLiteOpenHelper {
 			do { 
 				Task task = new Task(); 
 				task.set_tid(Integer.parseInt(cursor.getString(0))); 
-				task.set_uid(Integer.parseInt(cursor.getString(1))); 
+				task.set_uid(cursor.getString(1)); 
 				task.set_title(cursor.getString(2)); 
 				task.set_description(cursor.getString(3)); 
 				task.set_dateCreate(cursor.getString(4)); 
@@ -245,7 +245,7 @@ public class LocalDB extends SQLiteOpenHelper {
 	
 	/* Creates a RandomTask with data, useful for testing */
 	public void createRandomTask() {
-		Task task = new Task(1234567890, "TITLE", "DESCRIPTION", "1", "1", "TYPE", 1, 1);
+		Task task = new Task("1234567890", "TITLE", "DESCRIPTION", "1", "1", "TYPE", 1, 1);
 		createTask(task);
 	}
 	

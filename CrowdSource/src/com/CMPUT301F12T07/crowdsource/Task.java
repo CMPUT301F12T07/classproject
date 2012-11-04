@@ -11,7 +11,7 @@ public class Task implements Parcelable {
 	
 	/** private variables */
     int _tid; 
-    int _uid;
+    String _uid;
     String _title;
     String _description; 
     String _dateCreate; 
@@ -24,7 +24,7 @@ public class Task implements Parcelable {
     public Task(){ } 
 
     /** constructor without tid */ 
-    public Task(int uid, String title, String description, String dateCreate, 
+    public Task(String uid, String title, String description, String dateCreate, 
     		String dateDue, String type, int visibility, int quantity){ 
         this._uid = uid;
         this._title = title;
@@ -37,7 +37,7 @@ public class Task implements Parcelable {
     }
     
     /** constructor with tid */ 
-    public Task( int tid, int uid, String title, String description, String dateCreate, 
+    public Task( int tid, String uid, String title, String description, String dateCreate, 
     		String dateDue, String type, int visibility, int quantity){ 
     	this._tid = tid;
         this._uid = uid;
@@ -59,11 +59,11 @@ public class Task implements Parcelable {
 		this._tid = _tid;
 	}
 
-	public int get_uid() {
+	public String get_uid() {
 		return _uid;
 	}
 
-	public void set_uid(int _uid) {
+	public void set_uid(String _uid) {
 		this._uid = _uid;
 	}
 
