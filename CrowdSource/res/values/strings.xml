@@ -9,4 +9,25 @@
     <string name="addtask_actionbar">+</string>
     <string name="title_activity_add_task">AddTask</string>
 
+
+	<!-- AddTaskActivity items -->
+	<string name="titleTextView_text">Title</string>
+	<string name="enterTitleTextView_text">Enter task title.</string>
+	<string name="dueDateTextView_text">Due Date</string>
+	<string name="selectDateButton_text">Select Date</string>
+	<string name="descriptionTextView_text">Description</string>
+	<string name="enterDescriptionTextView_text">Enter description of your task.</string>
+	<string name="dateTextView_text">Date</string>
+	<string name="typeTextView_text">Type</string>
+	<string name="quantityTextView_text">Quantity</string>
+	<string name="quantityButton_text">Choose Quantity</string>
+	<string name="quantityChosenTextView_text">Choose Quantity</string>
+	<string name="checkbox_text">Make Task Private</string>
+	
+    <string-array name = "typeArray">
+        <item>Text</item>
+        <item>Photo</item>
+        <item>Audio</item>
+    </string-array>
+    
 </resources>

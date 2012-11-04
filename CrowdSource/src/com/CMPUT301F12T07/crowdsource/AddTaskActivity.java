@@ -26,7 +26,6 @@ public class AddTaskActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
         
-        //initializeDates();
         initializeListeners();
     }
 
@@ -46,8 +45,8 @@ public class AddTaskActivity extends Activity {
     }
     
     private void initializeListeners() {
-    	calendar = (Button) findViewById(R.id.calendar);
-    	textDate = (TextView) findViewById(R.id.textDate);
+    	calendar = (Button) findViewById(R.id.selectDateButton);
+    	textDate = (TextView) findViewById(R.id.dateTextView);
     	
     	initializeDates();
     	
