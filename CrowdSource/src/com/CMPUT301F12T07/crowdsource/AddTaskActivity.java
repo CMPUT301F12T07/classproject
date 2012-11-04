@@ -155,7 +155,7 @@ public class AddTaskActivity extends Activity {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				quantity = Integer.parseInt(s.toString());
+					quantity = Integer.parseInt(s.toString());
 			}
 
 			@Override
