@@ -25,7 +25,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/textViewTitle"
+        android:layout_below="@+id/textViewTitle"
+        android:layout_marginTop="15dp"
         android:text="Created: Date"
         tools:context=".ViewTask" />
 
@@ -43,8 +44,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/imageView1"
-        android:layout_marginTop="71dp"
+        android:layout_below="@+id/textViewDueDate"
+        android:layout_marginTop="15dp"
         android:text="Content"
         tools:context=".ViewTask" />
 
@@ -56,5 +57,37 @@
         android:layout_below="@+id/textViewContent"
         android:text="Description"
         tools:context=".ViewTask" />
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@strings/Delete" />
+
+    <Button
+        android:id="@+id/buttonFulfill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@strings/Fulfill" />
+
+    <Button
+        android:id="@+id/buttonUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@strings/Update" />
+
+    <Button
+        android:id="@+id/buttonPublic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textViewCreatedDate"
+        android:text="@strings/MakePublic" />
 
 </RelativeLayout>

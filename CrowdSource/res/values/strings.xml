@@ -36,5 +36,9 @@
     <string name="following_tab">Following</string>
     <string name="title_activity_my_tasks">My Tasks</string>
     <string name="log_tab">Log</string>
+    <string name="Fulfill">Fulfill</string>
+    <string name="Delete">Delete</string>
+    <string name="Update">Update</string>
+    <string name="MakePublic">Make Public</string>
 
 </resources>

@@ -1,6 +1,5 @@
 package com.CMPUT301F12T07.crowdsource;
 
-import android.R.string;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -47,7 +46,7 @@ public class ViewTaskActivity extends Activity {
         this.taskContent = (TextView) findViewById(R.id.textViewContent);
         // unknown implimentation of task getters
         String contentStr = currentTask.get_type();
-        taskDesc.setText(contentStr);
+        taskContent.setText(contentStr);
         
         // Getting the task description field
         this.taskDesc = (TextView) findViewById(R.id.textViewDescription);
