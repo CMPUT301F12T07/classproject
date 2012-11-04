@@ -25,16 +25,10 @@ public class UpdateTaskActivity extends Activity {
         setContentView(R.layout.activity_update_task);
 //        getActionBar().setDisplayHomeAsUpEnabled(true);
 
-<<<<<<< HEAD
         db = new LocalDB(this);
-        this.currentTask = db.getTask(getIntent().getExtras().getInt("taskObject"));
-
-=======
-        LocalDB db = new LocalDB(this);
         this.currentTask = db.getTask(getIntent().getExtras().getInt("taskID"));
         db.close();
         
->>>>>>> branch 'master' of https://github.com/CMPUT301F12T07/classproject.git
         // Getting the task title field
         this.taskTitle = (EditText) findViewById(R.id.textEditTitle);
         //String titleStr = currentTask.get_title();
