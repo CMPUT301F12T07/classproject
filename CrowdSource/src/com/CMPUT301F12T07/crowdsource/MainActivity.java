@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
         myList.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		Intent intent = new Intent(MainActivity.this, ViewTaskActivity.class);
-        		intent.putExtra("taskObject", tasks.get(position));
+        		intent.putExtra("taskObject", (int) tasks.get(position).get_tid());
         		startActivity(intent);
         	}
         });
