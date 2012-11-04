@@ -214,6 +214,7 @@ public class AddTaskActivity extends Activity {
 				Task newTask = new Task(deviceId, title, description, dateCreate, dateDue, type, visibility, quantity);
 				
 				db.createTask(newTask);
+				finish();
 			}
     		
     	});
