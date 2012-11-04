@@ -78,7 +78,7 @@ public class ViewTaskActivity extends Activity {
         this.deleteTask = (Button) findViewById(R.id.buttonDelete);
         deleteTask.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				LocalDB db = new LocalDB(v.getContext());
+				db = new LocalDB(v.getContext());
 				db.deleteTask(currentTask.get_tid());
 				finish();
 			}
