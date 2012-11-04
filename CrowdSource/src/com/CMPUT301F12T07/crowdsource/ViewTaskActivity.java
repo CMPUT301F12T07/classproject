@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ViewTaskActivity extends Activity {
 
@@ -21,6 +22,7 @@ public class ViewTaskActivity extends Activity {
 	private LocalDB db;
 
 	private Button deleteTask;
+	private Button fulfillTask;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,14 @@ public class ViewTaskActivity extends Activity {
 			}
         });
 
+        this.fulfillTask = (Button) findViewById(R.id.buttonFulfill);
+        fulfillTask.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				// do toast
+				Toast.makeText(v.getContext(), "This feature has not been implemented yet.", Toast.LENGTH_SHORT).show();
+				
+			}
+        });
     }
 
     @Override
