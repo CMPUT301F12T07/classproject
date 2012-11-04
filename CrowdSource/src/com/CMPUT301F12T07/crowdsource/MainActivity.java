@@ -43,7 +43,8 @@ public class MainActivity extends Activity {
         		startActivity(intent);
         	}
         });
-        
+
+        // ugly debugger
         final Button EmptyDB = (Button) findViewById(R.id.DBDEBUG);
         EmptyDB.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
@@ -53,6 +54,7 @@ public class MainActivity extends Activity {
         	}
         });
         
+        // ugly debugger
         final Button RandomTaskGen = (Button) findViewById(R.id.RandTask);
         RandomTaskGen.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
@@ -62,6 +64,15 @@ public class MainActivity extends Activity {
         	}
         });
     }
+    
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	this.tasks = db.getAllTasks();
+    	myList.setAdapter(new TaskListAdapter(MainActivity.this, tasks));
+    	
+    }
+    
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
