@@ -27,32 +27,28 @@ public class ViewTaskActivity extends Activity {
         
         // Getting the task title field
         this.taskTitle = (TextView) findViewById(R.id.textViewTitle);
-        // unknown implimentation of task getters
-        String titleStr = currentTask.get_title();
-        taskTitle.setText(titleStr);
+        //String titleStr = currentTask.get_title();
+        System.out.println(currentTask.get_title());
+        taskTitle.setText(currentTask.get_title());
         
         // Getting the start Date field
         this.startDate = (TextView) findViewById(R.id.textViewCreatedDate);
-        // unknown implimentation of task getters
         startDate.setText(currentTask.get_dateCreate());
         
         // Getting the end Date field
         this.endDate = (TextView) findViewById(R.id.textViewDueDate);
-        // unknown implimentation of task getters
         endDate.setText(currentTask.get_dateDue());
         
         // Getting the task content field
         // type? content?
         this.taskContent = (TextView) findViewById(R.id.textViewContent);
-        // unknown implimentation of task getters
-        String contentStr = currentTask.get_type();
-        taskContent.setText(contentStr);
+        //String contentStr = currentTask.get_type();
+        taskContent.setText(currentTask.get_type());
         
         // Getting the task description field
         this.taskDesc = (TextView) findViewById(R.id.textViewDescription);
-        // unknown implimentation of task getters
-        String descStr = currentTask.get_description();
-        taskDesc.setText(descStr);
+        //String descStr = currentTask.get_description();
+        taskDesc.setText(currentTask.get_description());
         
         /*
         timeEdit.setOnFocusChangeListener(new OnFocusChangeListener() {
