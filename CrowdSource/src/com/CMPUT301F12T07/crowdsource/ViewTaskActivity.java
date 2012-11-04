@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class ViewTaskActivity extends Activity {
 	private TextView taskDesc;
 	private LocalDB db;
 
+	private Button deleteTask;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class ViewTaskActivity extends Activity {
         //String descStr = currentTask.get_description();
         taskDesc.setText(currentTask.get_description());
         
+        
         /*
         timeEdit.setOnFocusChangeListener(new OnFocusChangeListener() {
         	public void onFocusChange(View v, boolean hasFocus){
@@ -70,6 +73,15 @@ public class ViewTaskActivity extends Activity {
         		intent.putExtra("taskID", currentTask.get_tid());
         		startActivity(intent);
             }
+        });
+        
+        this.deleteTask = (Button) findViewById(R.id.buttonDelete);
+        deleteTask.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				LocalDB db = new LocalDB(v.getContext());
+				db.deleteTask(currentTask.get_tid());
+				finish();
+			}
         });
 
     }
