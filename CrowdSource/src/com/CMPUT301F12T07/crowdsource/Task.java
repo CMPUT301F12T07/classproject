@@ -1,14 +1,13 @@
 package com.CMPUT301F12T07.crowdsource;
 
-import java.io.Serializable;
 
-public class Task implements Serializable { 
-	  
-    /**
-	 * Serialize ID
-	 */
-	private static final long serialVersionUID = 1L;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Task implements Parcelable { 
 	
+	// Parcelable Vars
+	int mData;
 	
 	/** private variables */
     int _tid; 
@@ -124,5 +123,31 @@ public class Task implements Serializable {
 		this._quantity = _quantity;
 	}
 
+	// http://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents/2141166#2141166
+	// 99.9% of the time you can just ignore this
+    public int describeContents() {
+        return 0;
+    }
+
+    // write your object's data to the passed-in Parcel
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(mData);
+    }
+
+    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<Task> CREATOR = new Parcelable.Creator<Task>() {
+        public Task createFromParcel(Parcel in) {
+            return new Task(in);
+        }
+
+        public Task[] newArray(int size) {
+            return new Task[size];
+        }
+    };
+
+    // example constructor that takes a Parcel and gives you an object populated with it's values
+    private Task(Parcel in) {
+        mData = in.readInt();
+    }
 
 }
