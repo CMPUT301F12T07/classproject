@@ -23,6 +23,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
+        android:maxLength="80"
         android:layout_below="@+id/titleTextView"
         android:ems="10" >
 
@@ -60,7 +61,7 @@
         android:text="@string/descriptionTextView_text" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/descriptionText"
         android:hint="@string/enterDescriptionTextView_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,7 +81,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/editText1"
+        android:layout_below="@+id/descriptionText"
         android:text="@string/typeTextView_text" />
 
     <Spinner
@@ -104,16 +105,16 @@
         android:layout_marginTop="5dp"
         android:layout_below="@+id/typeSpinner"
         android:text="@string/quantityTextView_text" />
-
+<!-- 
     <Button
-        android:id="@+id/quantityButton"
+        android:id="@+id/selectQuantityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/quantityTextView"
         android:layout_marginLeft="5dp"
         android:text="@string/quantityButton_text" />
-
+-->
     <TextView
         android:id="@+id/dateTextView"
         android:layout_width="wrap_content"
@@ -123,23 +124,43 @@
         android:layout_marginLeft="22dp"
         android:layout_toRightOf="@+id/selectDateButton"
         android:text="@string/dateTextView_text" />
-
+<!-- 
     <TextView
         android:id="@+id/quantityChosenTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/quantityButton"
-        android:layout_alignBottom="@+id/quantityButton"
+        android:layout_alignBaseline="@+id/selectQuantityButton"
+        android:layout_alignBottom="@+id/selectQuantityButton"
         android:layout_alignLeft="@+id/dateTextView"
         android:text="@string/quantityChosenTextView_text" />
+-->
 
-    <CheckBox
-        android:id="@+id/checkBox1"
+    <EditText
+        android:id="@+id/quantityText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/quantityButton"
-        android:layout_marginTop="33dp"
+        android:layout_alignLeft="@+id/quantityTextView"
+        android:layout_alignRight="@+id/typeSpinner"
+        android:layout_below="@+id/quantityTextView"
+        android:ems="10"
+        android:hint="@string/enterQuanity_text"
+        android:inputType="number" />
+
+    <CheckBox
+        android:id="@+id/privacyCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/quantityText"
+        android:layout_below="@+id/quantityText"
+        android:layout_marginTop="38dp"
         android:text="@string/checkbox_text" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/quantityText"
+        android:layout_below="@+id/privacyCheckbox"
+        android:text="@string/save_text" />
 
 </RelativeLayout>

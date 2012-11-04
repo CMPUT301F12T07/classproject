@@ -23,23 +23,23 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        LocalDB db = new LocalDB(this);
-        db.emptyDatabase();
-        db.createRandomTask();
-        
-        this.tasks = db.getAllTasks();
-        
-        myList = (ListView)findViewById(R.id.tasklist);
-        myList.setAdapter(new TaskListAdapter(MainActivity.this, tasks));
-        
-        // Adds listener for when a Task is clicked in the ListView
-        myList.setOnItemClickListener(new OnItemClickListener() {
-        	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-        		Intent intent = new Intent(MainActivity.this, ViewTaskActivity.class);
-        		intent.putExtra("taskObject", tasks.get(position));
-        		startActivity(intent);
-        	}
-        });
+//        LocalDB db = new LocalDB(this);
+//        db.emptyDatabase();
+//        db.createRandomTask();
+//        
+//        this.tasks = db.getAllTasks();
+//        
+//        myList = (ListView)findViewById(R.id.tasklist);
+//        myList.setAdapter(new TaskListAdapter(MainActivity.this, tasks));
+//        
+//        // Adds listener for when a Task is clicked in the ListView
+//        myList.setOnItemClickListener(new OnItemClickListener() {
+//        	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+//        		Intent intent = new Intent(MainActivity.this, ViewTaskActivity.class);
+//        		intent.putExtra("taskObject", tasks.get(position));
+//        		startActivity(intent);
+//        	}
+//        });
     }
 
     @Override
