@@ -47,6 +47,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".UpdateTaskActivity"
+            android:label="@string/title_activity_update_task" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ViewTaskActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -169,7 +169,7 @@ public class LocalDB extends SQLiteOpenHelper {
 				taskList.add(task); 
 			} while (cursor.moveToNext()); 
 		} 
-
+		db.close();
 		return taskList; 
 	} 
 
