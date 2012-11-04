@@ -107,7 +107,7 @@ public class LocalDB extends SQLiteOpenHelper {
 				cursor.getString(4), cursor.getString(5),
 				cursor.getString(6), cursor.getInt(7), 
 				Integer.parseInt(cursor.getString(8))); 
-
+		db.close();
 		return task; 
 	} 
 
@@ -137,6 +137,8 @@ public class LocalDB extends SQLiteOpenHelper {
 				taskList.add(task); 
 			} while (cursor.moveToNext()); 
 		} 
+		
+		db.close();
 
 		return taskList; 
 	} 
@@ -154,10 +156,11 @@ public class LocalDB extends SQLiteOpenHelper {
 		values.put(KEY_TYPE, task.get_type());
 		values.put(KEY_VISIBILITY, task.get_visibility());
 		values.put(KEY_QUANTITY, task.get_quantity());
-
+		int affectedRows = db.update(TABLE_TASKS, values, KEY_TID + " = ?", 
+				new String[] { String.valueOf(task.get_tid()) });
+		db.close();
 		// updating row 
-		return db.update(TABLE_TASKS, values, KEY_TID + " = ?", 
-				new String[] { String.valueOf(task.get_tid()) }); 
+		return affectedRows;
 	} 
 
 	/* Deleting single task */
@@ -197,9 +200,9 @@ public class LocalDB extends SQLiteOpenHelper {
 	
 	/* Deletes all data from Database, useful for testing */
 	public void emptyDatabase() {
-		String emptyQuery = "DELETE FROM " + TABLE_TASKS;
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.rawQuery(emptyQuery, null);
+		db.delete(TABLE_TASKS, null, null);
+		db.close();
 	}
 
 }
