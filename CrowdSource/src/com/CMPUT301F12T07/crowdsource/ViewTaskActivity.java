@@ -12,8 +12,6 @@ public class ViewTaskActivity extends Activity {
 
 
 	private Task currentTask;
-	//private DatabaseHandler db;
-
 	private TextView taskTitle;
 	private TextView startDate;
 	private TextView endDate;
