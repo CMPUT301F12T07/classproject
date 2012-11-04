@@ -28,6 +28,7 @@ public class ViewTaskActivity extends Activity {
         // Getting the task title field
         this.taskTitle = (TextView) findViewById(R.id.textViewTitle);
         //String titleStr = currentTask.get_title();
+        System.out.println(currentTask.get_title());
         taskTitle.setText(currentTask.get_title());
         
         // Getting the start Date field
