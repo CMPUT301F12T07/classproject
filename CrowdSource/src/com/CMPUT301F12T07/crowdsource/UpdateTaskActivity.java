@@ -32,7 +32,6 @@ public class UpdateTaskActivity extends Activity {
         
         // Getting the task title field
         this.taskTitle = (EditText) findViewById(R.id.textEditTitle);
-        //String titleStr = currentTask.get_title();
         taskTitle.setText(currentTask.get_title());
 
         // Getting the start Date field
@@ -43,15 +42,13 @@ public class UpdateTaskActivity extends Activity {
         this.endDate = (EditText) findViewById(R.id.textEditDueDate);
         endDate.setText(currentTask.get_dateDue());
 
-        // Getting the task content field
-        // type? content?
+        // Getting the task type/content field
         this.taskContent = (EditText) findViewById(R.id.textEditContent);
-        //String contentStr = currentTask.get_type();
         taskContent.setText(currentTask.get_type());
 
         // Getting the task description field
         this.taskDesc = (EditText) findViewById(R.id.textEditDescription);
-        //String descStr = currentTask.get_description();
+
         taskDesc.setText(currentTask.get_description());
         
         final Button Cancel = (Button) findViewById(R.id.buttonCancel);
