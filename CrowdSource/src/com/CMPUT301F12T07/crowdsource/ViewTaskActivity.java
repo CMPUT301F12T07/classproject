@@ -90,7 +90,8 @@ public class ViewTaskActivity extends Activity {
         fulfillTask.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				// do toast
-				Toast.makeText(v.getContext(), "This feature has not been implemented yet.", Toast.LENGTH_SHORT).show();
+				Toast.makeText(v.getContext(), 
+						"This feature has not been implemented yet.", Toast.LENGTH_SHORT).show();
 				
 			}
         });
