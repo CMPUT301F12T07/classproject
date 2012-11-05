@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ListView;
 
 public class MyTasksSectionFragment extends Fragment {
@@ -29,7 +28,7 @@ public class MyTasksSectionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
     	
-    	View myFeed = inflater.inflate(R.layout.activity_feed, container, false);
+    	View myFeed = inflater.inflate(R.layout.activity_my_tasks, container, false);
     	
     	db = new LocalDB(inflater.getContext());
         
@@ -49,4 +48,12 @@ public class MyTasksSectionFragment extends Fragment {
         
         return myFeed;
     }
+    
+    @Override
+	public void onResume() {
+		super.onResume();
+		this.tasks = db.getAllTasksByUid(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
+		myList.setAdapter(new TaskListAdapter(getActivity(), tasks));
+	}
+    
 }
