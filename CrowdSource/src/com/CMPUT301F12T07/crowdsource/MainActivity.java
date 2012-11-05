@@ -1,83 +1,33 @@
 package com.CMPUT301F12T07.crowdsource;
 
-import java.util.List;
-
 import android.app.ActionBar;
-import android.app.ActionBar.Tab;
-import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 
-public class MainActivity extends Activity {
-
-	private ListView myList;
-	private List<Task> tasks;
-	private LocalDB db;
+public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
+	
+	private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        
-        db = new LocalDB(this);
-        
-        this.tasks = db.getAllTasks();
-        
-        myList = (ListView)findViewById(R.id.tasklist);
-        myList.setAdapter(new TaskListAdapter(MainActivity.this, tasks));
-        
-        // Adds listener for when a Task is clicked in the ListView
-        myList.setOnItemClickListener(new OnItemClickListener() {
-        	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-        		Intent intent = new Intent(MainActivity.this, ViewTaskActivity.class);
-        		intent.putExtra("taskObject", tasks.get(position).get_tid());
-        		startActivity(intent);
-        	}
-        });
+        // Set up the action bar.
+        final ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        // ugly debugger
-        final Button EmptyDB = (Button) findViewById(R.id.DBDEBUG);
-        EmptyDB.setOnClickListener(new View.OnClickListener() {
-        	public void onClick(View v) {
-        		db.emptyDatabase();
-        		finish();
-        		startActivity(getIntent());
-        	}
-        });
-        
-        // ugly debugger
-        final Button RandomTaskGen = (Button) findViewById(R.id.RandTask);
-        RandomTaskGen.setOnClickListener(new View.OnClickListener() {
-        	public void onClick(View v) {
-        		db.createRandomTask();
-        		finish();
-        		startActivity(getIntent());
-        	}
-        });
-    }
-    
-    @Override
-    public void onResume() {
-    	super.onResume();
-    	this.tasks = db.getAllTasks();
-    	myList.setAdapter(new TaskListAdapter(MainActivity.this, tasks));
-    	
-    }
-    
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
+        // For each of the sections in the app, add a tab to the action bar.
+        actionBar.addTab(actionBar.newTab().setText(R.string.home_tab).setTabListener(this));
+        actionBar.addTab(actionBar.newTab().setText(R.string.mytasks_tab).setTabListener(this));
+        actionBar.addTab(actionBar.newTab().setText(R.string.following_tab).setTabListener(this));
+        actionBar.addTab(actionBar.newTab().setText(R.string.log_tab).setTabListener(this));
     }
     
     @Override
@@ -91,6 +41,68 @@ public class MainActivity extends Activity {
     			NavUtils.navigateUpFromSameTask(this);
     			return true;
     	}
+    }
+    
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState.containsKey(STATE_SELECTED_NAVIGATION_ITEM)) {
+            getActionBar().setSelectedNavigationItem(
+                    savedInstanceState.getInt(STATE_SELECTED_NAVIGATION_ITEM));
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(STATE_SELECTED_NAVIGATION_ITEM,
+                getActionBar().getSelectedNavigationIndex());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+
+    
+
+    @Override
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+    }
+
+    @Override
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        // When the given tab is selected, show the tab contents in the container
+    	Fragment fragment;
+    	switch (tab.getPosition()) {
+    		case 0:
+    			fragment = new FeedSectionFragment();
+    	        getSupportFragmentManager().beginTransaction()
+    	                .replace(R.id.container, fragment)
+    	                .commit();
+    			break;
+    		case 1:
+    			fragment = new MyTasksSectionFragment();
+    	        getSupportFragmentManager().beginTransaction()
+    	                .replace(R.id.container, fragment)
+    	                .commit();
+    			break;
+    		case 2:
+    			fragment = new FeedSectionFragment();
+    	        getSupportFragmentManager().beginTransaction()
+    	                .replace(R.id.container, fragment)
+    	                .commit();
+    			break;
+    		case 3:
+    			fragment = new FeedSectionFragment();
+    	        getSupportFragmentManager().beginTransaction()
+    	                .replace(R.id.container, fragment)
+    	                .commit();
+    			break;
+    	}
+    }
+
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
     
 }

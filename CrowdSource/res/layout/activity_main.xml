@@ -1,43 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-	<ListView
-	    android:id="@+id/tasklist"
-        android:layout_width="fill_parent"
-        android:layout_height="380dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:cacheColorHint="#00000000"
-        android:listSelector="@android:color/transparent"
-        android:transcriptMode="alwaysScroll" >
-    </ListView>
-
-	<Button
-	    android:id="@+id/button1"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentLeft="true"
-	    android:layout_alignParentTop="true"
-	    android:text="My Tasks" />
-	
-	<Button
-	    android:id="@+id/DBDEBUG"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentLeft="false"
-	    android:layout_alignParentRight="true"
-	    android:layout_alignParentTop="true"
-	    android:text="Empty DB" />
-
-	<Button
-	    android:id="@+id/RandTask"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentTop="true"
-	    android:layout_toLeftOf="@+id/DBDEBUG"
-	    android:layout_toRightOf="@+id/button1"
-	    android:text="Random Task" />
-
-</RelativeLayout>
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"/>

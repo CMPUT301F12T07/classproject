@@ -145,7 +145,7 @@ public class LocalDB extends SQLiteOpenHelper {
 	} 
 	
 	/* Getting All tasks by uid*/
-	public List<Task> getAllTasksByUid(int uid) { 
+	public List<Task> getAllTasksByUid(String uid) { 
 		List<Task> taskList = new ArrayList<Task>(); 
 
 		String selectQuery = "SELECT * FROM " + TABLE_TASKS + " WHERE " + KEY_UID + "='" + uid + "'";
@@ -224,7 +224,7 @@ public class LocalDB extends SQLiteOpenHelper {
 	}
 	
 	/* Print all tasks by uid to logcat (for debug purpose) */
-	public void printAllTasksByUid(int uid){
+	public void printAllTasksByUid(String uid){
 		Log.d("Print: ", "Printing all tasks..."); 
 		List<Task> tasks = this.getAllTasksByUid(uid);        
 
