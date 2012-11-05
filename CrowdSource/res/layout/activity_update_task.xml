@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="17dp" />
+        android:layout_marginRight="4dp" />
 
     <EditText
         android:id="@+id/textEditCreatedDate"
@@ -76,12 +76,14 @@
         android:layout_alignParentRight="true"
         android:text="@string/Save" />
 
-    <Button
-        android:id="@+id/buttonPublic"
+    <CheckBox
+        android:id="@+id/checkboxPublic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textEditCreatedDate"
-        android:text="@string/MakePublic" />
+        android:text="@string/MakePublic"
+        android:layout_marginRight="4dp" />
+
 
 </RelativeLayout>

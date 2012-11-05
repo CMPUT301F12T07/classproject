@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 public class UpdateTaskActivity extends Activity {
@@ -59,6 +60,19 @@ public class UpdateTaskActivity extends Activity {
             	finish();
             }
         });
+        
+        final CheckBox Public = (CheckBox) findViewById(R.id.checkboxPublic);
+        Public.setOnClickListener(new View.OnClickListener()
+        {
+        	public void onClick(View v)
+        	{
+        		if (Public.isChecked())
+        			currentTask.set_visibility(0);
+        		else
+        			currentTask.set_visibility(1);
+        	}
+        });
+ 
         
         Button Save = (Button) findViewById(R.id.buttonSave);
         Save.setOnClickListener(new View.OnClickListener() {
