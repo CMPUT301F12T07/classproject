@@ -16,7 +16,7 @@ public class ViewTaskActivity extends Activity {
 	private TextView taskTitle;
 	private TextView startDate;
 	private TextView endDate;
-	private TextView taskContent;
+	private TextView taskVisibility;
 	private TextView taskDesc;
 	private LocalDB db;
 
@@ -44,11 +44,12 @@ public class ViewTaskActivity extends Activity {
         this.endDate = (TextView) findViewById(R.id.textViewDueDate);
         endDate.setText(currentTask.get_dateDue());
         
-        // Getting the task content field
-        // type? content?
-        this.taskContent = (TextView) findViewById(R.id.textViewContent);
-        //String contentStr = currentTask.get_type();
-        taskContent.setText(currentTask.get_type());
+        // Getting the task visibility level
+        this.taskVisibility = (TextView) findViewById(R.id.textViewVisibility);
+        if (currentTask.get_visibility() == 1)
+        	taskVisibility.setText("Private");
+        else
+        	taskVisibility.setText("Public");
         
         // Getting the task description field
         this.taskDesc = (TextView) findViewById(R.id.textViewDescription);
@@ -94,7 +95,7 @@ public class ViewTaskActivity extends Activity {
     	taskTitle.setText(currentTask.get_title());
     	startDate.setText(currentTask.get_dateCreate());
     	endDate.setText(currentTask.get_dateDue());
-    	taskContent.setText(currentTask.get_type());
+    	taskVisibility.setText(currentTask.get_type());
     	taskDesc.setText(currentTask.get_description());
     }
     

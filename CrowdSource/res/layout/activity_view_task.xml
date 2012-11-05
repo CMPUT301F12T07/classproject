@@ -40,13 +40,13 @@
         tools:context=".ViewTask" />
 
     <TextView
-        android:id="@+id/textViewContent"
+        android:id="@+id/textViewVisibility"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textViewDueDate"
         android:layout_marginTop="15dp"
-        android:text="Content"
+        android:text="Visibility Level"
         tools:context=".ViewTask" />
 
     <TextView
@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewContent"
+        android:layout_below="@+id/textViewVisibility"
         android:text="Description"
         tools:context=".ViewTask" />
 
@@ -82,12 +82,5 @@
         android:layout_alignParentRight="true"
         android:text="@string/Update" />
 
-    <Button
-        android:id="@+id/buttonPublic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textViewCreatedDate"
-        android:text="@string/MakePublic" />
 
 </RelativeLayout>
