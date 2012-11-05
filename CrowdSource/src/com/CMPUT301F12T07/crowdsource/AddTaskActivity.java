@@ -154,6 +154,9 @@ public class AddTaskActivity extends Activity {
 
 			@Override
 			public void afterTextChanged(Editable s) {
+				if (s.toString().compareTo("") == 0)
+					quantity = 0;
+				else
 					quantity = Integer.parseInt(s.toString());
 			}
 
@@ -177,13 +180,11 @@ public class AddTaskActivity extends Activity {
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int pos, long id) {
 				type = parent.getItemAtPosition(pos).toString();
-				System.out.println(type);
 			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 				type = parent.getItemAtPosition(0).toString();
-				System.out.println(type);
 			}
     		
     	});
@@ -210,11 +211,18 @@ public class AddTaskActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				LocalDB db = new LocalDB(v.getContext());
-				Task newTask = new Task(deviceId, title, description, dateCreate, dateDue, type, visibility, quantity);
-				
-				db.createTask(newTask);
-				finish();
+				// can only save if quantity > 0, title and description is not blank
+				if (title.compareTo("") != 0 && description.compareTo("") != 0 && quantity > 0) {
+					LocalDB db = new LocalDB(v.getContext());
+					Task newTask = new Task(deviceId, title, description, dateCreate, dateDue, type, visibility, quantity);
+					
+					db.createTask(newTask);
+					finish();
+				} else if (quantity == 0) {
+					Toast.makeText(v.getContext(), "Quantity has to be at least one.", Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(v.getContext(), "Missing fields.", Toast.LENGTH_SHORT).show();
+				}
 			}
     		
     	});

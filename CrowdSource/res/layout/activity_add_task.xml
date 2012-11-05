@@ -24,7 +24,8 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:ems="10"
-        android:hint="@string/enterTitleTextView_text" >
+        android:hint="@string/enterTitleTextView_text"
+        android:singleLine="true" >
 
         <requestFocus />
     </EditText>
