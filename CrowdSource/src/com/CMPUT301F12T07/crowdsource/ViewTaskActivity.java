@@ -35,39 +35,14 @@ public class ViewTaskActivity extends Activity {
         
         // Getting the task title field
         this.taskTitle = (TextView) findViewById(R.id.textViewTitle);
-        //String titleStr = currentTask.get_title();
-        taskTitle.setText(currentTask.get_title());
-        
         // Getting the start Date field
         this.startDate = (TextView) findViewById(R.id.textViewCreatedDate);
-        startDate.setText(currentTask.get_dateCreate());
-        
         // Getting the end Date field
         this.endDate = (TextView) findViewById(R.id.textViewDueDate);
-        endDate.setText(currentTask.get_dateDue());
-        
         // Getting the task visibility level
         this.taskVisibility = (TextView) findViewById(R.id.textViewVisibility);
-        if (currentTask.get_visibility() == 1)
-        	taskVisibility.setText("Private");
-        else
-        	taskVisibility.setText("Public");
-        
         // Getting the task description field
         this.taskDesc = (TextView) findViewById(R.id.textViewDescription);
-        //String descStr = currentTask.get_description();
-        taskDesc.setText(currentTask.get_description());
-        
-        
-        /*
-        timeEdit.setOnFocusChangeListener(new OnFocusChangeListener() {
-        	public void onFocusChange(View v, boolean hasFocus){
-        		if (!hasFocus){
-        			currentTask.setTime(Integer.parseInt(timeEdit.getText().toString()));
-        			db.updateTask(currentTask);
-        		}
-        	}
-        }); */
         
         final Button Update = (Button) findViewById(R.id.buttonUpdate);
         Update.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +82,10 @@ public class ViewTaskActivity extends Activity {
     	taskTitle.setText(currentTask.get_title());
     	startDate.setText(currentTask.get_dateCreate());
     	endDate.setText(currentTask.get_dateDue());
-    	taskVisibility.setText(currentTask.get_type());
+    	if(currentTask.get_visibility() == 1)
+    		taskVisibility.setText("Private");
+    	else
+    		taskVisibility.setText("Public");
     	taskDesc.setText(currentTask.get_description());
     }
     
