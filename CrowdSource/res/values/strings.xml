@@ -1,13 +1,12 @@
 <resources>
 
     <string name="app_name">CrowdSource</string>
-    <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_view_task">ViewTask</string>
+    <string name="title_activity_main">CrowdSourced</string>
+    <string name="title_activity_view_task">View Task</string>
     <string name="TaskObject">taskObject</string>
     <string name="addtask_actionbar">+</string>
-    <string name="title_activity_add_task">AddTask</string>
+    <string name="title_activity_add_task">Add Task</string>
 
     <!-- AddTaskActivity items -->
     <string name="titleTextView_text">Title</string>
@@ -40,7 +39,7 @@
     <string name="Delete">Delete</string>
     <string name="Update">Update</string>
     <string name="MakePublic">Make Public</string>
-    <string name="title_activity_update_task">UpdateTaskActivity</string>
+    <string name="title_activity_update_task">Update Task</string>
     <string name="Save">Save</string>
     <string name="Cancel">Cancel</string>
 

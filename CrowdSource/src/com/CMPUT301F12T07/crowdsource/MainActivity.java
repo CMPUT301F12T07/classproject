@@ -26,8 +26,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         // For each of the sections in the app, add a tab to the action bar.
         actionBar.addTab(actionBar.newTab().setText(R.string.home_tab).setTabListener(this));
         actionBar.addTab(actionBar.newTab().setText(R.string.mytasks_tab).setTabListener(this));
-        actionBar.addTab(actionBar.newTab().setText(R.string.following_tab).setTabListener(this));
-        actionBar.addTab(actionBar.newTab().setText(R.string.log_tab).setTabListener(this));
+        //actionBar.addTab(actionBar.newTab().setText(R.string.following_tab).setTabListener(this));
+        //actionBar.addTab(actionBar.newTab().setText(R.string.log_tab).setTabListener(this));
     }
     
     @Override
