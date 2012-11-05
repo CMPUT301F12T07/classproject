@@ -50,7 +50,7 @@ public class AddTaskActivity extends Activity {
 	
 	private Button save;
 	
-    @Override
+    // intializes listeners and gets android id on startup
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
@@ -59,7 +59,6 @@ public class AddTaskActivity extends Activity {
         initializeListeners();
     }
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_add_task, menu);
         return true;
@@ -168,6 +167,7 @@ public class AddTaskActivity extends Activity {
     	});
 	}
     
+    // initializes dropdown type boxes
     private void initializeSpinners() {
     	typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
     	
