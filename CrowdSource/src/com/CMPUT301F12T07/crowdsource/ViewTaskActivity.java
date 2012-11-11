@@ -1,5 +1,8 @@
 package com.CMPUT301F12T07.crowdsource;
 
+import com.CMPUT301F12T07.taskmodeldb.crowdsource.LocalDB;
+import com.CMPUT301F12T07.taskmodeldb.crowdsource.Task;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

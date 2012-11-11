@@ -1,5 +1,7 @@
-package com.CMPUT301F12T07.crowdsource;
+package com.CMPUT301F12T07.tabviews.crowdsource;
 
+import com.CMPUT301F12T07.crowdsource.AddTaskActivity;
+import com.CMPUT301F12T07.crowdsource.R;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;
