@@ -1,9 +1,9 @@
-package com.CMPUT301F12T07.tabviews.crowdsource;
+package com.CMPUT301F12T07.crowdsource.tabviews;
 
 import java.util.List;
 
 import com.CMPUT301F12T07.crowdsource.R;
-import com.CMPUT301F12T07.taskmodeldb.crowdsource.Task;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
 import android.content.Context;
 import android.view.LayoutInflater;

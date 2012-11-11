@@ -2,8 +2,8 @@ package com.CMPUT301F12T07.crowdsource;
 
 import java.util.Calendar;
 
-import com.CMPUT301F12T07.taskmodeldb.crowdsource.LocalDB;
-import com.CMPUT301F12T07.taskmodeldb.crowdsource.Task;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
 import android.os.Bundle;
 import android.provider.Settings.Secure;

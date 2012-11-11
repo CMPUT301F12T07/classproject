@@ -1,4 +1,4 @@
-package com.CMPUT301F12T07.taskmodeldb.crowdsource;
+package com.CMPUT301F12T07.crowdsource.taskmodeldb;
 
 import java.util.ArrayList; 
 import java.util.List; 

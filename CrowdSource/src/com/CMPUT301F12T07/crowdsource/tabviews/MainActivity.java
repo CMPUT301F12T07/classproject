@@ -1,4 +1,4 @@
-package com.CMPUT301F12T07.tabviews.crowdsource;
+package com.CMPUT301F12T07.crowdsource.tabviews;
 
 import com.CMPUT301F12T07.crowdsource.AddTaskActivity;
 import com.CMPUT301F12T07.crowdsource.R;
