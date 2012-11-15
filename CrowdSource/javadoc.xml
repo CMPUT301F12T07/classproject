@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="/usr/local/stow/android-sdk_r20.0.3/share/android-sdk-linux/platforms/android-15/android.jar" destdir="doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="com.CMPUT301F12T07.crowdsource,com.CMPUT301F12T07.crowdsource.tabviews,com.CMPUT301F12T07.crowdsource.taskmodeldb,com.CMPUT301F12T07.crowdsource.testcases" source="1.6" sourcepath="src:gen" splitindex="true" use="true" version="true"/>
+    </target>
+</project>
