@@ -3,15 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="Title of Task"
-        tools:context=".ViewTask" />
-
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
@@ -19,44 +10,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="17dp" />
-
-    <TextView
-        android:id="@+id/textViewCreatedDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewTitle"
-        android:layout_marginTop="15dp"
-        android:text="Created: Date"
-        tools:context=".ViewTask" />
-
-    <TextView
-        android:id="@+id/textViewDueDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewCreatedDate"
-        android:text="Due: Date"
-        tools:context=".ViewTask" />
-
-    <TextView
-        android:id="@+id/textViewVisibility"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewDueDate"
-        android:layout_marginTop="15dp"
-        android:text="Visibility Level"
-        tools:context=".ViewTask" />
-
-    <TextView
-        android:id="@+id/textViewDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewVisibility"
-        android:text="Description"
-        tools:context=".ViewTask" />
 
     <Button
         android:id="@+id/buttonDelete"
@@ -82,5 +35,100 @@
         android:layout_alignParentRight="true"
         android:text="@string/Update" />
 
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Title of Task"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        tools:context=".ViewTask" />
+
+    <TextView
+        android:id="@+id/textLabelCreatedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewTitle"
+        android:layout_marginTop="15dp"
+        android:text="Created:"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewCreatedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textLabelCreatedDate"
+        android:layout_alignBottom="@+id/textLabelCreatedDate"
+        android:layout_toRightOf="@+id/textLabelCreatedDate"
+        android:text="This date is unset"
+        tools:context=".ViewTask" />
+
+    <TextView
+        android:id="@+id/textLabelDueDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textLabelCreatedDate"
+        android:textStyle="bold"
+        android:text="Due:" />
+
+    <TextView
+        android:id="@+id/textViewDueDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textLabelDueDate"
+        android:layout_alignBottom="@+id/textLabelDueDate"
+        android:layout_toRightOf="@+id/textLabelDueDate"
+        android:text="This date is unset"
+        tools:context=".ViewTask" />
+
+    <TextView
+        android:id="@+id/textLabelDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textLabelDueDate"
+        android:layout_marginTop="30dp"
+        android:text="Description:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textLabelDescription"
+        android:layout_toLeftOf="@+id/textViewVisibility"
+        android:text="this is a sample task with no set description"
+        tools:context=".ViewTask" />
+
+    <TextView
+        android:id="@+id/textViewVisibility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/textLabelDescription"
+        android:text="Visibility Level"
+        tools:context=".ViewTask" />
+
+    <TextView
+        android:id="@+id/textLabelQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewDescription"
+        android:layout_marginTop="15dp"
+        android:text="Quantity:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textViewQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textLabelQuantity"
+        android:layout_toRightOf="@+id/textLabelQuantity"
+        android:text="unset quantity" />
 
 </RelativeLayout>
