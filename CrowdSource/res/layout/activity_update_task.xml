@@ -45,7 +45,7 @@
         android:text="Created:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <EditText
+    <TextView
         android:id="@+id/textEditCreatedDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,19 +55,11 @@
         android:hint="Created: Date"
         tools:context=".UpdateTaskActivity" />
 
-    <TextView
-        android:id="@+id/textLabelDueDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textEditCreatedDate"
-        android:text="Due:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <EditText
         android:id="@+id/textEditDueDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textLabelDueDate"
+        android:layout_below="@+id/textLabelCreatedDate"
         android:layout_toRightOf="@+id/textLabelCreatedDate"
         android:ems="10"
         android:hint="Due: Date"
@@ -122,5 +114,14 @@
         android:ems="10"
         android:hint="Quantity"
         tools:context=".UpdateTaskActivity" />
+
+    <TextView
+        android:id="@+id/textLabelDueDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textLabelCreatedDate"
+        android:layout_toLeftOf="@+id/textEditDueDate"
+        android:text="Due:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
