@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    
+
     <EditText
         android:id="@+id/textEditTitle"
         android:layout_width="wrap_content"
@@ -12,7 +12,6 @@
         android:hint="Title of Task"
         tools:context=".UpdateTaskActivity" />
 
-    // TODO fix up
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
@@ -20,45 +19,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="4dp" />
-
-    <EditText
-        android:id="@+id/textEditCreatedDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textEditTitle"
-        android:layout_marginTop="15dp"
-        android:hint="Created: Date"
-        tools:context=".UpdateTaskActivity" />
-
-    <EditText
-        android:id="@+id/textEditDueDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textEditCreatedDate"
-        android:hint="Due: Date"
-        tools:context=".UpdateTaskActivity" />
-
-    <EditText
-        android:id="@+id/textEditContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textEditDueDate"
-        android:layout_marginTop="15dp"
-        android:hint="Content"
-        tools:context=".UpdateTaskActivity" />
-
-    <EditText
-        android:id="@+id/textEditDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textEditContent"
-        android:hint="Description"
-        tools:context=".UpdateTaskActivity" />
-
 
     <Button
         android:id="@+id/buttonCancel"
@@ -76,14 +36,91 @@
         android:layout_alignParentRight="true"
         android:text="@string/Save" />
 
+    <TextView
+        android:id="@+id/textLabelCreatedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textEditTitle"
+        android:text="Created:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/textEditCreatedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textEditTitle"
+        android:layout_toRightOf="@+id/textLabelCreatedDate"
+        android:ems="10"
+        android:hint="Created: Date"
+        tools:context=".UpdateTaskActivity" />
+
+    <TextView
+        android:id="@+id/textLabelDueDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textEditCreatedDate"
+        android:text="Due:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/textEditDueDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textLabelDueDate"
+        android:layout_toRightOf="@+id/textLabelCreatedDate"
+        android:ems="10"
+        android:hint="Due: Date"
+        tools:context=".UpdateTaskActivity" />
+
+    <TextView
+        android:id="@+id/textLabelDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textEditDueDate"
+        android:layout_marginTop="43dp"
+        android:text="Description:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/textEditDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textLabelDescription"
+        android:ems="10"
+        android:hint="Description"
+        tools:context=".UpdateTaskActivity" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textLabelQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textEditDescription"
+        android:text="Quantity:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <CheckBox
         android:id="@+id/checkboxPublic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textEditCreatedDate"
-        android:text="@string/MakePublic"
-        android:layout_marginRight="4dp" />
+        android:layout_alignRight="@+id/imageView1"
+        android:layout_below="@+id/textEditDueDate"
+        android:text="@string/MakePublic" />
 
+    <EditText
+        android:id="@+id/textEditQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textLabelQuantity"
+        android:ems="10"
+        android:hint="Quantity"
+        tools:context=".UpdateTaskActivity" />
 
 </RelativeLayout>

@@ -43,9 +43,9 @@ public class UpdateTaskActivity extends Activity {
         this.endDate = (EditText) findViewById(R.id.textEditDueDate);
         endDate.setText(currentTask.get_dateDue());
 
-        // Getting the task type/content field
-        this.taskContent = (EditText) findViewById(R.id.textEditContent);
-        taskContent.setText(currentTask.get_type());
+        // Getting the task quantity field
+        this.taskContent = (EditText) findViewById(R.id.textEditQuantity);
+        taskContent.setText(Integer.toString(currentTask.get_quantity()));
 
         // Getting the task description field
         this.taskDesc = (EditText) findViewById(R.id.textEditDescription);
