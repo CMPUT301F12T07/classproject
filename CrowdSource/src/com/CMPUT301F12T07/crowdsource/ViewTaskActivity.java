@@ -47,7 +47,7 @@ public class ViewTaskActivity extends Activity {
         this.taskVisibility = (TextView) findViewById(R.id.textViewVisibility);
         // Getting the task description field
         this.taskDesc = (TextView) findViewById(R.id.textViewDescription);
-     // Getting the task quantity field
+        // Getting the task quantity field
         this.taskQuantity = (TextView) findViewById(R.id.textViewQuantity);
         
         final Button Update = (Button) findViewById(R.id.buttonUpdate);
