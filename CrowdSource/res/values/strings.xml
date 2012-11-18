@@ -42,5 +42,7 @@
     <string name="title_activity_update_task">Update Task</string>
     <string name="Save">Save</string>
     <string name="Cancel">Cancel</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_view_logged">ViewLoggedActivity</string>
 
 </resources>
