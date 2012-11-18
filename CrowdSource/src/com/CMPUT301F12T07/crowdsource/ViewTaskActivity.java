@@ -22,6 +22,7 @@ public class ViewTaskActivity extends Activity {
 	private TextView endDate;
 	private TextView taskVisibility;
 	private TextView taskDesc;
+	private TextView taskQuantity;
 	private LocalDB db;
 
 	private Button deleteTask;
@@ -46,6 +47,8 @@ public class ViewTaskActivity extends Activity {
         this.taskVisibility = (TextView) findViewById(R.id.textViewVisibility);
         // Getting the task description field
         this.taskDesc = (TextView) findViewById(R.id.textViewDescription);
+     // Getting the task quantity field
+        this.taskQuantity = (TextView) findViewById(R.id.textViewQuantity);
         
         final Button Update = (Button) findViewById(R.id.buttonUpdate);
         Update.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +88,7 @@ public class ViewTaskActivity extends Activity {
     	taskTitle.setText(currentTask.get_title());
     	startDate.setText(currentTask.get_dateCreate());
     	endDate.setText(currentTask.get_dateDue());
+    	taskQuantity.setText(Integer.toString(currentTask.get_quantity()));
     	if(currentTask.get_visibility() == 1)
     		taskVisibility.setText("Private");
     	else
