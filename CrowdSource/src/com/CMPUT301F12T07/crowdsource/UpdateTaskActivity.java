@@ -1,8 +1,5 @@
 package com.CMPUT301F12T07.crowdsource;
 
-import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
-import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,14 +7,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
 public class UpdateTaskActivity extends Activity {
 
 	private Task currentTask;
 	private EditText taskTitle;
-	private EditText startDate;
+	private TextView startDate;
 	private EditText endDate;
-	private EditText taskContent;
+	private EditText taskQuantity;
 	private EditText taskDesc;
 	private LocalDB db;
 	
@@ -36,7 +37,7 @@ public class UpdateTaskActivity extends Activity {
         taskTitle.setText(currentTask.get_title());
 
         // Getting the start Date field
-        this.startDate = (EditText) findViewById(R.id.textEditCreatedDate);
+        this.startDate = (TextView) findViewById(R.id.textEditCreatedDate);
         startDate.setText(currentTask.get_dateCreate());
 
         // Getting the end Date field
@@ -44,8 +45,8 @@ public class UpdateTaskActivity extends Activity {
         endDate.setText(currentTask.get_dateDue());
 
         // Getting the task quantity field
-        this.taskContent = (EditText) findViewById(R.id.textEditQuantity);
-        taskContent.setText(Integer.toString(currentTask.get_quantity()));
+        this.taskQuantity = (EditText) findViewById(R.id.textEditQuantity);
+        taskQuantity.setText(Integer.toString(currentTask.get_quantity()));
 
         // Getting the task description field
         this.taskDesc = (EditText) findViewById(R.id.textEditDescription);
@@ -81,7 +82,7 @@ public class UpdateTaskActivity extends Activity {
             	currentTask.set_title(taskTitle.getText().toString());
             	currentTask.set_dateCreate(startDate.getText().toString());
             	currentTask.set_dateDue(endDate.getText().toString());
-            	currentTask.set_type(taskContent.getText().toString());
+            	currentTask.set_quantity(Integer.parseInt(taskQuantity.getText().toString()));
             	currentTask.set_description(taskDesc.getText().toString());
             	
             	db.updateTask(currentTask);
