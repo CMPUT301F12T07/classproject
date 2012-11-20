@@ -9,17 +9,11 @@ import android.os.Bundle;
 import android.provider.Settings.Secure;
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -41,15 +35,11 @@ public class AddTaskActivity extends Activity {
 	private EditText titleText;
 	private EditText descriptionText;
 	private EditText quantityText;
-	private String title;
-	private String description;
-	private int quantity;
 	
 	private Spinner typeSpinner;
-	private String type;
 	
 	private CheckBox privacyCheckBox;
-	private int visibility;
+//	private int visibility;
 	
 	private Button save;
 	
@@ -104,10 +94,10 @@ public class AddTaskActivity extends Activity {
 	        month = inmonth;
 	        day = inday;
 	        
-	        selectedDate.setText(year + "-" + (month+1) + "-" + day);
 	        dateDue = year + "-" + (month+1) + "-" + day;
+	        selectedDate.setText(dateDue);
 	        
-	        Toast.makeText(v.getContext(), "Date set to: " + year + "-" + (month+1) + "-" + day, Toast.LENGTH_SHORT).show();
+	        Toast.makeText(v.getContext(), "Date set to: " + dateDue, Toast.LENGTH_SHORT).show();
 	    }
     };
     
@@ -116,95 +106,15 @@ public class AddTaskActivity extends Activity {
     	titleText = (EditText) findViewById(R.id.titleText);
     	descriptionText = (EditText) findViewById(R.id.descriptionText);
     	quantityText = (EditText) findViewById(R.id.quantityText);
-    	
-    	title = "";
-    	description = "";
-    	quantity = 0;
-		
-    	titleText.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				title = s.toString();
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence arg0, int arg1,
-					int arg2, int arg3) {}
-
-			@Override
-			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
-					int arg3) {}
-    	});
-    	
-    	descriptionText.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				description = s.toString();
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence arg0, int arg1,
-					int arg2, int arg3) {}
-
-			@Override
-			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
-					int arg3) {}
-    	});
-    	
-    	quantityText.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				if (s.toString().compareTo("") == 0)
-					quantity = 0;
-				else
-					quantity = Integer.parseInt(s.toString());
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence arg0, int arg1,
-					int arg2, int arg3) {}
-
-			@Override
-			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
-					int arg3) {}
-    	});
 	}
     
     // initializes dropdown type boxes
     private void initializeSpinners() {
     	typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
-    	
-    	typeSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view,
-					int pos, long id) {
-				type = parent.getItemAtPosition(pos).toString();
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-				type = parent.getItemAtPosition(0).toString();
-			}
-    		
-    	});
     }
     
     private void initializeCheckBox() {
     	privacyCheckBox = (CheckBox) findViewById(R.id.privacyCheckbox);
-    	
-    	privacyCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton button, boolean checked) {
-				if (checked) visibility = 1;
-				else visibility = 0;
-			}
-    		
-    	});
     }
     
     private void initializeSave() {
@@ -214,18 +124,27 @@ public class AddTaskActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				// can only save if quantity > 0, title and description is not blank
-				if (title.compareTo("") != 0 && description.compareTo("") != 0 && quantity > 0) {
+				String title = titleText.getText().toString();
+				String description = descriptionText.getText().toString();
+				String quantity = quantityText.getText().toString();
+				String type = typeSpinner.toString();
+				int visibility = (privacyCheckBox.isChecked() ? 1 : 0);
+				
+				if (title.compareTo("") == 0) 
+					Toast.makeText(v.getContext(), "Title cannot be left blank.", Toast.LENGTH_SHORT).show();
+				else if (description.compareTo("") == 0) 
+					Toast.makeText(v.getContext(), "Description cannot be left blank.", Toast.LENGTH_SHORT).show();
+				else if (quantity.compareTo("") == 0 || quantity.compareTo("0") == 0/*quantity == 0*/) 
+					Toast.makeText(v.getContext(), "Quantity has to be at least one.", Toast.LENGTH_SHORT).show();
+				else
+				{
 					LocalDB db = new LocalDB(v.getContext());
-					Task newTask = new Task(deviceId, title, description, dateCreate, dateDue, type, visibility, quantity);
+					Task newTask = new Task(deviceId, title, description, dateCreate, dateDue, type, visibility, Integer.parseInt(quantity));
 					
 					db.createTask(newTask);
 					finish();
-				} else if (quantity == 0) {
-					Toast.makeText(v.getContext(), "Quantity has to be at least one.", Toast.LENGTH_SHORT).show();
-				} else {
-					Toast.makeText(v.getContext(), "Missing fields.", Toast.LENGTH_SHORT).show();
 				}
+				
 			}
     		
     	});
