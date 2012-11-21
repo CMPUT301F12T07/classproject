@@ -18,14 +18,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class MyTasksSectionFragment extends Fragment {
+public class FollowedSectionFragment extends Fragment {
 	
-	private ListView myPrivateList;
-	private ListView myPublicList;
+	private ListView myList;
 	private List<Task> tasks;
 	private LocalDB db;
 	
-    public MyTasksSectionFragment() {
+    public FollowedSectionFragment() {
     }
 
     public static final String ARG_SECTION_NUMBER = "1";
@@ -34,29 +33,17 @@ public class MyTasksSectionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
     	
-    	View myFeed = inflater.inflate(R.layout.activity_my_tasks, container, false);
+    	View myFeed = inflater.inflate(R.layout.activity_followed_tasks, container, false);
     	
     	db = new LocalDB(inflater.getContext());
         
         this.tasks = db.getAllTasksByUid(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
         
-        myPrivateList = (ListView) myFeed.findViewById(R.id.privatetasklist);
-        myPrivateList.setAdapter(new TaskListAdapter(inflater.getContext(), tasks));
+        myList = (ListView) myFeed.findViewById(R.id.tasklist);
+        myList.setAdapter(new TaskListAdapter(inflater.getContext(), tasks));
         
         // Adds listener for when a Task is clicked in the ListView
-        myPrivateList.setOnItemClickListener(new OnItemClickListener() {
-        	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-        		Intent intent = new Intent(view.getContext(), ViewTaskActivity.class);
-        		intent.putExtra("taskObject", tasks.get(position).get_tid());
-        		startActivity(intent);
-        	}
-        });
-        
-        myPublicList = (ListView) myFeed.findViewById(R.id.publictasklist);
-        myPublicList.setAdapter(new TaskListAdapter(inflater.getContext(), tasks));
-        
-        // Adds listener for when a Task is clicked in the ListView
-        myPublicList.setOnItemClickListener(new OnItemClickListener() {
+        myList.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		Intent intent = new Intent(view.getContext(), ViewTaskActivity.class);
         		intent.putExtra("taskObject", tasks.get(position).get_tid());
@@ -71,8 +58,7 @@ public class MyTasksSectionFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		this.tasks = db.getAllTasksByUid(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
-		myPrivateList.setAdapter(new TaskListAdapter(getActivity(), tasks));
-		myPublicList.setAdapter(new TaskListAdapter(getActivity(), tasks));
+		myList.setAdapter(new TaskListAdapter(getActivity(), tasks));
 	}
     
 }

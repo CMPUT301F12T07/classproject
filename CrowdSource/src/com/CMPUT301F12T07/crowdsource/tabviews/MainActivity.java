@@ -26,10 +26,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // For each of the sections in the app, add a tab to the action bar.
-        actionBar.addTab(actionBar.newTab().setText(R.string.home_tab).setTabListener(this));
+        actionBar.addTab(actionBar.newTab().setText(R.string.home_tab).setTabListener(this)); // setIcon(R.drawable.)
         actionBar.addTab(actionBar.newTab().setText(R.string.mytasks_tab).setTabListener(this));
-        //actionBar.addTab(actionBar.newTab().setText(R.string.following_tab).setTabListener(this));
-        //actionBar.addTab(actionBar.newTab().setText(R.string.log_tab).setTabListener(this));
+        actionBar.addTab(actionBar.newTab().setText(R.string.following_tab).setTabListener(this));
+        actionBar.addTab(actionBar.newTab().setText(R.string.log_tab).setTabListener(this));
     }
     
     @Override
@@ -89,13 +89,13 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     	                .commit();
     			break;
     		case 2:
-    			fragment = new FeedSectionFragment();
+    			fragment = new FollowedSectionFragment();
     	        getSupportFragmentManager().beginTransaction()
     	                .replace(R.id.container, fragment)
     	                .commit();
     			break;
     		case 3:
-    			fragment = new FeedSectionFragment();
+    			fragment = new LogSectionFragment();
     	        getSupportFragmentManager().beginTransaction()
     	                .replace(R.id.container, fragment)
     	                .commit();
