@@ -44,5 +44,7 @@
     <string name="Cancel">Cancel</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_view_logged">ViewLoggedActivity</string>
+    <string name="myPrivateTasksText">Private Tasks</string>
+    <string name="myPublicTasksText">Public Tasks</string>
 
 </resources>
