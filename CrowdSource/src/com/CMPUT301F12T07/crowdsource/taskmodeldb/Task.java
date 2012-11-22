@@ -15,6 +15,21 @@ public class Task {
     
     /** Empty constructor */
     public Task(){ } 
+   
+// TODO: Add these for Model/Database Handler
+//    public Task(String webid, String title){ 
+//    	this._webid = webid;
+//    	this._title = title;
+//    }
+//    
+// TODO: These should be in Database Handler
+//    public Task getAllWebTasks(){    	
+//    	return new Task(parsedWebID, parsedTitle);
+//    }
+//    
+//    public Task getTaskByWid(wid){
+//    	return new Task(etc., etc., etc.)
+//    }
 
     /** constructor without tid */ 
     public Task(String uid, String title, String description, String dateCreate, 

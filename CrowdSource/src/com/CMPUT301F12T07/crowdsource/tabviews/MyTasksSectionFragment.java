@@ -18,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 public class MyTasksSectionFragment extends Fragment {
 	
@@ -44,12 +43,15 @@ public class MyTasksSectionFragment extends Fragment {
         
         myPrivateList = (ListView) myFeed.findViewById(R.id.privatetasklist);
         myPrivateList.setAdapter(new TaskListAdapter(inflater.getContext(), tasks));
+        
+        // Max Height implementation so that Private List and Public List can Coincide
         if (myPrivateList.getAdapter().getCount() >= 3){
         	View taskItem = myPrivateList.getAdapter().getView(0, null, myPrivateList);
         	taskItem.measure(0, 0);
         	LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, (int) (3.9 * taskItem.getMeasuredHeight()));
         	myPrivateList.setLayoutParams(params);
         }
+        
         // TODO: Add Text if you have no Tasks Specified (ie. No Public Tasks, No Private Tasks)
         
         // Adds listener for when a Task is clicked in the ListView
@@ -60,6 +62,8 @@ public class MyTasksSectionFragment extends Fragment {
         		startActivity(intent);
         	}
         });
+        
+        
         
         myPublicList = (ListView) myFeed.findViewById(R.id.publictasklist);
         myPublicList.setAdapter(new TaskListAdapter(inflater.getContext(), tasks));
@@ -73,6 +77,8 @@ public class MyTasksSectionFragment extends Fragment {
         	}
         });
         
+        // TODO: Add Text if you have no Tasks Specified (ie. No Public Tasks, No Private Tasks)
+        
         return myFeed;
     }
     
@@ -81,12 +87,15 @@ public class MyTasksSectionFragment extends Fragment {
 		super.onResume();
 		this.tasks = db.getAllTasksByUid(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
 		myPrivateList.setAdapter(new TaskListAdapter(getActivity(), tasks));
+		
+		// Max Height implementation so that Private List and Public List can Coincide
 		if (myPrivateList.getAdapter().getCount() >= 3){
         	View taskItem = myPrivateList.getAdapter().getView(0, null, myPrivateList);
         	taskItem.measure(0, 0);
         	myPrivateList.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, (int) (3.9 * taskItem.getMeasuredHeight())));
         }
 		myPublicList.setAdapter(new TaskListAdapter(getActivity(), tasks));
+		// TODO: Add Text if you have no Tasks Specified (ie. No Public Tasks, No Private Tasks)
 	}
     
 }
