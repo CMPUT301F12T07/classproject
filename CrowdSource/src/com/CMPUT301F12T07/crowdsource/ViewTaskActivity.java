@@ -1,9 +1,9 @@
 package com.CMPUT301F12T07.crowdsource;
 
-import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
-import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
-
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +12,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
 public class ViewTaskActivity extends Activity {
 
@@ -25,8 +28,11 @@ public class ViewTaskActivity extends Activity {
 	private TextView taskQuantity;
 	private LocalDB db;
 
+	private Button updateTask;
 	private Button deleteTask;
 	private Button fulfillTask;
+	
+	final Context context = this;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,8 +56,8 @@ public class ViewTaskActivity extends Activity {
         // Getting the task quantity field
         this.taskQuantity = (TextView) findViewById(R.id.textViewQuantity);
         
-        final Button Update = (Button) findViewById(R.id.buttonUpdate);
-        Update.setOnClickListener(new View.OnClickListener() {
+        this.updateTask = (Button) findViewById(R.id.buttonUpdate);
+        updateTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	Intent intent = new Intent(ViewTaskActivity.this, UpdateTaskActivity.class);
         		intent.putExtra("taskID", currentTask.get_tid());
@@ -61,10 +67,37 @@ public class ViewTaskActivity extends Activity {
         
         this.deleteTask = (Button) findViewById(R.id.buttonDelete);
         deleteTask.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				db.deleteTask(currentTask.get_tid());
-				finish();
-			}
+        	public void onClick(View v) {
+        		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        		// set title
+        		builder.setTitle("Delete");
+
+        		// set dialog message
+        		builder.setMessage("Are you sure you want to delete this task?");
+        		builder.setCancelable(false);
+        		builder.setPositiveButton(R.string.Delete, new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog,int id) {
+        				// if this button is clicked, delete the task and leave the activity
+        				db.deleteTask(currentTask.get_tid());
+        				finish();
+        			}
+        		});
+        		builder.setNegativeButton(R.string.Cancel,new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog,int id) {
+        				// if this button is clicked, just close
+        				// the dialog box and do nothing
+        				dialog.cancel();
+        			}
+        		});
+
+        		// create alert dialog
+        		AlertDialog alertDialog = builder.create();
+
+        		// show it
+        		alertDialog.show();
+        	}
+
         });
 
         this.fulfillTask = (Button) findViewById(R.id.buttonFulfill);
