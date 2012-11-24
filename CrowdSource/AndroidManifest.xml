@@ -48,6 +48,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ViewOtherTaskActivity"
+            android:label="@string/title_activity_view_other_task" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.CMPUT301F12T07.crowdsource.tabviews.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

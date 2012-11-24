@@ -46,5 +46,7 @@
     <string name="title_activity_view_logged">ViewLoggedActivity</string>
     <string name="myPrivateTasksText">Private Tasks</string>
     <string name="myPublicTasksText">Public Tasks</string>
+    <string name="title_activity_view_other_task">ViewOtherTaskActivity</string>
+    <string name="Follow">Follow</string>
 
 </resources>
