@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -110,6 +111,16 @@ public class ViewTaskActivity extends Activity {
 				
 			}
         });
+        
+        ImageView imageName = (ImageView) findViewById(R.id.imageView1);
+        
+        if (currentTask.get_type().equals("Audio")){
+        	imageName.setImageResource(R.drawable.ic_tasktype_audio);
+        } else if (currentTask.get_type().equals("Photo")){
+        	imageName.setImageResource(R.drawable.ic_tasktype_photo);
+        } else {
+        	imageName.setImageResource(R.drawable.ic_tasktype_text);
+        }
     }
 
     @Override

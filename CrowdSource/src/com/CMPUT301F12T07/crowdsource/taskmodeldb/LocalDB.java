@@ -334,6 +334,19 @@ public class LocalDB extends SQLiteOpenHelper {
 	}
 	
 	/**
+	 * Gets a Random not owned, incomplete Task
+	 * 
+	 * Queries database to get a random not owned
+	 * task which is incomplete and returns
+	 * the task object of it.
+	 * 
+	 * @return Task Object
+	 */
+	public Task getRandomTask(){
+		return new Task();
+	}
+	
+	/**
 	 * Updates a Single Tasks Information
 	 * 
 	 * Queries Database to update a Single

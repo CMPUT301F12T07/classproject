@@ -37,7 +37,7 @@ public class FollowedSectionFragment extends Fragment {
     	
     	db = new LocalDB(inflater.getContext());
         
-        this.tasks = db.getAllTasksByUid(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
+        this.tasks = db.getFollowedTasks(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
         
         myList = (ListView) myFeed.findViewById(R.id.tasklist);
         myList.setAdapter(new TaskListAdapter(inflater.getContext(), tasks));
@@ -57,7 +57,7 @@ public class FollowedSectionFragment extends Fragment {
     @Override
 	public void onResume() {
 		super.onResume();
-		this.tasks = db.getAllTasksByUid(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
+		this.tasks = db.getFollowedTasks(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
 		myList.setAdapter(new TaskListAdapter(getActivity(), tasks));
 	}
     
