@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.Settings.Secure;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -47,6 +48,16 @@ public class AddTaskActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+        
+        /// test code for take photo
+        Button photo = (Button) findViewById(R.id.takephoto);
+        photo.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(v.getContext(), TakePhoto.class);
+				startActivity(intent);
+			}
+        });
+        ///
         
         deviceId = Secure.getString(this.getContentResolver(), Secure.ANDROID_ID);
         initializeListeners();
