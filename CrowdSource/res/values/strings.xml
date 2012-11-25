@@ -5,7 +5,7 @@
     <string name="title_activity_main">CrowdSourced</string>
     <string name="title_activity_view_task">View Task</string>
     <string name="TaskObject">taskObject</string>
-    <string name="addtask_actionbar">+</string>
+    <string name="addtask_actionbar">Add Task</string>
     <string name="title_activity_add_task">Add Task</string>
 
     <!-- AddTaskActivity items -->

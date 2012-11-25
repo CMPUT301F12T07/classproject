@@ -7,5 +7,5 @@
         android:id="@+id/addTask"
         android:title="@string/addtask_actionbar"
         android:showAsAction="always"
-        ></item>
+        android:icon="@drawable/ic_actionbar_plus"></item>
 </menu>
