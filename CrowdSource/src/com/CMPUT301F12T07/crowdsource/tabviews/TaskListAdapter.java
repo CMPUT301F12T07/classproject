@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class TaskListAdapter extends BaseAdapter {
@@ -53,12 +54,23 @@ public class TaskListAdapter extends BaseAdapter {
         Task taskItem = (Task) mListItems.get(position);
         if (taskItem != null) {
  
-            TextView itemName = (TextView) view.findViewById(R.id.taskitem_textview);
+            TextView itemName = (TextView) view.findViewById(R.id.taskitem_textview);      
  
             if (itemName != null) {
                 //set the item name on the TextView
                 itemName.setText(taskItem.get_title());
             }
+            
+            ImageView imageName = (ImageView) view.findViewById(R.id.tasklist_task_icon);
+            
+            if (taskItem.get_type().equals("Audio")){
+            	imageName.setImageResource(R.drawable.ic_tasktype_audio);
+            } else if (taskItem.get_type().equals("Photo")){
+            	imageName.setImageResource(R.drawable.ic_tasktype_photo);
+            } else {
+            	imageName.setImageResource(R.drawable.ic_tasktype_text);
+            }
+            
         }
  
         //this method must return the view corresponding to the data at the specified position.

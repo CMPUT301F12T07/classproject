@@ -127,7 +127,7 @@ public class AddTaskActivity extends Activity {
 				String title = titleText.getText().toString();
 				String description = descriptionText.getText().toString();
 				String quantity = quantityText.getText().toString();
-				String type = typeSpinner.toString();
+				String type = typeSpinner.getSelectedItem().toString();
 				int visibility = (privacyCheckBox.isChecked() ? 1 : 0);
 				
 				if (title.compareTo("") == 0) 

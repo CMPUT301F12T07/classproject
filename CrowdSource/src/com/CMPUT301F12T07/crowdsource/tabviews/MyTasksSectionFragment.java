@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 public class MyTasksSectionFragment extends Fragment {
 	
@@ -45,10 +46,8 @@ public class MyTasksSectionFragment extends Fragment {
         myPrivateList.setAdapter(new TaskListAdapter(inflater.getContext(), tasks));
         
         // Max Height implementation so that Private List and Public List can Coincide
-        if (myPrivateList.getAdapter().getCount() >= 3){
-        	View taskItem = myPrivateList.getAdapter().getView(0, null, myPrivateList);
-        	taskItem.measure(0, 0);
-        	LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, (int) (3.9 * taskItem.getMeasuredHeight()));
+        if (myPrivateList.getAdapter().getCount() >= 4){
+        	RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, (int) (284));
         	myPrivateList.setLayoutParams(params);
         }
         
@@ -89,10 +88,8 @@ public class MyTasksSectionFragment extends Fragment {
 		myPrivateList.setAdapter(new TaskListAdapter(getActivity(), tasks));
 		
 		// Max Height implementation so that Private List and Public List can Coincide
-		if (myPrivateList.getAdapter().getCount() >= 3){
-        	View taskItem = myPrivateList.getAdapter().getView(0, null, myPrivateList);
-        	taskItem.measure(0, 0);
-        	myPrivateList.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, (int) (3.9 * taskItem.getMeasuredHeight())));
+		if (myPrivateList.getAdapter().getCount() >= 4){
+        	myPrivateList.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, (int) (284)));
         }
 		myPublicList.setAdapter(new TaskListAdapter(getActivity(), tasks));
 		// TODO: Add Text if you have no Tasks Specified (ie. No Public Tasks, No Private Tasks)

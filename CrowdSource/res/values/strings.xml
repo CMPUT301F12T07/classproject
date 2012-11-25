@@ -48,5 +48,6 @@
     <string name="myPublicTasksText">Public Tasks</string>
     <string name="title_activity_view_other_task">ViewOtherTaskActivity</string>
     <string name="Follow">Follow</string>
+    <string name="tasktype_desc">Task Type</string>
 
 </resources>
