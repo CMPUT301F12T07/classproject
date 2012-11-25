@@ -24,7 +24,8 @@ public class MyTasksSectionFragment extends Fragment {
 	
 	private ListView myPrivateList;
 	private ListView myPublicList;
-	private List<Task> tasks;
+	private List<Task> publicTasks;
+	private List<Task> privateTasks;
 	private LocalDB db;
 	
     public MyTasksSectionFragment() {
@@ -40,10 +41,11 @@ public class MyTasksSectionFragment extends Fragment {
     	
     	db = new LocalDB(inflater.getContext());
         
-        this.tasks = db.getAllTasksByUid(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
+        this.publicTasks = db.getPublicTasksByUid(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
+        this.privateTasks = db.getPrivateTasksByUid(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
         
         myPrivateList = (ListView) myFeed.findViewById(R.id.privatetasklist);
-        myPrivateList.setAdapter(new TaskListAdapter(inflater.getContext(), tasks));
+        myPrivateList.setAdapter(new TaskListAdapter(inflater.getContext(), privateTasks));
         
         // Max Height implementation so that Private List and Public List can Coincide
         if (myPrivateList.getAdapter().getCount() >= 4){
@@ -57,7 +59,7 @@ public class MyTasksSectionFragment extends Fragment {
         myPrivateList.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		Intent intent = new Intent(view.getContext(), ViewTaskActivity.class);
-        		intent.putExtra("taskObject", tasks.get(position).get_tid());
+        		intent.putExtra("taskObject", privateTasks.get(position).get_tid());
         		startActivity(intent);
         	}
         });
@@ -65,13 +67,13 @@ public class MyTasksSectionFragment extends Fragment {
         
         
         myPublicList = (ListView) myFeed.findViewById(R.id.publictasklist);
-        myPublicList.setAdapter(new TaskListAdapter(inflater.getContext(), tasks));
+        myPublicList.setAdapter(new TaskListAdapter(inflater.getContext(), publicTasks));
         
         // Adds listener for when a Task is clicked in the ListView
         myPublicList.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		Intent intent = new Intent(view.getContext(), ViewTaskActivity.class);
-        		intent.putExtra("taskObject", tasks.get(position).get_tid());
+        		intent.putExtra("taskObject", publicTasks.get(position).get_tid());
         		startActivity(intent);
         	}
         });
@@ -84,14 +86,15 @@ public class MyTasksSectionFragment extends Fragment {
     @Override
 	public void onResume() {
 		super.onResume();
-		this.tasks = db.getAllTasksByUid(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
-		myPrivateList.setAdapter(new TaskListAdapter(getActivity(), tasks));
+		this.publicTasks = db.getPublicTasksByUid(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
+        this.privateTasks = db.getPrivateTasksByUid(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
+		myPrivateList.setAdapter(new TaskListAdapter(getActivity(), privateTasks));
 		
 		// Max Height implementation so that Private List and Public List can Coincide
 		if (myPrivateList.getAdapter().getCount() >= 4){
         	myPrivateList.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, (int) (284)));
         }
-		myPublicList.setAdapter(new TaskListAdapter(getActivity(), tasks));
+		myPublicList.setAdapter(new TaskListAdapter(getActivity(), publicTasks));
 		// TODO: Add Text if you have no Tasks Specified (ie. No Public Tasks, No Private Tasks)
 	}
     
