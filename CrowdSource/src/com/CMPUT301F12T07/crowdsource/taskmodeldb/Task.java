@@ -16,6 +16,10 @@ public class Task {
     /** Empty constructor */
     public Task(){ } 
    
+// TODO: Number of Follows
+// TODO: Add Flag to Model and Database for Following
+// TODO: User Email Address
+// TODO: Number of Submitted
 // TODO: Add these for Model/Database Handler
 //    public Task(String webid, String title){ 
 //    	this._webid = webid;

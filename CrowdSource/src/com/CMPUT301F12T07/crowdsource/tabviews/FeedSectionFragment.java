@@ -46,6 +46,7 @@ public class FeedSectionFragment extends Fragment {
         myList.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		Intent intent = new Intent(view.getContext(), ViewTaskActivity.class);
+        		// TODO: Put in if check to check if Web ID is set, if so pass that to intent, otherwise pass TID
         		intent.putExtra("taskObject", tasks.get(position).get_tid());
         		startActivity(intent);
         	}
