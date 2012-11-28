@@ -79,6 +79,7 @@ public class FeedSectionFragment extends Fragment {
     @Override
 	public void onResume() {
 		super.onResume();
+		// TODO: Add Sync Down of Data to here
 		this.tasks = db.getAllTasks();
 		myList.setAdapter(new TaskListAdapter(getActivity(), tasks));
 	}
