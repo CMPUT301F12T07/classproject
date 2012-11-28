@@ -13,7 +13,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.widget.Toast;
 
-public class TakePhoto extends Activity {
+public class TakePhotoActivity extends Activity {
 
 	Uri imageFileUri;
 	private String folder;
@@ -32,9 +32,9 @@ public class TakePhoto extends Activity {
     public void onActivityResult(int reqCode, int resultCode, Intent data) {
     	super.onActivityResult(reqCode, resultCode, data);
     	if (reqCode == CAPTURE_REQUEST_CODE && resultCode == RESULT_OK) {
-    		Toast.makeText(TakePhoto.this, "Photo saved.", Toast.LENGTH_LONG).show();
+    		Toast.makeText(TakePhotoActivity.this, "Photo saved.", Toast.LENGTH_LONG).show();
     	} else {
-    		Toast.makeText(TakePhoto.this, "Photo cancelled.", Toast.LENGTH_SHORT).show();
+    		Toast.makeText(TakePhotoActivity.this, "Photo cancelled.", Toast.LENGTH_SHORT).show();
     	}
     	finish();
     }

@@ -53,7 +53,7 @@ public class AddTaskActivity extends Activity {
         Button photo = (Button) findViewById(R.id.takephoto);
         photo.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(v.getContext(), TakePhoto.class);
+				Intent intent = new Intent(v.getContext(), TakePhotoActivity.class);
 				startActivity(intent);
 			}
         });

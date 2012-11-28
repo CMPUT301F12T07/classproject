@@ -91,7 +91,7 @@ public class ViewOtherTaskActivity extends Activity {
 						new DialogInterface.OnClickListener() {
 							
 							public void onClick(DialogInterface dialog, int which) {
-								Intent intent = new Intent(ViewOtherTaskActivity.this, TakePhoto.class);
+								Intent intent = new Intent(ViewOtherTaskActivity.this, TakePhotoActivity.class);
 								startActivity(intent);
 							}
 						});

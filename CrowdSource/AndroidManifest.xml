@@ -59,7 +59,7 @@
                 android:value="com.CMPUT301F12T07.crowdsource.tabviews.MainActivity" />
         </activity>
         <activity
-            android:name=".TakePhoto"
+            android:name=".TakePhotoActivity"
             android:label="@string/title_activity_take_photo" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -73,6 +73,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.CMPUT301F12T07.crowdsource.tabviews.MainActivity" />
+        </activity>
+        <activity
+            android:name=".EmailActivity"
+            android:label="@string/title_activity_email" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

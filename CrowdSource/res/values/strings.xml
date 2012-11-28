@@ -51,5 +51,6 @@
     <string name="tasktype_desc">Task Type</string>
     <string name="title_activity_take_photo">TakePhoto</string>
     <string name="title_activity_task_load_handler">TaskLoadHandler</string>
+    <string name="title_activity_email">EmailActivity</string>
 
 </resources>
