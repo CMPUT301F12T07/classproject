@@ -70,10 +70,34 @@ public class ViewOtherTaskActivity extends Activity {
         this.fulfillTask = (Button) findViewById(R.id.buttonFulfill);
         fulfillTask.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				// do toast
-				Toast.makeText(v.getContext(), 
-						"This feature has not been implemented yet.", 
-						Toast.LENGTH_SHORT).show();
+				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+				builder.setMessage("Choose an option.");
+				builder.setPositiveButton("Send/Fulfill Directly", 
+						new DialogInterface.OnClickListener() {
+						
+							public void onClick(DialogInterface dialog, int which) {
+								
+								
+							}
+					});
+				builder.setNeutralButton("Record Audio", 
+						new DialogInterface.OnClickListener() {
+						
+							public void onClick(DialogInterface dialog, int which) {
+								
+							}
+					});
+				builder.setNegativeButton("Take Photo", 
+						new DialogInterface.OnClickListener() {
+							
+							public void onClick(DialogInterface dialog, int which) {
+								Intent intent = new Intent(ViewOtherTaskActivity.this, TakePhoto.class);
+								startActivity(intent);
+							}
+						});
+				
+				AlertDialog alert = builder.create();
+				alert.show();
 				
 			}
         });
