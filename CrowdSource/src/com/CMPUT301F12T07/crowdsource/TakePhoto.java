@@ -31,7 +31,7 @@ public class TakePhoto extends Activity {
 
     public void onActivityResult(int reqCode, int resultCode, Intent data) {
     	super.onActivityResult(reqCode, resultCode, data);
-    	if (reqCode == CAPTURE_REQUEST_CODE) {
+    	if (reqCode == CAPTURE_REQUEST_CODE && resultCode == RESULT_OK) {
     		Toast.makeText(TakePhoto.this, "Photo saved.", Toast.LENGTH_LONG).show();
     	} else {
     		Toast.makeText(TakePhoto.this, "Photo cancelled.", Toast.LENGTH_SHORT).show();
