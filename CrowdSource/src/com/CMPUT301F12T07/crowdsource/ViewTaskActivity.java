@@ -115,11 +115,11 @@ public class ViewTaskActivity extends Activity {
         ImageView imageName = (ImageView) findViewById(R.id.imageView1);
         
         if (currentTask.get_type().equals("Audio")){
-        	imageName.setImageResource(R.drawable.ic_tasktype_audio);
+        	imageName.setImageResource(R.drawable.ic_tasktype_audio_lg);
         } else if (currentTask.get_type().equals("Photo")){
-        	imageName.setImageResource(R.drawable.ic_tasktype_photo);
+        	imageName.setImageResource(R.drawable.ic_tasktype_photo_lg);
         } else {
-        	imageName.setImageResource(R.drawable.ic_tasktype_text);
+        	imageName.setImageResource(R.drawable.ic_tasktype_text_lg);
         }
     }
 
