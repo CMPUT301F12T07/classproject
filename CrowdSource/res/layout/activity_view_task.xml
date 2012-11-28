@@ -10,32 +10,26 @@
         android:layout_marginRight="17dp"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/ic_tasktype_text"
+        android:src="@drawable/ic_tasktype_text_lg"
         android:contentDescription="Task type Image" />
 
     <Button
-        android:id="@+id/buttonDelete"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/Delete" />
-
-    <Button
         android:id="@+id/buttonFulfill"
-        android:layout_width="100dp"
+        android:layout_width="105dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="@string/Fulfill" />
+        android:text="@string/Fulfill"
+        android:drawableLeft="@drawable/ic_button_fulfill" />
 
     <Button
         android:id="@+id/buttonUpdate"
-        android:layout_width="100dp"
+        android:layout_width="105dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/Update" />
+        android:text="@string/Update"
+        android:drawableLeft="@drawable/ic_button_edit" />
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -131,5 +125,14 @@
         android:layout_toRightOf="@+id/textLabelCreatedDate"
         android:text="This date is unset"
         tools:context=".ViewTask" />
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:drawableLeft="@drawable/ic_button_delete"
+        android:text="@string/Delete" />
 
 </RelativeLayout>

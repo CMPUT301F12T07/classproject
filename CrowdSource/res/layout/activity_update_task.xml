@@ -28,7 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="@string/Cancel" />
+        android:text="@string/Cancel"
+        android:drawableLeft="@drawable/ic_button_delete" />
 
     <Button
         android:id="@+id/buttonSave"
@@ -36,7 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/Save" />
+        android:text="@string/Save"
+        android:drawableLeft="@drawable/ic_button_save" />
 
     <TextView
         android:id="@+id/textLabelCreatedDate"

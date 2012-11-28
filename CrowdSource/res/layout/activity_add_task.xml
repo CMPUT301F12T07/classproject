@@ -42,12 +42,13 @@
 
     <Button
         android:id="@+id/selectDateButton"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/dueDateTextView"
         android:layout_marginLeft="5dp"
-        android:text="@string/selectDateButton_text" />
+        android:text="@string/selectDateButton_text"
+        android:drawableLeft="@drawable/ic_button_clock" />
 
     <TextView
         android:id="@+id/descriptionTextView"
@@ -160,7 +161,8 @@
         android:layout_alignRight="@+id/quantityText"
         android:layout_below="@+id/privacyCheckbox"
         android:layout_marginTop="24dp"
-        android:text="@string/save_text" />
+        android:text="@string/save_text"
+        android:drawableLeft="@drawable/ic_button_save" />
 
     <Button
         android:id="@+id/takephoto"

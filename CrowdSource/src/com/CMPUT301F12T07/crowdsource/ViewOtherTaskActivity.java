@@ -61,6 +61,8 @@ public class ViewOtherTaskActivity extends Activity {
             public void onClick(View v) {
             	// TODO: pending implementation in task
             	// currentTask.set_followed();
+            	// TODO: Put check if currently following and then use this below to set icon
+            	followTask.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_button_followed, 0, 0, 0);
             }
         });
         
@@ -85,6 +87,7 @@ public class ViewOtherTaskActivity extends Activity {
         } else {
         	imageName.setImageResource(R.drawable.ic_tasktype_text);
         }
+        
     }
 
     @Override

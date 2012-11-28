@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="@string/Fulfill" />
+        android:text="@string/Fulfill"
+        android:drawableLeft="@drawable/ic_button_fulfill" />
 
     <Button
         android:id="@+id/buttonFollow"
