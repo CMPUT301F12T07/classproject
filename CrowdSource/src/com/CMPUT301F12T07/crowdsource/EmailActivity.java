@@ -12,14 +12,19 @@ public class EmailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email);
         
-        startEmailIntent("falserecipiant@gmail.com");
+        startEmailIntent("recipiant@gmail.com");
     }
 
     private void startEmailIntent(String email) {
-    	String[] recipients = new String[]{};
-    	
     	Intent intent = new Intent(android.content.Intent.ACTION_SEND);
     	
+    	intent.setType("message/rfc822");
+    	intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{email});
+    	intent.putExtra(android.content.Intent.EXTRA_TEXT, "Sample Email");
+    	intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject");
+    	
+    	intent.setType("text/plain");
+    	startActivity(Intent.createChooser(intent, "Send mail client:"));
     }
     
     @Override

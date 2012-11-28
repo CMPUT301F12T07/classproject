@@ -108,22 +108,19 @@ public class ViewTaskActivity extends Activity {
 				builder.setMessage("Choose an option.");
 				builder.setPositiveButton("Send/Fulfill Directly", 
 						new DialogInterface.OnClickListener() {
-						
 							public void onClick(DialogInterface dialog, int which) {
-								
-								
+								Intent intent = new Intent(ViewTaskActivity.this, EmailActivity.class);
+								startActivity(intent);
 							}
 					});
 				builder.setNeutralButton("Record Audio", 
 						new DialogInterface.OnClickListener() {
-						
 							public void onClick(DialogInterface dialog, int which) {
 								
 							}
 					});
 				builder.setNegativeButton("Take Photo", 
 						new DialogInterface.OnClickListener() {
-							
 							public void onClick(DialogInterface dialog, int which) {
 								Intent intent = new Intent(ViewTaskActivity.this, TakePhotoActivity.class);
 								startActivity(intent);
