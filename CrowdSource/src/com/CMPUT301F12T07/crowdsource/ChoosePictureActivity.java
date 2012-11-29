@@ -29,17 +29,23 @@ public class ChoosePictureActivity extends Activity {
         intent.setType("image/*");
         
         startActivityForResult(intent,1);
+        
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        
+        Intent result = new Intent();
+        
+        Log.v("result code: official", ""+RESULT_OK);
+        Log.v("result code", ""+resultCode);
+        
         if (requestCode == RETURN_IMAGE_CODE && resultCode == RESULT_OK) {
             Uri selectedImage = data.getData();
             
-            Intent result = new Intent();
-            result.putExtra("image", selectedImage.toString());
+            result.putExtra("Photo", selectedImage.toString());
+            result.putExtra("result", "pass");
             setResult(RESULT_OK, result);
-            finish();
             
 //            String[] filePathColumn = {MediaStore.Images.Media.DATA};
 //            Cursor cursor = getContentResolver().query(selectedImage, null, null, null, null);
@@ -58,7 +64,13 @@ public class ChoosePictureActivity extends Activity {
 //            bmp = BitmapFactory.decodeFile(filePath);
 //            
 //            pic.setImageBitmap(bmp);
+        } else {
+	        setResult(RESULT_CANCELED, result);
+	        result.putExtra("result", "fail");
+	        Log.v("canclled","can");
         }
+        
+        finish();
     }
     
     @Override

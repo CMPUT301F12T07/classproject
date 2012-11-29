@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
@@ -32,6 +33,15 @@ public class TakePhotoActivity extends Activity {
     public void onActivityResult(int reqCode, int resultCode, Intent data) {
     	super.onActivityResult(reqCode, resultCode, data);
     	if (reqCode == CAPTURE_REQUEST_CODE && resultCode == RESULT_OK) {
+    		//Uri image = data.getData();
+    		
+    		Log.v("result @ take photo", "takephoto");
+    		
+    		
+    		//Intent result = new Intent();
+    		//result.putExtra("Photo", image.toString());
+    		//setResult(RESULT_OK, result);
+    		//Log.v("result @ take photo2", "takephoto2");
     		Toast.makeText(TakePhotoActivity.this, "Photo saved.", Toast.LENGTH_LONG).show();
     	} else {
     		Toast.makeText(TakePhotoActivity.this, "Photo cancelled.", Toast.LENGTH_SHORT).show();

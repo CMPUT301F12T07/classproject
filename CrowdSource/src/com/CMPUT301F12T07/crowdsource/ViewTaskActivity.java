@@ -171,12 +171,16 @@ public class ViewTaskActivity extends Activity {
 								//audio/photo/text --> email
 								// if (type) elseif() else()
 								if (type.equals("Photo")) {
-								
+									Intent intent = new Intent(ViewTaskActivity.this, TakePhotoActivity.class);
+									startActivity(intent);
+									//startActivityForResult(intent,1);
 								} else if (type.equals("Audio")) {
 									Intent intent = new Intent(ViewTaskActivity.this, RecordAudioActivity.class);
-									startActivity(intent);
+									startActivityForResult(intent,1);
 								} else {
 									Intent intent = new Intent(ViewTaskActivity.this, EmailActivity.class);
+									intent.putExtra("type",	type);
+									intent.putExtra("data", "n/a");
 									startActivity(intent);
 								}
 							}
@@ -220,9 +224,15 @@ public class ViewTaskActivity extends Activity {
     	
     	if (resultCode != RESULT_OK) finish();
     	
+    	if (data.getStringExtra("result").compareTo("fail") == 0) finish();
+    	
+    	Log.v("result", ""+resultCode);
+    	Log.v("result", "result");
+    	
     	switch (requestCode) {
     		case RETURN_PHOTO_CODE:
-    			String image = data.getStringExtra("image");
+    			String image = data.getStringExtra("Photo");
+    			Log.v("switch", "switch");
     			sendMedia("Photo", image);
     			
     			break;

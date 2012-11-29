@@ -28,12 +28,15 @@ public class EmailActivity extends Activity {
     	
     	intent.setType("message/rfc822");
     	intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{email});
-    	intent.putExtra(android.content.Intent.EXTRA_TEXT, "This attachment contains your requested task");
     	intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject");
     	
     	// if type is not equal to Text, then do not attach
-    	if (type.compareTo("Text") != 0) 
+    	if (type.compareTo("Text") != 0) {
+    		intent.putExtra(android.content.Intent.EXTRA_TEXT, "This attachment contains your requested task");
     		intent.putExtra(Intent.EXTRA_STREAM, input);
+    	} else {
+    		intent.putExtra(android.content.Intent.EXTRA_TEXT, "Text:\n\n\n");
+    	}
     	
     	intent.setType("text/plain");
     	startActivity(intent);
