@@ -159,7 +159,7 @@ public class ViewTaskActivity extends Activity {
 						
 								public void onClick(DialogInterface dialog, int which) {
 									Intent intent = new Intent(ViewTaskActivity.this, ChoosePictureActivity.class);
-									startActivityForResult(intent,1);
+									startActivityForResult(intent,RETURN_PHOTO_CODE);
 								}
 								
 						});
@@ -176,9 +176,9 @@ public class ViewTaskActivity extends Activity {
 									//startActivityForResult(intent,1);
 								} else if (type.equals("Audio")) {
 									Intent intent = new Intent(ViewTaskActivity.this, RecordAudioActivity.class);
-									startActivity(intent);
+//									startActivity(intent);
 									
-//									startActivityForResult(intent,1);
+									startActivityForResult(intent,RETURN_AUDIO_CODE);
 								} else {
 									Intent intent = new Intent(ViewTaskActivity.this, EmailActivity.class);
 									intent.putExtra("type",	type);
@@ -240,7 +240,8 @@ public class ViewTaskActivity extends Activity {
     			break;
     		
     		case RETURN_AUDIO_CODE:
-    			String audio = data.getStringExtra("audio");
+    			Log.v("switch", "audio");
+    			String audio = data.getStringExtra("Audio");
     			sendMedia("Audio", audio);
     			
     			break;

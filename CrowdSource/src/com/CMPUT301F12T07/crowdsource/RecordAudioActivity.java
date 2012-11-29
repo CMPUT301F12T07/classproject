@@ -136,14 +136,21 @@ public class RecordAudioActivity extends Activity {
     	mRecorder.stop();
     	mRecorder.release();
     	
-    	String type = "Audio";
+//    	String type = "Audio";
     	String data = Uri.fromFile(audioFile).toString();
     	
-    	Intent email = new Intent(RecordAudioActivity.this, EmailActivity.class);
-    	email.putExtra("type", type);
-    	email.putExtra("data", data);
+    	Intent result = new Intent();
+    	result.putExtra("Audio", data);
+    	result.putExtra("result", "pass");
+    	setResult(RESULT_OK,result);
     	finish();
-    	startActivity(email);
+    	
+    	
+//    	Intent email = new Intent(RecordAudioActivity.this, EmailActivity.class);
+//    	email.putExtra("type", type);
+//    	email.putExtra("data", data);
+//    	finish();
+//    	startActivity(email);
     }
     
     @Override
