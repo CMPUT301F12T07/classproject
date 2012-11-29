@@ -88,7 +88,7 @@ public class LocalDB extends SQLiteOpenHelper {
 	 * 
 	 * @param task - Task Object
 	 */
-	public void createTask(Task task) { 
+	public long createTask(Task task) { 
 		SQLiteDatabase db = this.getWritableDatabase(); 
 
 		ContentValues values = new ContentValues(); 
@@ -102,8 +102,10 @@ public class LocalDB extends SQLiteOpenHelper {
 		values.put(KEY_QUANTITY, task.get_quantity());
 
 		// Inserting Row 
-		db.insert(TABLE_TASKS, null, values); 
+		long id = db.insert(TABLE_TASKS, null, values); 
 		db.close();
+		
+		return id;
 	} 
 
 	/**
