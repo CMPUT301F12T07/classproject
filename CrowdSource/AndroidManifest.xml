@@ -12,7 +12,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     
     <application
         android:icon="@drawable/ic_launcher"
@@ -20,7 +20,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.CMPUT301F12T07.crowdsource.tabviews.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,26 +30,31 @@
         </activity>
         <activity
             android:name=".ViewTaskActivity"
-            android:label="@string/title_activity_view_task" >
+            android:label="@string/title_activity_view_task"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".AddTaskActivity"
-            android:label="@string/title_activity_add_task" >
+            android:label="@string/title_activity_add_task"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".MyTasksActivity"
-            android:label="@string/title_activity_my_tasks" >
+            android:label="@string/title_activity_my_tasks"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".UpdateTaskActivity"
-            android:label="@string/title_activity_update_task" >
+            android:label="@string/title_activity_update_task"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ViewTaskActivity" />
         </activity>
         <activity
             android:name=".ViewLoggedActivity"
-            android:label="@string/title_activity_view_logged" >
+            android:label="@string/title_activity_view_logged"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -57,14 +63,16 @@
         </activity>
         <activity
             android:name=".ViewOtherTaskActivity"
-            android:label="@string/title_activity_view_other_task" >
+            android:label="@string/title_activity_view_other_task"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.CMPUT301F12T07.crowdsource.tabviews.MainActivity" />
         </activity>
         <activity
             android:name=".TakePhotoActivity"
-            android:label="@string/title_activity_take_photo" >
+            android:label="@string/title_activity_take_photo"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -73,14 +81,25 @@
         </activity>
         <activity
             android:name=".taskmodeldb.TaskLoadHandler"
-            android:label="@string/title_activity_task_load_handler" >
+            android:label="@string/title_activity_task_load_handler"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.CMPUT301F12T07.crowdsource.tabviews.MainActivity" />
         </activity>
         <activity
             android:name=".EmailActivity"
-            android:label="@string/title_activity_email" >
+            android:label="@string/title_activity_email"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".RecordAudioActivity"
+            android:label="@string/title_activity_record_audio" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

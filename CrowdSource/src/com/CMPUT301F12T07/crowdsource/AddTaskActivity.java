@@ -49,16 +49,6 @@ public class AddTaskActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
         
-        /// test code for take photo
-        Button photo = (Button) findViewById(R.id.takephoto);
-        photo.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(v.getContext(), TakePhotoActivity.class);
-				startActivity(intent);
-			}
-        });
-        ///
-        
         deviceId = Secure.getString(this.getContentResolver(), Secure.ANDROID_ID);
         initializeListeners();
     }

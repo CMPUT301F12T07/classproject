@@ -116,7 +116,8 @@ public class ViewTaskActivity extends Activity {
 				builder.setNeutralButton("Record Audio", 
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
-								
+								Intent intent = new Intent(ViewTaskActivity.this, RecordAudioActivity.class);
+								startActivity(intent);
 							}
 					});
 				builder.setNegativeButton("Take Photo", 

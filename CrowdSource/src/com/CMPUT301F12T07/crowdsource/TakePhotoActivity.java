@@ -40,7 +40,7 @@ public class TakePhotoActivity extends Activity {
     }
     
     private void setUpFolder() {
-		folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/crowdsource";
+		folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/crowdsource";
 		
 		File folderF = new File(folder);
 		if (!folderF.exists()) folderF.mkdir();
@@ -64,7 +64,7 @@ public class TakePhotoActivity extends Activity {
     	//Date date = new SimpleDateFormat("YYYYmmdd-HHmmss")
     	
     	return "" + cal.get(Calendar.YEAR) + (cal.get(Calendar.MONTH) + 1) + 
-    			cal.get(Calendar.DAY_OF_MONTH) + "-" + cal.HOUR_OF_DAY + cal.MINUTE + cal.SECOND;
+    			cal.get(Calendar.DAY_OF_MONTH) + "-" + cal.getTimeInMillis();//cal.HOUR_OF_DAY + cal.MINUTE + cal.SECOND;
     }
     
     @Override
