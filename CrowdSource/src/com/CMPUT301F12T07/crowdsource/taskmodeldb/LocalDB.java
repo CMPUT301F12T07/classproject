@@ -87,6 +87,7 @@ public class LocalDB extends SQLiteOpenHelper {
 	 * to the database.
 	 * 
 	 * @param task - Task Object
+	 * @return ID of Inserted Task
 	 */
 	public long createTask(Task task) { 
 		SQLiteDatabase db = this.getWritableDatabase(); 
