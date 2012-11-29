@@ -6,11 +6,13 @@ import java.util.Timer;
 
 import com.CMPUT301F12T07.crowdsource.R;
 import android.media.MediaRecorder;
+import android.net.Uri;
 import android.net.wifi.p2p.WifiP2pManager.ActionListener;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -44,8 +46,6 @@ public class RecordAudioActivity extends Activity {
     final Runnable runnable = new Runnable() {
     	public void run() {
     		if (cSec == 60) {
-    			String sMin;
-    			
     			cMin++;
     			cSec = 0;
     			
@@ -135,6 +135,15 @@ public class RecordAudioActivity extends Activity {
     private void stopRecording() {
     	mRecorder.stop();
     	mRecorder.release();
+    	
+    	String type = "Audio";
+    	String data = Uri.fromFile(audioFile).toString();
+    	
+    	Intent email = new Intent(RecordAudioActivity.this, EmailActivity.class);
+    	email.putExtra("type", type);
+    	email.putExtra("data", data);
+    	finish();
+    	startActivity(email);
     }
     
     @Override

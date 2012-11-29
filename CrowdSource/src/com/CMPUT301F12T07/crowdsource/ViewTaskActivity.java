@@ -176,7 +176,9 @@ public class ViewTaskActivity extends Activity {
 									//startActivityForResult(intent,1);
 								} else if (type.equals("Audio")) {
 									Intent intent = new Intent(ViewTaskActivity.this, RecordAudioActivity.class);
-									startActivityForResult(intent,1);
+									startActivity(intent);
+									
+//									startActivityForResult(intent,1);
 								} else {
 									Intent intent = new Intent(ViewTaskActivity.this, EmailActivity.class);
 									intent.putExtra("type",	type);
