@@ -15,7 +15,7 @@ public class EmailActivity extends Activity {
         setContentView(R.layout.activity_email);
         
         String type = getIntent().getStringExtra("type");
-        Uri received = Uri.parse(getIntent().getStringExtra("image"));
+        Uri received = Uri.parse(getIntent().getStringExtra("data"));
 
         startEmailIntent("tfung@ualberta.ca", type, received);
         finish();
@@ -23,6 +23,8 @@ public class EmailActivity extends Activity {
 
     private void startEmailIntent(String email, String type, Uri input) {
     	Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+    	
+		Log.v("onactivity", "asdf");
     	
     	intent.setType("message/rfc822");
     	intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{email});

@@ -212,7 +212,6 @@ public class ViewTaskActivity extends Activity {
 		Intent intent = new Intent(ViewTaskActivity.this, EmailActivity.class);
 		intent.putExtra("type",	type);
 		intent.putExtra("data", data);
-		
 		startActivity(intent);
     }
     
