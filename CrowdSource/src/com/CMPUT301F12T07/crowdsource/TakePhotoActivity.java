@@ -35,11 +35,11 @@ public class TakePhotoActivity extends Activity {
     	if (reqCode == CAPTURE_REQUEST_CODE && resultCode == RESULT_OK) {
     		
     		Log.v("result @ take photo", "takephoto");
-    		Intent intent = new Intent(TakePhotoActivity.this, EmailActivity.class);
-    		intent.putExtra("data", imageFileUri.toString());
-    		intent.putExtra("type", "Photo");
-    		finish();
-    		startActivity(intent);
+//    		Intent intent = new Intent(TakePhotoActivity.this, EmailActivity.class);
+//    		intent.putExtra("data", imageFileUri.toString());
+//    		intent.putExtra("type", "Photo");
+//    		finish();
+//    		startActivity(intent);
     		
     		Intent result = new Intent();
     		result.putExtra("Photo", imageFileUri.toString());
@@ -48,6 +48,7 @@ public class TakePhotoActivity extends Activity {
 //    		Toast.makeText(TakePhotoActivity.this, "Photo saved.", Toast.LENGTH_LONG).show();
     	} else {
     		Toast.makeText(TakePhotoActivity.this, "Photo cancelled.", Toast.LENGTH_SHORT).show();
+    		
     	}
     	finish();
     }

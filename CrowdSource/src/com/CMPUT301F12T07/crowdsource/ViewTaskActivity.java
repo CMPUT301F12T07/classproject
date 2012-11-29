@@ -172,8 +172,8 @@ public class ViewTaskActivity extends Activity {
 								// if (type) elseif() else()
 								if (type.equals("Photo")) {
 									Intent intent = new Intent(ViewTaskActivity.this, TakePhotoActivity.class);
-									startActivity(intent);
-									//startActivityForResult(intent,1);
+									//startActivity(intent);
+									startActivityForResult(intent,RETURN_PHOTO_CODE);
 								} else if (type.equals("Audio")) {
 									Intent intent = new Intent(ViewTaskActivity.this, RecordAudioActivity.class);
 //									startActivity(intent);
