@@ -40,7 +40,7 @@ public class TakePhotoActivity extends Activity {
     }
     
     private void setUpFolder() {
-		folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/crowdsource";
+		folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/crowdsource/photos";
 		
 		File folderF = new File(folder);
 		if (!folderF.exists()) folderF.mkdir();

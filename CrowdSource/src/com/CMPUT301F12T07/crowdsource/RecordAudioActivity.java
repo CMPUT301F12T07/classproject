@@ -41,7 +41,7 @@ public class RecordAudioActivity extends Activity {
     private MediaRecorder mRecorder = null;
 
     final Handler handler = new Handler();
-    final Runnable r = new Runnable() {
+    final Runnable runnable = new Runnable() {
     	public void run() {
     		if (cSec == 60) {
     			String sMin;
@@ -77,18 +77,15 @@ public class RecordAudioActivity extends Activity {
     	start = (Button) findViewById(R.id.start);
     	start.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				r.run();
+				runnable.run();
 				
-				//handler.postDelayed(runnable, 1000);
-				
-				
-//			    try {
-//			        setUpRecorder();
-//			        setUpPath();
-//			        recordAudio();
-//		        } catch (IOException e) {
-//		        	Log.e(LOG_TAG, "start recording error");
-//		        }
+			    try {
+			        setUpRecorder();
+			        setUpPath();
+			        recordAudio();
+		        } catch (IOException e) {
+		        	Log.e(LOG_TAG, "start recording error");
+		        }
 			}
     	});
     }
@@ -97,8 +94,8 @@ public class RecordAudioActivity extends Activity {
     	stop = (Button) findViewById(R.id.stop);
     	stop.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				handler.removeCallbacks(r);
-				
+				handler.removeCallbacks(runnable);
+				stopRecording();
 			}
     	});
     }
@@ -124,7 +121,7 @@ public class RecordAudioActivity extends Activity {
         File folderF = new File(folder);
         if (!folderF.exists()) folderF.mkdir();
         
-		audioFile = File.createTempFile("ibm", ".3gp", audioFile);
+		audioFile = File.createTempFile("ibm", ".3gp", folderF);
 
     }
     
@@ -138,7 +135,6 @@ public class RecordAudioActivity extends Activity {
     private void stopRecording() {
     	mRecorder.stop();
     	mRecorder.release();
-    	//processaudiofile(audioFile.getAbsoluteFile());
     }
     
     @Override
