@@ -5,7 +5,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,7 +36,10 @@ public class ViewTaskActivity extends Activity {
 	private Button fulfillTask;
 	
 	final Context context = this;
-
+	
+	private static final int RETURN_PHOTO_CODE = 1;
+	private static final int RETURN_AUDIO_CODE = 2;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +67,7 @@ public class ViewTaskActivity extends Activity {
             public void onClick(View v) {
             	Intent intent = new Intent(ViewTaskActivity.this, UpdateTaskActivity.class);
         		intent.putExtra("taskID", currentTask.get_tid());
-        		startActivity(intent);
+        		startActivityForResult(intent,1);
             }
         });
         
@@ -102,29 +107,84 @@ public class ViewTaskActivity extends Activity {
         });
 
         this.fulfillTask = (Button) findViewById(R.id.buttonFulfill);
+//        fulfillTask.setOnClickListener(new OnClickListener() {
+//			public void onClick(View v) {
+//				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+//				builder.setMessage("Choose an option.");
+//				
+//				builder.setPositiveButton("Send/Fulfill Directly", 
+//						new DialogInterface.OnClickListener() {
+//							public void onClick(DialogInterface dialog, int which) {
+//								Intent intent = new Intent(ViewTaskActivity.this, EmailActivity.class);
+//								startActivity(intent);
+//							}
+//					});
+//				builder.setNeutralButton("Record Audio", 
+//						new DialogInterface.OnClickListener() {
+//							public void onClick(DialogInterface dialog, int which) {
+//								Intent intent = new Intent(ViewTaskActivity.this, RecordAudioActivity.class);
+//								startActivity(intent);
+//							}
+//					});
+//				builder.setNegativeButton("Take Photo", 
+//						new DialogInterface.OnClickListener() {
+//							public void onClick(DialogInterface dialog, int which) {
+//								Intent intent = new Intent(ViewTaskActivity.this, TakePhotoActivity.class);
+//								startActivity(intent);
+//							}
+//						});
+//				
+//				AlertDialog alert = builder.create();
+//				alert.show();
+//				
+//			}
+//        });
+//        
+
         fulfillTask.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
 				builder.setMessage("Choose an option.");
-				builder.setPositiveButton("Send/Fulfill Directly", 
+				
+				final String type = currentTask.get_type();
+				String neutral = null;
+				
+				if (type.equals("Photo")) 		neutral = "Capture, and send";
+				else if (type.equals("Audio")) 	neutral = "Record, and send";
+				else 							neutral = "Send Text";
+				
+				if (type.equals("Photo")) {
+					builder.setPositiveButton("Choose, and send", 
+							new DialogInterface.OnClickListener() {
+						
+								public void onClick(DialogInterface dialog, int which) {
+									Intent intent = new Intent(ViewTaskActivity.this, ChoosePictureActivity.class);
+									startActivityForResult(intent,1);
+								}
+								
+						});
+				}
+				
+				builder.setNeutralButton(neutral, 
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
-								Intent intent = new Intent(ViewTaskActivity.this, EmailActivity.class);
-								startActivity(intent);
+								//audio/photo/text --> email
+								// if (type) elseif() else()
+								if (type.equals("Photo")) {
+								
+								} else if (type.equals("Audio")) {
+									Intent intent = new Intent(ViewTaskActivity.this, RecordAudioActivity.class);
+									startActivity(intent);
+								} else {
+									Intent intent = new Intent(ViewTaskActivity.this, EmailActivity.class);
+									startActivity(intent);
+								}
 							}
 					});
-				builder.setNeutralButton("Record Audio", 
+				builder.setNegativeButton("Cancel", 
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
-								Intent intent = new Intent(ViewTaskActivity.this, RecordAudioActivity.class);
-								startActivity(intent);
-							}
-					});
-				builder.setNegativeButton("Take Photo", 
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								Intent intent = new Intent(ViewTaskActivity.this, TakePhotoActivity.class);
-								startActivity(intent);
+								dialog.cancel();
 							}
 						});
 				
@@ -133,6 +193,8 @@ public class ViewTaskActivity extends Activity {
 				
 			}
         });
+        
+        
         
         ImageView imageName = (ImageView) findViewById(R.id.imageView1);
         
@@ -145,6 +207,38 @@ public class ViewTaskActivity extends Activity {
         }
     }
 
+    private void sendMedia(String type, String data) {
+    	// data can be converted to Uri
+		Intent intent = new Intent(ViewTaskActivity.this, EmailActivity.class);
+		intent.putExtra("type",	type);
+		intent.putExtra("data", data);
+		
+		startActivity(intent);
+    }
+    
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	super.onActivityResult(requestCode, resultCode, data);
+    	
+    	if (resultCode != RESULT_OK) finish();
+    	
+    	switch (requestCode) {
+    		case RETURN_PHOTO_CODE:
+    			String image = data.getStringExtra("image");
+    			sendMedia("Photo", image);
+    			
+    			break;
+    		
+    		case RETURN_AUDIO_CODE:
+    			String audio = data.getStringExtra("audio");
+    			sendMedia("Audio", audio);
+    			
+    			break;
+
+    		default:
+    			Log.v("Error", "default case in ViewTaskActivity");
+    	}
+    }
+    
     @Override
     public void onResume() {
     	super.onResume();
