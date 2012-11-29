@@ -82,7 +82,7 @@ public class ViewTaskActivity extends Activity {
         			public void onClick(DialogInterface dialog,int id) {
         				// if this button is clicked, delete the task and leave the activity
         				try {
-							db.deleteTask((int)currentTask.get_tid());
+							db.deleteTask(currentTask.get_tid());
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

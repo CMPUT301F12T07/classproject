@@ -33,6 +33,9 @@ public class LocalDB extends SQLiteOpenHelper {
 	private static final String KEY_TYPE = "type";
 	private static final String KEY_VISIBILITY = "visibility";
 	private static final String KEY_QUANTITY = "quantity";
+	
+	public static final String FOR_PUBLIC = "FOR_PUBLIC";
+	public static final String FOR_PRIVATE = "FOR_PRIVATE";
 
 	/** Constructor */
 	public LocalDB(Context context) { 
@@ -82,8 +85,6 @@ public class LocalDB extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase(); 
 
 		ContentValues values = new ContentValues(); 
-//		values.put(KEY_WID, task.get_wid());
-//		values.put(KEY_TID, task.get_tid());
 		values.put(KEY_UID, task.get_uid());
 		values.put(KEY_TITLE, task.get_title());
 		values.put(KEY_DESCRIPTION, task.get_description());
@@ -322,10 +323,16 @@ public class LocalDB extends SQLiteOpenHelper {
 	}
 
 	/* Updating single task */
-	public int updateTask(Task task) { 
+	public int updateTask(Task task, String flag) { 
 		SQLiteDatabase db = this.getWritableDatabase(); 
 
-		ContentValues values = new ContentValues(); 
+		ContentValues values = new ContentValues();
+		
+		if (flag.equals(LocalDB.FOR_PUBLIC)){
+			values.put(KEY_WID, task.get_wid());
+			values.put(KEY_TID, task.get_tid());
+		}
+		
 		values.put(KEY_UID, task.get_uid());
 		values.put(KEY_TITLE, task.get_title());
 		values.put(KEY_DESCRIPTION, task.get_description());
@@ -342,7 +349,7 @@ public class LocalDB extends SQLiteOpenHelper {
 	} 
 
 	/* Deleting single task */
-	public void deleteTask(int tid) {
+	public void deleteTask(long tid) {
 		SQLiteDatabase db = this.getWritableDatabase(); 
 		db.delete(TABLE_TASKS, KEY_TID + " = ?", 
 				new String[] { String.valueOf(tid) }); 
