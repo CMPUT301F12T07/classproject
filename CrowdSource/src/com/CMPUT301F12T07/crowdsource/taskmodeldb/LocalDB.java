@@ -53,6 +53,11 @@ public class LocalDB extends SQLiteOpenHelper {
 				+ KEY_TYPE + " TEXT,"
 				+ KEY_VISIBILITY + " NUMERIC,"
 				+ KEY_QUANTITY + " INTEGER" + ")"; 
+		// Quantity Filled
+		// Followed BINARY
+		
+		
+		// Summary: Title, Quantity Left, Due Date TITLE~11~20121114
 
 		db.execSQL(CREATE_TASKS_TABLE); 
 	} 
@@ -73,12 +78,12 @@ public class LocalDB extends SQLiteOpenHelper {
 
 	/* Adding new task */
 
-	public int createTask(Task task) { 
+	public long createTask(Task task) { 
 		SQLiteDatabase db = this.getWritableDatabase(); 
 
 		ContentValues values = new ContentValues(); 
-		values.put(KEY_WID, task.get_wid());
-		values.put(KEY_TID, task.get_tid());
+//		values.put(KEY_WID, task.get_wid());
+//		values.put(KEY_TID, task.get_tid());
 		values.put(KEY_UID, task.get_uid());
 		values.put(KEY_TITLE, task.get_title());
 		values.put(KEY_DESCRIPTION, task.get_description());
@@ -89,13 +94,14 @@ public class LocalDB extends SQLiteOpenHelper {
 		values.put(KEY_QUANTITY, task.get_quantity());
 
 		// Inserting Row 
-		int tid = (int)db.insert(TABLE_TASKS, null, values); 
+		long tid = db.insert(TABLE_TASKS, null, values); 
 		db.close();
 		return tid;
 	} 
 
 	/* Getting single task */
-	public Task getTask(int tid) { 
+	public Task getTask(long tid) { 
+		if (tid == 0) return new Task();
 		SQLiteDatabase db = this.getReadableDatabase(); 
 
 		Cursor cursor = db.query(TABLE_TASKS, new String[] { 
@@ -108,7 +114,7 @@ public class LocalDB extends SQLiteOpenHelper {
 
 		Task task = new Task(
 				cursor.getString(0),
-				Integer.parseInt(cursor.getString(1)), 
+				Integer.parseInt(cursor.getString(1)), // Long.parseLong??? 
 				cursor.getString(2), cursor.getString(3), 
 				cursor.getString(4), cursor.getString(5),
 				cursor.getString(6), cursor.getString(7), 
@@ -132,7 +138,7 @@ public class LocalDB extends SQLiteOpenHelper {
 			do { 
 				Task task = new Task(); 
 				task.set_wid(cursor.getString(0));
-				task.set_tid(Integer.parseInt(cursor.getString(1))); 
+				task.set_tid(Long.parseLong(cursor.getString(1))); 
 				task.set_uid(cursor.getString(2)); 
 				task.set_title(cursor.getString(3)); 
 				task.set_description(cursor.getString(4)); 
@@ -140,7 +146,7 @@ public class LocalDB extends SQLiteOpenHelper {
 				task.set_dateDue(cursor.getString(6)); 
 				task.set_type(cursor.getString(7)); 
 				task.set_visibility(cursor.getInt(8));
-				task.set_quantity(cursor.getInt(9));
+				task.set_quantity(Integer.parseInt(cursor.getString(9)));
 				// Adding contact to list 
 				taskList.add(task); 
 			} while (cursor.moveToNext()); 
@@ -165,7 +171,7 @@ public class LocalDB extends SQLiteOpenHelper {
 			do { 
 				Task task = new Task(); 
 				task.set_wid(cursor.getString(0));
-				task.set_tid(Integer.parseInt(cursor.getString(1))); 
+				task.set_tid(Long.parseLong(cursor.getString(1))); 
 				task.set_uid(cursor.getString(2)); 
 				task.set_title(cursor.getString(3)); 
 				task.set_description(cursor.getString(4)); 
@@ -197,7 +203,7 @@ public class LocalDB extends SQLiteOpenHelper {
 			do { 
 				Task task = new Task(); 
 				task.set_wid(cursor.getString(0));
-				task.set_tid(Integer.parseInt(cursor.getString(1))); 
+				task.set_tid(Long.parseLong(cursor.getString(1))); 
 				task.set_uid(cursor.getString(2)); 
 				task.set_title(cursor.getString(3)); 
 				task.set_description(cursor.getString(4)); 
@@ -236,15 +242,16 @@ public class LocalDB extends SQLiteOpenHelper {
 		if (cursor.moveToFirst()) {
 			do {
 				Task task = new Task();
-				task.set_tid(Integer.parseInt(cursor.getString(0)));
-				task.set_uid(cursor.getString(1));
-				task.set_title(cursor.getString(2));
-				task.set_description(cursor.getString(3));
-				task.set_dateCreate(cursor.getString(4));
-				task.set_dateDue(cursor.getString(5));
-				task.set_type(cursor.getString(6));
-				task.set_visibility(cursor.getInt(7));
-				task.set_quantity(cursor.getInt(8));
+				task.set_wid(cursor.getString(0));
+				task.set_tid(Long.parseLong(cursor.getString(1))); 
+				task.set_uid(cursor.getString(2)); 
+				task.set_title(cursor.getString(3)); 
+				task.set_description(cursor.getString(4)); 
+				task.set_dateCreate(cursor.getString(5)); 
+				task.set_dateDue(cursor.getString(6)); 
+				task.set_type(cursor.getString(7)); 
+				task.set_visibility(cursor.getInt(8));
+				task.set_quantity(Integer.parseInt(cursor.getString(9)));
 				// Adding contact to list
 				taskList.add(task);
 			} while (cursor.moveToNext());
@@ -275,20 +282,21 @@ public class LocalDB extends SQLiteOpenHelper {
 		if (cursor.moveToFirst()) {
 			do {
 				Task task = new Task();
-				task.set_tid(Integer.parseInt(cursor.getString(0)));
-				task.set_uid(cursor.getString(1));
-				task.set_title(cursor.getString(2));
-				task.set_description(cursor.getString(3));
-				task.set_dateCreate(cursor.getString(4));
-				task.set_dateDue(cursor.getString(5));
-				task.set_type(cursor.getString(6));
-				task.set_visibility(cursor.getInt(7));
-				task.set_quantity(cursor.getInt(8));
+				task.set_wid(cursor.getString(0));
+				task.set_tid(Long.parseLong(cursor.getString(1))); 
+				task.set_uid(cursor.getString(2)); 
+				task.set_title(cursor.getString(3)); 
+				task.set_description(cursor.getString(4)); 
+				task.set_dateCreate(cursor.getString(5)); 
+				task.set_dateDue(cursor.getString(6)); 
+				task.set_type(cursor.getString(7)); 
+				task.set_visibility(cursor.getInt(8));
+				task.set_quantity(Integer.parseInt(cursor.getString(9)));
 				// Adding contact to list
 				taskList.add(task);
 			} while (cursor.moveToNext());
 		}
-		db.close();
+		db.close();// ? 1 : 0
 		return taskList;
 	}
 

@@ -61,7 +61,7 @@ public class Task {
         this._dateCreate = dateCreate; 
         this._dateDue = dateDue;
         this._type = type;
-        this._visibility = visibility;
+        this._visibility = visibility; // 1 for private, 0 for public
         this._quantity = quantity;
     	
     }

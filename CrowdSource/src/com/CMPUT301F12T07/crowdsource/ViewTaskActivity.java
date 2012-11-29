@@ -42,7 +42,7 @@ public class ViewTaskActivity extends Activity {
         setContentView(R.layout.activity_view_task);
         
         db = new DBHandler(this);
-        this.currentTask = db.getTask(getIntent().getExtras().getInt("taskObject"));
+        this.currentTask = db.getTask(getIntent().getExtras().getLong("taskObject"));
     //    db.close();
         
         // Getting the task title field
@@ -153,7 +153,7 @@ public class ViewTaskActivity extends Activity {
     public void onResume() {
     	super.onResume();
 
-    	this.currentTask = db.getTask(getIntent().getExtras().getInt("taskObject"));
+    	this.currentTask = db.getTask(getIntent().getExtras().getLong("taskObject"));
     	
     	taskTitle.setText(currentTask.get_title());
     	startDate.setText(currentTask.get_dateCreate());
