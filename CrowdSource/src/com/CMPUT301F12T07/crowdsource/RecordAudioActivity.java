@@ -2,12 +2,11 @@ package com.CMPUT301F12T07.crowdsource;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Timer;
 
 import com.CMPUT301F12T07.crowdsource.R;
+
 import android.media.MediaRecorder;
 import android.net.Uri;
-import android.net.wifi.p2p.WifiP2pManager.ActionListener;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -19,6 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RecordAudioActivity extends Activity {
 
@@ -31,17 +31,15 @@ public class RecordAudioActivity extends Activity {
 	private int cMin;
 	private int cSec;
 	
-	private Timer myTimer;
 	final static int delay = 1000;
-	private ActionListener timerHandler;
-	
 	
 	private static final String LOG_TAG = "AudioRecordTest";
     private String folder;
     private File audioFile;
 
     private MediaRecorder mRecorder = null;
-
+    private boolean started = false;
+    
     final Handler handler = new Handler();
     final Runnable runnable = new Runnable() {
     	public void run() {
@@ -76,17 +74,20 @@ public class RecordAudioActivity extends Activity {
     private void setUpStart() {
     	start = (Button) findViewById(R.id.start);
     	start.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				runnable.run();
-				
-			    try {
-			        setUpRecorder();
-			        setUpPath();
-			        recordAudio();
-		        } catch (IOException e) {
-		        	Log.e(LOG_TAG, "start recording error");
-		        }
-			}
+    		public void onClick(View v) {		
+    			if (started == true) return;
+    			runnable.run();
+    			started = true;
+    			
+    			try {
+    				setUpRecorder();
+    				setUpPath();
+    				recordAudio();
+    			} catch (IOException e) {
+    				Log.e(LOG_TAG, "start recording error");
+    			}
+
+    		}
     	});
     }
     
@@ -133,24 +134,26 @@ public class RecordAudioActivity extends Activity {
     }
     
     private void stopRecording() {
+    	if (started == false) {
+    		Toast.makeText(RecordAudioActivity.this, "Recording canceled", Toast.LENGTH_LONG).show();
+
+        	Intent result = new Intent();
+        	setResult(RESULT_CANCELED,result);
+        	finish();
+    		
+    		return;
+    	}
+    	
     	mRecorder.stop();
     	mRecorder.release();
-    	
-//    	String type = "Audio";
+
     	String data = Uri.fromFile(audioFile).toString();
-    	
+
     	Intent result = new Intent();
     	result.putExtra("Audio", data);
     	result.putExtra("result", "pass");
     	setResult(RESULT_OK,result);
     	finish();
-    	
-    	
-//    	Intent email = new Intent(RecordAudioActivity.this, EmailActivity.class);
-//    	email.putExtra("type", type);
-//    	email.putExtra("data", data);
-//    	finish();
-//    	startActivity(email);
     }
     
     @Override
