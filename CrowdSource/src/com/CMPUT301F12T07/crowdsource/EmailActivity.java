@@ -12,7 +12,8 @@ public class EmailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email);
         
-        startEmailIntent("recipiant@gmail.com");
+        startEmailIntent("thomas.fung1@gmail.com");
+        finish();
     }
 
     private void startEmailIntent(String email) {
@@ -20,11 +21,11 @@ public class EmailActivity extends Activity {
     	
     	intent.setType("message/rfc822");
     	intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{email});
-    	intent.putExtra(android.content.Intent.EXTRA_TEXT, "Sample Email");
+    	intent.putExtra(android.content.Intent.EXTRA_TEXT, "This attachment contains your requested task");
     	intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject");
     	
     	intent.setType("text/plain");
-    	startActivity(Intent.createChooser(intent, "Send mail client:"));
+    	startActivity(intent);
     }
     
     @Override

@@ -164,13 +164,4 @@
         android:text="@string/save_text"
         android:drawableLeft="@drawable/ic_button_save" />
 
-    <Button
-        android:id="@+id/takephoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="14dp"
-        android:text="test_take_photo" />
-
 </RelativeLayout>
