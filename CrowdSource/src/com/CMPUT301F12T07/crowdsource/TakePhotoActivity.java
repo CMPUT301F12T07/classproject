@@ -33,16 +33,19 @@ public class TakePhotoActivity extends Activity {
     public void onActivityResult(int reqCode, int resultCode, Intent data) {
     	super.onActivityResult(reqCode, resultCode, data);
     	if (reqCode == CAPTURE_REQUEST_CODE && resultCode == RESULT_OK) {
-    		//Uri image = data.getData();
     		
     		Log.v("result @ take photo", "takephoto");
+    		Intent intent = new Intent(TakePhotoActivity.this, EmailActivity.class);
+    		intent.putExtra("data", imageFileUri.toString());
+    		intent.putExtra("type", "Photo");
+    		finish();
+    		startActivity(intent);
     		
-    		
-    		//Intent result = new Intent();
-    		//result.putExtra("Photo", image.toString());
-    		//setResult(RESULT_OK, result);
-    		//Log.v("result @ take photo2", "takephoto2");
-    		Toast.makeText(TakePhotoActivity.this, "Photo saved.", Toast.LENGTH_LONG).show();
+    		Intent result = new Intent();
+    		result.putExtra("Photo", imageFileUri.toString());
+    		result.putExtra("result", "pass");
+    		setResult(RESULT_OK,result);
+//    		Toast.makeText(TakePhotoActivity.this, "Photo saved.", Toast.LENGTH_LONG).show();
     	} else {
     		Toast.makeText(TakePhotoActivity.this, "Photo cancelled.", Toast.LENGTH_SHORT).show();
     	}
