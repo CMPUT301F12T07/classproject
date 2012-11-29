@@ -21,14 +21,13 @@ import android.widget.TextView;
 public class RecordAudioActivity extends Activity {
 
 	// Timer
-	private TextView hour;
+	private TextView min;
 	private TextView sec;
 	private Button start;
 	private Button stop;
 	
-	private Handler handler;
-	private int cHour;
 	private int cMin;
+	private int cSec;
 	
 	private Timer myTimer;
 	final static int delay = 1000;
@@ -41,16 +40,26 @@ public class RecordAudioActivity extends Activity {
 
     private MediaRecorder mRecorder = null;
 
-    Runnable runnable = new Runnable() {
+    final Handler handler = new Handler();
+    final Runnable r = new Runnable() {
     	public void run() {
-    		if (cMin == 60) cHour++;
-    		cMin++;
+    		if (cSec == 60) {
+    			String sMin;
+    			
+    			cMin++;
+    			cSec = 0;
+    			
+    			if (cMin < 10) min.setText("0"+cMin);
+    			else min.setText(""+cMin);
+    		}
+    		cSec++;
     		
-    		hour.setText(cHour);
-    		sec.setText(cMin);
+    		handler.postDelayed(this, 1000);
+    		Log.w("r", "" + cSec);
+    		if (cSec < 10) sec.setText("0"+cSec);
+    		else sec.setText(""+cSec);
     	}
     };
-    
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,7 +77,9 @@ public class RecordAudioActivity extends Activity {
     	start = (Button) findViewById(R.id.start);
     	start.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				handler.postDelayed(runnable, 1000);
+				r.run();
+				
+				//handler.postDelayed(runnable, 1000);
 				
 				
 //			    try {
@@ -86,20 +97,18 @@ public class RecordAudioActivity extends Activity {
     	stop = (Button) findViewById(R.id.stop);
     	stop.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				handler.removeCallbacks(runnable);
+				handler.removeCallbacks(r);
 				
 			}
     	});
     }
     
     private void setUpTimer() {
-    	hour = (TextView) findViewById(R.id.hour);
+    	min = (TextView) findViewById(R.id.min);
     	sec = (TextView) findViewById(R.id.sec);
     	
-    	cHour = 0;
     	cMin = 0;
-    	
-    	handler = new Handler();
+    	cSec = 0;
     }
     
     private void setUpRecorder() {

@@ -42,7 +42,7 @@
         android:textSize="70dp" />
 
     <TextView
-        android:id="@+id/hour"
+        android:id="@+id/min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/colon"
