@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.CMPUT301F12T07.crowdsource.R;
 import com.CMPUT301F12T07.crowdsource.ViewTaskActivity;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
@@ -22,7 +23,8 @@ public class FollowedSectionFragment extends Fragment {
 	
 	private ListView myList;
 	private List<Task> tasks;
-	private LocalDB db;
+//	private LocalDB db;
+	private DBHandler db;
 	
     public FollowedSectionFragment() {
     }
@@ -35,7 +37,7 @@ public class FollowedSectionFragment extends Fragment {
     	
     	View myFeed = inflater.inflate(R.layout.activity_followed_tasks, container, false);
     	
-    	db = new LocalDB(inflater.getContext());
+    	db = new DBHandler(inflater.getContext());
         
         this.tasks = db.getFollowedTasks(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
         

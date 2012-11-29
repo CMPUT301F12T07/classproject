@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.CMPUT301F12T07.crowdsource.R;
 import com.CMPUT301F12T07.crowdsource.ViewTaskActivity;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
@@ -22,7 +23,7 @@ public class LogSectionFragment extends Fragment {
 	
 	private ListView myList;
 	private List<Task> tasks;
-	private LocalDB db;
+	private DBHandler db;
 	
     public LogSectionFragment() {
     }
@@ -35,7 +36,7 @@ public class LogSectionFragment extends Fragment {
     	
     	View myFeed = inflater.inflate(R.layout.activity_logged_tasks, container, false);
     	
-    	db = new LocalDB(inflater.getContext());
+    	db = new DBHandler(inflater.getContext());
         
         this.tasks = db.getLoggedTasks(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
         

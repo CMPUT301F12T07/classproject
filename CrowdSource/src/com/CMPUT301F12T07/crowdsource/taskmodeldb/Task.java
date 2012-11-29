@@ -3,7 +3,8 @@ package com.CMPUT301F12T07.crowdsource.taskmodeldb;
 public class Task { 
 	
 	/** private variables */
-    int _tid; 
+	String _wid;
+	long _tid; 
     String _uid;
     String _title;
     String _description; 
@@ -15,25 +16,12 @@ public class Task {
     
     /** Empty constructor */
     public Task(){ } 
-   
-// TODO: Number of Follows
-// TODO: Add Flag to Model and Database for Following
-// TODO: User Email Address
-// TODO: Number of Submitted
-// TODO: Add these for Model/Database Handler
-//    public Task(String webid, String title){ 
-//    	this._webid = webid;
-//    	this._title = title;
-//    }
-//    
-// TODO: These should be in Database Handler
-//    public Task getAllWebTasks(){    	
-//    	return new Task(parsedWebID, parsedTitle);
-//    }
-//    
-//    public Task getTaskByWid(wid){
-//    	return new Task(etc., etc., etc.)
-//    }
+    
+    /** Light weight constructor */
+    public Task(String wid, String title){
+    	this._wid = wid;
+    	this._title = title;
+    }
 
     /** constructor without tid */ 
     public Task(String uid, String title, String description, String dateCreate, 
@@ -61,13 +49,37 @@ public class Task {
         this._visibility = visibility;
         this._quantity = quantity;
     }
+    
+    /** constructor with wid */
+    public Task( String wid, int tid, String uid, String title, String description, String dateCreate, 
+    		String dateDue, String type, int visibility, int quantity ){
+    	this._wid = wid;
+    	this._tid = tid;
+        this._uid = uid;
+        this._title = title;
+        this._description = description; 
+        this._dateCreate = dateCreate; 
+        this._dateDue = dateDue;
+        this._type = type;
+        this._visibility = visibility;
+        this._quantity = quantity;
+    	
+    }
 
     /** getter and setter */
-	public int get_tid() {
+    public String get_wid() {
+		return _wid;
+	}
+
+	public void set_wid(String _wid) {
+		this._wid = _wid;
+	}
+
+	public long get_tid() {
 		return _tid;
 	}
 
-	public void set_tid(int _tid) {
+	public void set_tid(long _tid) {
 		this._tid = _tid;
 	}
 

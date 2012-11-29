@@ -2,6 +2,7 @@ package com.CMPUT301F12T07.crowdsource;
 
 import java.util.Calendar;
 
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
@@ -149,10 +150,14 @@ public class AddTaskActivity extends Activity {
 					Toast.makeText(v.getContext(), "Quantity has to be at least one.", Toast.LENGTH_SHORT).show();
 				else
 				{
-					LocalDB db = new LocalDB(v.getContext());
+					DBHandler db = new DBHandler(v.getContext());
 					Task newTask = new Task(deviceId, title, description, dateCreate, dateDue, type, visibility, Integer.parseInt(quantity));
 					
-					db.createTask(newTask);
+					try {
+						db.createTask(newTask);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					finish();
 				}
 				

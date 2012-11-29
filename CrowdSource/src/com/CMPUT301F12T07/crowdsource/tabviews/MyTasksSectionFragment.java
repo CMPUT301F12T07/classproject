@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.CMPUT301F12T07.crowdsource.R;
 import com.CMPUT301F12T07.crowdsource.ViewTaskActivity;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
@@ -26,7 +27,7 @@ public class MyTasksSectionFragment extends Fragment {
 	private ListView myPublicList;
 	private List<Task> publicTasks;
 	private List<Task> privateTasks;
-	private LocalDB db;
+	private DBHandler db;
 	
     public MyTasksSectionFragment() {
     }
@@ -39,7 +40,7 @@ public class MyTasksSectionFragment extends Fragment {
     	
     	View myFeed = inflater.inflate(R.layout.activity_my_tasks, container, false);
     	
-    	db = new LocalDB(inflater.getContext());
+    	db = new DBHandler(inflater.getContext());
         
         this.publicTasks = db.getPublicTasksByUid(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
         this.privateTasks = db.getPrivateTasksByUid(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));

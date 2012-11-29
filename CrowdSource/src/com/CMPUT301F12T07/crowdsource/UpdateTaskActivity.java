@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
@@ -20,7 +21,7 @@ public class UpdateTaskActivity extends Activity {
 	private EditText endDate;
 	private EditText taskQuantity;
 	private EditText taskDesc;
-	private LocalDB db;
+	private DBHandler db;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,9 +29,9 @@ public class UpdateTaskActivity extends Activity {
         setContentView(R.layout.activity_update_task);
 //        getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        db = new LocalDB(this);
+        db = new DBHandler(this);
         this.currentTask = db.getTask(getIntent().getExtras().getInt("taskID"));
-        db.close();
+//        db.close();
         
         // Getting the task title field
         this.taskTitle = (EditText) findViewById(R.id.textEditTitle);
@@ -85,7 +86,11 @@ public class UpdateTaskActivity extends Activity {
             	currentTask.set_quantity(Integer.parseInt(taskQuantity.getText().toString()));
             	currentTask.set_description(taskDesc.getText().toString());
             	
-            	db.updateTask(currentTask);
+            	try {
+					db.updateTask(currentTask);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
             	
             	finish();
             }
