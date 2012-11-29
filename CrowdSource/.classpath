@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="/home/dsk14/ugrad/xuefeng1/git/classproject/CrowdSource/ExternalJar/commons-logging-1.1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk14/ugrad/xuefeng1/git/classproject/CrowdSource/ExternalJar/commons-codec-1.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk14/ugrad/xuefeng1/git/classproject/CrowdSource/ExternalJar/httpmime-4.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk14/ugrad/xuefeng1/git/classproject/CrowdSource/ExternalJar/fluent-hc-4.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk14/ugrad/xuefeng1/git/classproject/CrowdSource/ExternalJar/gson-2.2.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk14/ugrad/xuefeng1/git/classproject/CrowdSource/ExternalJar/httpclient-4.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk14/ugrad/xuefeng1/git/classproject/CrowdSource/ExternalJar/httpclient-cache-4.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk14/ugrad/xuefeng1/git/classproject/CrowdSource/ExternalJar/httpcore-4.2.1.jar"/>
 	<classpathentry excluding="com/CMPUT01F12T07/crowdsouce/diaglogs/" kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry exported="true" kind="lib" path="ExternalJar/commons-codec-1.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="ExternalJar/commons-logging-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="ExternalJar/fluent-hc-4.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="ExternalJar/gson-2.2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="ExternalJar/httpclient-4.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="ExternalJar/httpclient-cache-4.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="ExternalJar/httpcore-4.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="ExternalJar/httpmime-4.2.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
