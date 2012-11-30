@@ -13,13 +13,22 @@
         android:orientation="horizontal" >
 
         <Button
+	        android:id="@+id/cancel"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+			android:layout_marginBottom="5dp"
+            android:layout_marginRight="2.5dp"
+            android:layout_weight="1"
+	        android:text="Cancel" />
+        
+        <Button
             android:id="@+id/start"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="2.5dp"
             android:layout_weight="1"
-            android:text="Start Recording" />
+            android:text="Start" />
 
         <Button
             android:id="@+id/stop"
@@ -28,7 +37,8 @@
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="2.5dp"
             android:layout_weight="1"
-            android:text="Stop Recording" />
+            android:text="Stop" />
+        
     </LinearLayout>
 
     <TextView

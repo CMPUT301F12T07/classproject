@@ -22,18 +22,17 @@ import android.widget.Toast;
 
 public class RecordAudioActivity extends Activity {
 
-	// Timer
 	private TextView min;
 	private TextView sec;
 	private Button start;
 	private Button stop;
+	private Button cancel;
 	
 	private int cMin;
 	private int cSec;
 	
 	final static int delay = 1000;
 	
-	private static final String LOG_TAG = "AudioRecordTest";
     private String folder;
     private File audioFile;
 
@@ -53,7 +52,7 @@ public class RecordAudioActivity extends Activity {
     		cSec++;
     		
     		handler.postDelayed(this, 1000);
-    		Log.w("r", "" + cSec);
+
     		if (cSec < 10) sec.setText("0"+cSec);
     		else sec.setText(""+cSec);
     	}
@@ -67,7 +66,7 @@ public class RecordAudioActivity extends Activity {
         setUpTimer();
         setUpStart();
         setUpStop();
-
+        setUpCancel();
         
     }
     
@@ -84,10 +83,30 @@ public class RecordAudioActivity extends Activity {
     				setUpPath();
     				recordAudio();
     			} catch (IOException e) {
-    				Log.e(LOG_TAG, "start recording error");
+    				Log.e("RecordAudioActivity", "start recording error");
     			}
 
     		}
+    	});
+    }
+    
+    private void setUpCancel() {
+    	cancel = (Button) findViewById(R.id.cancel);
+    	cancel.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				if (started == true)  {
+					mRecorder.stop();
+			    	mRecorder.release();
+			    	
+			    	handler.removeCallbacks(runnable);
+				}
+				
+	    		Toast.makeText(RecordAudioActivity.this, "Recording canceled", Toast.LENGTH_LONG).show();
+
+	        	Intent result = new Intent();
+	        	setResult(RESULT_CANCELED,result);
+	        	finish();
+			}
     	});
     }
     

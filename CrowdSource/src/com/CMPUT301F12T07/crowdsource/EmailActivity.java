@@ -22,16 +22,15 @@ public class EmailActivity extends Activity {
 	        Uri received = Uri.parse(intent.getStringExtra("data"));
 	        startEmailIntent("tfung@ualberta.ca", type, received);
         } catch (Exception e) {
-        	Log.v("Email Exception", e.toString());
+        	Log.v("EmailActivity", "Error receiving Uri");
         }
+        
         finish();
     }
 
     private void startEmailIntent(String email, String type, Uri input) {
     	Intent intent = new Intent(android.content.Intent.ACTION_SEND);
-    	
-		Log.v("onactivity", "asdf");
-    	
+ 
     	intent.setType("message/rfc822");
     	intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{email});
     	intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject");

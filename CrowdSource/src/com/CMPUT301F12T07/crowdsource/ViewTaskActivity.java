@@ -106,6 +106,11 @@ public class ViewTaskActivity extends Activity {
 
         });
 
+        /** 
+         * Initiates Fulfill button, and buildds AlertDialogs for the three
+         * fulfillment types. The fulfillment type is automatically configured
+         * from retrieving from the database by calling currentTask.get_type().
+         * */
         this.fulfillTask = (Button) findViewById(R.id.buttonFulfill);
         fulfillTask.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -174,6 +179,12 @@ public class ViewTaskActivity extends Activity {
         }
     }
 
+    /**
+     * Takes input type and fulfillment and transfers its data to EmailActivity
+     * 
+     * @param type	The type of the media. (Audio, Photo)
+     * @param data	The Uri data in string form
+     */
     private void sendMedia(String type, String data) {
 		Intent intent = new Intent(ViewTaskActivity.this, EmailActivity.class);
 		intent.putExtra("type",	type);
@@ -181,41 +192,36 @@ public class ViewTaskActivity extends Activity {
 		startActivity(intent);
     }
     
+    
+    /**
+     * This method is only called when a fulfillment activity is activated.
+     * This method either captures RESULT_OK signal sends the data and type to 
+     * sendMedia, or it captures an RESULT_CANCEL and just returns and does nothing.
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
     	super.onActivityResult(requestCode, resultCode, data);
     	
     	try{
-	    	if (resultCode == RESULT_CANCELED || data.getExtras() == null) finish();
-	    	
-	    	if (resultCode == RESULT_OK) {
-	    		Log.v("OK", "RESULT_OK");
-	    	}
-	    	
-	    	
-	    	if (data.getStringExtra("result").compareTo("fail") == 0) finish();
-	    	
-	    	Log.v("result", ""+resultCode);
+	    	if (resultCode == RESULT_CANCELED) {finish(); return;}
 	    	
 	    	switch (requestCode) {
 	    		case RETURN_PHOTO_CODE:
 	    			String image = data.getStringExtra("Photo");
-	    			Log.v("switch", "switch");
 	    			sendMedia("Photo", image);
 	    			
 	    			break;
 	    		
 	    		case RETURN_AUDIO_CODE:
-	    			Log.v("switch", "audio");
 	    			String audio = data.getStringExtra("Audio");
 	    			sendMedia("Audio", audio);
 	    			
 	    			break;
 	
 	    		default:
-	    			Log.v("Error", "default case in ViewTaskActivity");
+	    			Log.v("default", "default case in ViewTaskActivity");
 	    	}
     	} catch (Exception e) {
-    		Log.v("Exception", e.toString());
+    		Log.v("ViewTaskActivity", "Error in ViewTaskActivity");
     	}
     }
     
