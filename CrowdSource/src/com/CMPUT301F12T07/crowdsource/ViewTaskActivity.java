@@ -185,6 +185,9 @@ public class ViewTaskActivity extends Activity {
      */
     private void sendMedia(String type, String data) {
 		Intent intent = new Intent(ViewTaskActivity.this, EmailActivity.class);
+		
+		intent.putExtra("email", "tfung@ualberta.ca");
+		
 		intent.putExtra("type",	type);
 		intent.putExtra("data", data);
 		startActivity(intent);

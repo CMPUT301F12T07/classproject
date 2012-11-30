@@ -151,6 +151,9 @@ public class ViewOtherTaskActivity extends Activity {
      */
     private void sendMedia(String type, String data) {
 		Intent intent = new Intent(ViewOtherTaskActivity.this, EmailActivity.class);
+		
+		intent.putExtra("email", "tfung@ualberta.ca");
+		
 		intent.putExtra("type",	type);
 		intent.putExtra("data", data);
 		startActivity(intent);

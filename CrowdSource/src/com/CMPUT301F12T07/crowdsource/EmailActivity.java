@@ -26,10 +26,11 @@ public class EmailActivity extends Activity {
         Intent intent = getIntent();
         
         String type = intent.getStringExtra("type");
+        String email = intent.getStringExtra("email");
         
         try {
 	        Uri received = Uri.parse(intent.getStringExtra("data"));
-	        startEmailIntent("tfung@ualberta.ca", type, received);
+	        startEmailIntent(email, type, received);
         } catch (Exception e) {
         	Log.v("EmailActivity", "Error receiving Uri");
         }
