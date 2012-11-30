@@ -107,40 +107,6 @@ public class ViewTaskActivity extends Activity {
         });
 
         this.fulfillTask = (Button) findViewById(R.id.buttonFulfill);
-//        fulfillTask.setOnClickListener(new OnClickListener() {
-//			public void onClick(View v) {
-//				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-//				builder.setMessage("Choose an option.");
-//				
-//				builder.setPositiveButton("Send/Fulfill Directly", 
-//						new DialogInterface.OnClickListener() {
-//							public void onClick(DialogInterface dialog, int which) {
-//								Intent intent = new Intent(ViewTaskActivity.this, EmailActivity.class);
-//								startActivity(intent);
-//							}
-//					});
-//				builder.setNeutralButton("Record Audio", 
-//						new DialogInterface.OnClickListener() {
-//							public void onClick(DialogInterface dialog, int which) {
-//								Intent intent = new Intent(ViewTaskActivity.this, RecordAudioActivity.class);
-//								startActivity(intent);
-//							}
-//					});
-//				builder.setNegativeButton("Take Photo", 
-//						new DialogInterface.OnClickListener() {
-//							public void onClick(DialogInterface dialog, int which) {
-//								Intent intent = new Intent(ViewTaskActivity.this, TakePhotoActivity.class);
-//								startActivity(intent);
-//							}
-//						});
-//				
-//				AlertDialog alert = builder.create();
-//				alert.show();
-//				
-//			}
-//        });
-//        
-
         fulfillTask.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
@@ -168,16 +134,11 @@ public class ViewTaskActivity extends Activity {
 				builder.setNeutralButton(neutral, 
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
-								//audio/photo/text --> email
-								// if (type) elseif() else()
 								if (type.equals("Photo")) {
 									Intent intent = new Intent(ViewTaskActivity.this, TakePhotoActivity.class);
-									//startActivity(intent);
 									startActivityForResult(intent,RETURN_PHOTO_CODE);
 								} else if (type.equals("Audio")) {
 									Intent intent = new Intent(ViewTaskActivity.this, RecordAudioActivity.class);
-//									startActivity(intent);
-									
 									startActivityForResult(intent,RETURN_AUDIO_CODE);
 								} else {
 									Intent intent = new Intent(ViewTaskActivity.this, EmailActivity.class);
@@ -214,7 +175,6 @@ public class ViewTaskActivity extends Activity {
     }
 
     private void sendMedia(String type, String data) {
-    	// data can be converted to Uri
 		Intent intent = new Intent(ViewTaskActivity.this, EmailActivity.class);
 		intent.putExtra("type",	type);
 		intent.putExtra("data", data);
@@ -224,30 +184,38 @@ public class ViewTaskActivity extends Activity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
     	super.onActivityResult(requestCode, resultCode, data);
     	
-    	if (resultCode != RESULT_OK) finish();
-    	
-    	if (data.getStringExtra("result").compareTo("fail") == 0) finish();
-    	
-    	Log.v("result", ""+resultCode);
-    	Log.v("result", "result");
-    	
-    	switch (requestCode) {
-    		case RETURN_PHOTO_CODE:
-    			String image = data.getStringExtra("Photo");
-    			Log.v("switch", "switch");
-    			sendMedia("Photo", image);
-    			
-    			break;
-    		
-    		case RETURN_AUDIO_CODE:
-    			Log.v("switch", "audio");
-    			String audio = data.getStringExtra("Audio");
-    			sendMedia("Audio", audio);
-    			
-    			break;
-
-    		default:
-    			Log.v("Error", "default case in ViewTaskActivity");
+    	try{
+	    	if (resultCode == RESULT_CANCELED || data.getExtras() == null) finish();
+	    	
+	    	if (resultCode == RESULT_OK) {
+	    		Log.v("OK", "RESULT_OK");
+	    	}
+	    	
+	    	
+	    	if (data.getStringExtra("result").compareTo("fail") == 0) finish();
+	    	
+	    	Log.v("result", ""+resultCode);
+	    	
+	    	switch (requestCode) {
+	    		case RETURN_PHOTO_CODE:
+	    			String image = data.getStringExtra("Photo");
+	    			Log.v("switch", "switch");
+	    			sendMedia("Photo", image);
+	    			
+	    			break;
+	    		
+	    		case RETURN_AUDIO_CODE:
+	    			Log.v("switch", "audio");
+	    			String audio = data.getStringExtra("Audio");
+	    			sendMedia("Audio", audio);
+	    			
+	    			break;
+	
+	    		default:
+	    			Log.v("Error", "default case in ViewTaskActivity");
+	    	}
+    	} catch (Exception e) {
+    		Log.v("Exception", e.toString());
     	}
     }
     

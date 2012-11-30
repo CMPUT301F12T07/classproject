@@ -47,23 +47,6 @@ public class ChoosePictureActivity extends Activity {
             result.putExtra("result", "pass");
             setResult(RESULT_OK, result);
             
-//            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-//            Cursor cursor = getContentResolver().query(selectedImage, null, null, null, null);
-//            
-//            cursor.moveToFirst();
-//            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//            String filePath = cursor.getString(columnIndex);
-//            cursor.close();
-//
-//            Log.w("------", "------------------");
-//            Log.w("filepath", filePath);
-//            if (bmp != null && !bmp.isRecycled()) {
-//                bmp = null;
-//            }
-//            
-//            bmp = BitmapFactory.decodeFile(filePath);
-//            
-//            pic.setImageBitmap(bmp);
         } else {
 	        setResult(RESULT_CANCELED, result);
 	        result.putExtra("result", "fail");

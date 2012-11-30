@@ -14,10 +14,16 @@ public class EmailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email);
         
-        String type = getIntent().getStringExtra("type");
-        Uri received = Uri.parse(getIntent().getStringExtra("data"));
-
-        startEmailIntent("tfung@ualberta.ca", type, received);
+        Intent intent = getIntent();
+        
+        String type = intent.getStringExtra("type");
+        
+        try {
+	        Uri received = Uri.parse(intent.getStringExtra("data"));
+	        startEmailIntent("tfung@ualberta.ca", type, received);
+        } catch (Exception e) {
+        	Log.v("Email Exception", e.toString());
+        }
         finish();
     }
 
