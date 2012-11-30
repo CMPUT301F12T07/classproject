@@ -39,7 +39,15 @@ public class RecordAudioActivity extends Activity {
     private MediaRecorder mRecorder = null;
     private boolean started = false;
     
+    /**
+     * Handler for timer polling.
+     */
     final Handler handler = new Handler();
+    
+    /**
+     * Updater for when the handler is called. Handler set to be called
+     * every 1 second. This also updates the timer on the display.
+     */
     final Runnable runnable = new Runnable() {
     	public void run() {
     		if (cSec == 60) {
@@ -70,6 +78,9 @@ public class RecordAudioActivity extends Activity {
         
     }
     
+    /**
+     * Initializes buttons, and timer display. 
+     */
     private void setUpStart() {
     	start = (Button) findViewById(R.id.start);
     	start.setOnClickListener(new OnClickListener() {
@@ -90,6 +101,12 @@ public class RecordAudioActivity extends Activity {
     	});
     }
     
+    /**
+     * Initializes the cancel button. If the button is called when
+     * the timer has not yet been called, it will just return RESULT_CANCELED.
+     * However, if the timer has been called previously, then it will stop the 
+     * timer first return RESULT_CANCELED.
+     */
     private void setUpCancel() {
     	cancel = (Button) findViewById(R.id.cancel);
     	cancel.setOnClickListener(new OnClickListener() {
@@ -110,6 +127,10 @@ public class RecordAudioActivity extends Activity {
     	});
     }
     
+    /**
+     * Initializes the stop button. This stops the handler from calling
+     * again 1 second later.
+     */
     private void setUpStop() {
     	stop = (Button) findViewById(R.id.stop);
     	stop.setOnClickListener(new OnClickListener() {
@@ -120,6 +141,9 @@ public class RecordAudioActivity extends Activity {
     	});
     }
     
+    /**
+     * Initializes the timer display.
+     */
     private void setUpTimer() {
     	min = (TextView) findViewById(R.id.min);
     	sec = (TextView) findViewById(R.id.sec);
@@ -128,6 +152,9 @@ public class RecordAudioActivity extends Activity {
     	cSec = 0;
     }
     
+    /**
+     * Initializes the MediaRecorder with configurations.
+     */
     private void setUpRecorder() {
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -135,16 +162,24 @@ public class RecordAudioActivity extends Activity {
         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
     }
     
+    /**
+     * Initializes the save path for the audio file.
+     * @throws IOException
+     */
     private void setUpPath() throws IOException {
         folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/crowdsource/audio";
         
         File folderF = new File(folder);
         if (!folderF.exists()) folderF.mkdir();
-        
+        //TODO: change name
 		audioFile = File.createTempFile("ibm", ".3gp", folderF);
 
     }
     
+    /**
+     * recordAudio will get called when the recording starts
+     * @throws IOException
+     */
     private void recordAudio() throws IOException {
         mRecorder.setOutputFile(audioFile.getAbsolutePath());
         
@@ -152,6 +187,10 @@ public class RecordAudioActivity extends Activity {
         mRecorder.start();
     }
     
+    /**
+     * stopRecording will get called, when recording is canceled or finished. If the recording
+     * is cancelled, it will return RESULT_CANCELED, otherwise RESULT_OK to the caller.
+     */
     private void stopRecording() {
     	if (started == false) {
     		Toast.makeText(RecordAudioActivity.this, "Recording canceled", Toast.LENGTH_LONG).show();

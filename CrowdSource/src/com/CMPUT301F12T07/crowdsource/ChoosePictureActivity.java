@@ -22,35 +22,40 @@ public class ChoosePictureActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_picture);
-        
+       
+        startPicture();
+    }
+    
+    /**
+     * starts the builtin Android camera application, and captures photos.
+     * After capturing, it will call on ActivityResult.
+     */
+    private void startPicture() {
         pic = (ImageView) findViewById(R.id.image);
         
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         
         startActivityForResult(intent,1);
-        
     }
 
+    /**
+     * When onActivityResult is called, it will setup the return intent back
+     * to the original caller
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         
         Intent result = new Intent();
         
-        Log.v("result code: official", ""+RESULT_OK);
-        Log.v("result code", ""+resultCode);
-        
         if (requestCode == RETURN_IMAGE_CODE && resultCode == RESULT_OK) {
             Uri selectedImage = data.getData();
             
             result.putExtra("Photo", selectedImage.toString());
-            result.putExtra("result", "pass");
             setResult(RESULT_OK, result);
             
         } else {
 	        setResult(RESULT_CANCELED, result);
-	        result.putExtra("result", "fail");
-	        Log.v("canclled","can");
         }
         
         finish();

@@ -30,24 +30,19 @@ public class TakePhotoActivity extends Activity {
         capturePicture();
     }
 
+    /**
+     * onActivityResult will get called after a photo is taken or gets canceled.
+     * If the photo gets taken successfully, it will return RESULT_OK to the caller,
+     * otherwise it will return RESULT_CANCELED
+     */
     public void onActivityResult(int reqCode, int resultCode, Intent data) {
     	super.onActivityResult(reqCode, resultCode, data);
     	Intent result = new Intent();
     	
     	if (reqCode == CAPTURE_REQUEST_CODE && resultCode == RESULT_OK) {
-    		
-    		Log.v("result @ take photo", "takephoto");
-//    		Intent intent = new Intent(TakePhotoActivity.this, EmailActivity.class);
-//    		intent.putExtra("data", imageFileUri.toString());
-//    		intent.putExtra("type", "Photo");
-//    		finish();
-//    		startActivity(intent);
-    		
-//    		Intent result = new Intent();
     		result.putExtra("Photo", imageFileUri.toString());
     		result.putExtra("result", "pass");
     		setResult(RESULT_OK,result);
-//    		Toast.makeText(TakePhotoActivity.this, "Photo saved.", Toast.LENGTH_LONG).show();
     	} else {
     		Toast.makeText(TakePhotoActivity.this, "Photo cancelled.", Toast.LENGTH_SHORT).show();
     		setResult(RESULT_CANCELED, result);
@@ -55,6 +50,9 @@ public class TakePhotoActivity extends Activity {
     	finish();
     }
     
+    /**
+     * Configure's folder for photos.
+     */
     private void setUpFolder() {
 		folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/crowdsource/photos";
 		
@@ -62,12 +60,18 @@ public class TakePhotoActivity extends Activity {
 		if (!folderF.exists()) folderF.mkdir();
     }
     
+    /**
+     * Initializes the photos path, and name.
+     */
     private void setUpPath() {
 		String imageFilePath = folder + "/" + getDateTime() + ".jpg";
 		File imageFile = new File(imageFilePath);
 		imageFileUri = Uri.fromFile(imageFile);
     }
     
+    /** 
+     * capturePicture calls calls the default Android Camera for taking photos.
+     */
     private void capturePicture() {
     	Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
     	
@@ -75,6 +79,10 @@ public class TakePhotoActivity extends Activity {
 		startActivityForResult(intent,CAPTURE_REQUEST_CODE);
     }
     
+    /**
+     * This returns the current date and time for photo name.
+     * @return Current date and time.
+     */
     private String getDateTime() {
     	final Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("MST"), Locale.CANADA);
     	//Date date = new SimpleDateFormat("YYYYmmdd-HHmmss")

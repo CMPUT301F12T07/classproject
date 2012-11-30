@@ -63,6 +63,9 @@ public class AddTaskActivity extends Activity {
         return true;
     }
     
+    /**
+     * Initializes all text and button fields.
+     */
     private void initializeListeners() {
     	initializeDates();
     	initializeTextFields();
@@ -71,6 +74,10 @@ public class AddTaskActivity extends Activity {
     	initializeSave();
     }
 
+    
+    /**
+     * Initializes the date fields, and sets up the DatePicker dialog.
+     */
 	private void initializeDates() {
     	selectDate = (Button) findViewById(R.id.selectDateButton);
     	selectedDate = (TextView) findViewById(R.id.dateTextView);
@@ -98,6 +105,10 @@ public class AddTaskActivity extends Activity {
     	});
     }
     
+	/**
+	 * This is the popup for when the button Select Date. It takes the data from the user's input and 
+	 * copies it into year, month, and day.
+	 */
     private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
 	    public void onDateSet(DatePicker v, int inyear, int inmonth, int inday) {
 	    	year = inyear;
@@ -111,22 +122,34 @@ public class AddTaskActivity extends Activity {
 	    }
     };
     
-    
+    /**
+     * Initializes the text fields in the activity.
+     */
     private void initializeTextFields() {
     	titleText = (EditText) findViewById(R.id.titleText);
     	descriptionText = (EditText) findViewById(R.id.descriptionText);
     	quantityText = (EditText) findViewById(R.id.quantityText);
 	}
     
-    // initializes dropdown type boxes
+    /**
+     * Initialize the dropdowns in the activity.
+     */
     private void initializeSpinners() {
     	typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
     }
     
+    /**
+     * Initializes the checkboxes in the actvity.
+     */
     private void initializeCheckBox() {
     	privacyCheckBox = (CheckBox) findViewById(R.id.privacyCheckbox);
     }
     
+    /**
+     * Checks for a valid input date.
+     * 
+     * @return Returns true if date is the current date or after. Returns false otherwise.
+     */
     private boolean checkDate() {
     	if (year < cYear) return false;
     	if (year == cYear && month < cMonth) return false;
@@ -135,6 +158,13 @@ public class AddTaskActivity extends Activity {
     	return true;
     }
     
+    
+    /**
+     * Initializes the save button, and adds constraints as to when it can be saved.
+     * For the task to be saved it must not have empty fields, must have a valid date,
+     * and the quantity has to be at least one.
+     * 
+     */
     private void initializeSave() {
     	save = (Button) findViewById(R.id.saveButton);
     	

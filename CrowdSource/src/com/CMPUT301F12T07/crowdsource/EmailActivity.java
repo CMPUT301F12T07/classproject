@@ -14,6 +14,15 @@ public class EmailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email);
         
+        startEmail();
+    }
+
+    /**
+     * startEmail will retrieve the data from the callers, and set up
+     * its Uri and type. With these received 'Extras', they are passed to
+     * startEmailIntent for actual emailing.
+     */
+    private void startEmail() {
         Intent intent = getIntent();
         
         String type = intent.getStringExtra("type");
@@ -27,7 +36,15 @@ public class EmailActivity extends Activity {
         
         finish();
     }
-
+    
+    /**
+     * startEmailIntent will setup the intent by attaching the data if need be, and
+     * send it to the email client the user picks.
+     * 
+     * @param email This is the recipient's email address
+     * @param type	This would be the fulfillment type
+     * @param input	This would the data of the fulfillment
+     */
     private void startEmailIntent(String email, String type, Uri input) {
     	Intent intent = new Intent(android.content.Intent.ACTION_SEND);
  
