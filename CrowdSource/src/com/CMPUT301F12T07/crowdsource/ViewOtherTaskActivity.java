@@ -6,13 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
@@ -33,6 +33,9 @@ public class ViewOtherTaskActivity extends Activity {
 	private Button fulfillTask;
 	
 	final Context context = this;
+	
+	private static final int RETURN_PHOTO_CODE = 1;
+	private static final int RETURN_AUDIO_CODE = 2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,32 +70,57 @@ public class ViewOtherTaskActivity extends Activity {
         });
         
 
+        /** 
+         * Initiates Fulfill button, and buildds AlertDialogs for the three
+         * fulfillment types. The fulfillment type is automatically configured
+         * from retrieving from the database by calling currentTask.get_type().
+         * */
         this.fulfillTask = (Button) findViewById(R.id.buttonFulfill);
         fulfillTask.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
 				builder.setMessage("Choose an option.");
-				builder.setPositiveButton("Send/Fulfill Directly", 
-						new DialogInterface.OnClickListener() {
+				
+				final String type = currentTask.get_type();
+				String neutral = null;
+				
+				if (type.equals("Photo")) 		neutral = "Capture, and send";
+				else if (type.equals("Audio")) 	neutral = "Record, and send";
+				else 							neutral = "Send Text";
+				
+				if (type.equals("Photo")) {
+					builder.setPositiveButton("Choose, and send", 
+							new DialogInterface.OnClickListener() {
 						
+								public void onClick(DialogInterface dialog, int which) {
+									Intent intent = new Intent(ViewOtherTaskActivity.this, ChoosePictureActivity.class);
+									startActivityForResult(intent,RETURN_PHOTO_CODE);
+								}
+								
+						});
+				}
+				
+				builder.setNeutralButton(neutral, 
+						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
-								
-								
+								if (type.equals("Photo")) {
+									Intent intent = new Intent(ViewOtherTaskActivity.this, TakePhotoActivity.class);
+									startActivityForResult(intent,RETURN_PHOTO_CODE);
+								} else if (type.equals("Audio")) {
+									Intent intent = new Intent(ViewOtherTaskActivity.this, RecordAudioActivity.class);
+									startActivityForResult(intent,RETURN_AUDIO_CODE);
+								} else {
+									Intent intent = new Intent(ViewOtherTaskActivity.this, EmailActivity.class);
+									intent.putExtra("type",	type);
+									intent.putExtra("data", "n/a");
+									startActivity(intent);
+								}
 							}
 					});
-				builder.setNeutralButton("Record Audio", 
+				builder.setNegativeButton("Cancel", 
 						new DialogInterface.OnClickListener() {
-						
 							public void onClick(DialogInterface dialog, int which) {
-								
-							}
-					});
-				builder.setNegativeButton("Take Photo", 
-						new DialogInterface.OnClickListener() {
-							
-							public void onClick(DialogInterface dialog, int which) {
-								Intent intent = new Intent(ViewOtherTaskActivity.this, TakePhotoActivity.class);
-								startActivity(intent);
+								dialog.cancel();
 							}
 						});
 				
@@ -101,6 +129,8 @@ public class ViewOtherTaskActivity extends Activity {
 				
 			}
         });
+        
+        
         
         ImageView imageName = (ImageView) findViewById(R.id.imageView1);
         
@@ -111,7 +141,52 @@ public class ViewOtherTaskActivity extends Activity {
         } else {
         	imageName.setImageResource(R.drawable.ic_tasktype_text_lg);
         }
-        
+    }
+
+    /**
+     * Takes input type and fulfillment and transfers its data to EmailActivity
+     * 
+     * @param type	The type of the media. (Audio, Photo)
+     * @param data	The Uri data in string form
+     */
+    private void sendMedia(String type, String data) {
+		Intent intent = new Intent(ViewOtherTaskActivity.this, EmailActivity.class);
+		intent.putExtra("type",	type);
+		intent.putExtra("data", data);
+		startActivity(intent);
+    }
+    
+    
+    /**
+     * This method is only called when a fulfillment activity is activated.
+     * This method either captures RESULT_OK signal sends the data and type to 
+     * sendMedia, or it captures an RESULT_CANCEL and just returns and does nothing.
+     */
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	super.onActivityResult(requestCode, resultCode, data);
+    	
+    	try{
+	    	if (resultCode == RESULT_CANCELED) {finish(); return;}
+	    	
+	    	switch (requestCode) {
+	    		case RETURN_PHOTO_CODE:
+	    			String image = data.getStringExtra("Photo");
+	    			sendMedia("Photo", image);
+	    			
+	    			break;
+	    		
+	    		case RETURN_AUDIO_CODE:
+	    			String audio = data.getStringExtra("Audio");
+	    			sendMedia("Audio", audio);
+	    			
+	    			break;
+	
+	    		default:
+	    			Log.v("default", "default case in ViewTaskActivity");
+	    	}
+    	} catch (Exception e) {
+    		Log.v("ViewTaskActivity", "Error in ViewTaskActivity");
+    	}
     }
 
     @Override

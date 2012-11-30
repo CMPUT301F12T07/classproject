@@ -105,16 +105,6 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:text="@string/quantityTextView_text" />
-    <!--
-    <Button
-        android:id="@+id/selectQuantityButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/quantityTextView"
-        android:layout_marginLeft="5dp"
-        android:text="@string/quantityButton_text" />
-    -->
 
     <TextView
         android:id="@+id/dateTextView"
@@ -125,16 +115,6 @@
         android:layout_marginLeft="22dp"
         android:layout_toRightOf="@+id/selectDateButton"
         android:text="@string/dateTextView_text" />
-    <!--
-    <TextView
-        android:id="@+id/quantityChosenTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/selectQuantityButton"
-        android:layout_alignBottom="@+id/selectQuantityButton"
-        android:layout_alignLeft="@+id/dateTextView"
-        android:text="@string/quantityChosenTextView_text" />
-    -->
 
     <EditText
         android:id="@+id/quantityText"

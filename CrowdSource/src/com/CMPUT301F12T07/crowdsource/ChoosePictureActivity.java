@@ -2,21 +2,13 @@ package com.CMPUT301F12T07.crowdsource;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.Menu;
-import android.widget.ImageView;
 
 public class ChoosePictureActivity extends Activity {
 
-	private ImageView pic;
 	private static final int RETURN_IMAGE_CODE = 1;
-	private Bitmap bmp;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,8 +23,6 @@ public class ChoosePictureActivity extends Activity {
      * After capturing, it will call on ActivityResult.
      */
     private void startPicture() {
-        pic = (ImageView) findViewById(R.id.image);
-        
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         
