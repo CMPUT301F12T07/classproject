@@ -29,6 +29,11 @@ public class AddTaskActivity extends Activity {
 	private TextView selectedDate;
 	private String dateCreate;
 	private String dateDue;
+	
+	private int cYear;
+	private int cMonth;
+	private int cDay;
+	
 	private int year;
 	private int month;
 	private int day;
@@ -75,6 +80,10 @@ public class AddTaskActivity extends Activity {
     	month = cal.get(Calendar.MONTH);
     	day = cal.get(Calendar.DAY_OF_MONTH);
     	
+    	cYear = year;
+    	cMonth = month;
+    	cDay = day;
+    	
     	selectedDate.setText(year + "-" + (month+1) + "-" + day);
     	dateCreate = year + "-" + (month+1) + "-" + day;
     	
@@ -118,6 +127,14 @@ public class AddTaskActivity extends Activity {
     	privacyCheckBox = (CheckBox) findViewById(R.id.privacyCheckbox);
     }
     
+    private boolean checkDate() {
+    	if (year < cYear) return false;
+    	if (year == cYear && month < cMonth) return false;
+    	if (year == cYear && cMonth == month && day < cDay) return false;
+    	
+    	return true;
+    }
+    
     private void initializeSave() {
     	save = (Button) findViewById(R.id.saveButton);
     	
@@ -137,6 +154,8 @@ public class AddTaskActivity extends Activity {
 					Toast.makeText(v.getContext(), "Description cannot be left blank.", Toast.LENGTH_SHORT).show();
 				else if (quantity.compareTo("") == 0 || quantity.compareTo("0") == 0/*quantity == 0*/) 
 					Toast.makeText(v.getContext(), "Quantity has to be at least one.", Toast.LENGTH_SHORT).show();
+				else if (checkDate() == false)
+					Toast.makeText(v.getContext(), "Minimum date is " + dateCreate, Toast.LENGTH_SHORT).show();
 				else
 				{
 					LocalDB db = new LocalDB(v.getContext());
