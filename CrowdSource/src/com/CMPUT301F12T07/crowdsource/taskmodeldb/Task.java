@@ -10,16 +10,18 @@ public class Task {
     String _dateCreate; 
     String _dateDue;
     String _type;
+    String _email;
     int _visibility;
     int _quantity;
+    int _follows;
+    int _submitted;
+    Boolean _followed;
     
     /** Empty constructor */
     public Task(){ } 
    
-// TODO: Number of Follows
 // TODO: Add Flag to Model and Database for Following
 // TODO: User Email Address
-// TODO: Number of Submitted
 // TODO: Add these for Model/Database Handler
 //    public Task(String webid, String title){ 
 //    	this._webid = webid;
@@ -119,6 +121,14 @@ public class Task {
 		this._type = _type;
 	}
 	
+	public String get_email(){
+		return _email;
+	}
+	
+	public void set_email(String _email){
+		this._email = _email;
+	}
+	
 	public int get_visibility() {
 		return _visibility;
 	}
@@ -133,6 +143,30 @@ public class Task {
 
 	public void set_quantity(int _quantity) {
 		this._quantity = _quantity;
+	}
+	
+	public int get_follows(){
+		return _follows;
+	}
+	
+	public void set_follows(int _follows){
+		this._follows = _follows;
+	}
+	
+	public int get_submitted(){
+		return _submitted;
+	}
+	
+	public void set_submitted(int _submitted){
+		this._submitted = _submitted;
+	}
+	
+	public Boolean get_followed(){
+		return _followed;
+	}
+	
+	public void set_followed(Boolean _followed){
+		this._followed = _followed;
 	}
 
 }
