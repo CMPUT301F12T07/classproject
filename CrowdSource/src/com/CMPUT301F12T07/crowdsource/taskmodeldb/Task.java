@@ -18,14 +18,10 @@ public class Task {
     int _num_followed;
     String _user_email;
     String _wid;
-    int _follows;
-    int _submitted;
-    Boolean _followed;
     
     /** Empty constructor */
     public Task(){ } 
    
-<<<<<<< HEAD
     /** constructor with wid */
     public Task(String webid, String title, String dateDue, int quantity, int qty_filled){ 
     	this._wid = webid;
@@ -35,25 +31,6 @@ public class Task {
     	this._qty_filled = qty_filled;
     }
     
-=======
-// TODO: Add Flag to Model and Database for Following
-// TODO: User Email Address
-// TODO: Add these for Model/Database Handler
-//    public Task(String webid, String title){ 
-//    	this._webid = webid;
-//    	this._title = title;
-//    }
-//    
-// TODO: These should be in Database Handler
-//    public Task getAllWebTasks(){    	
-//    	return new Task(parsedWebID, parsedTitle);
-//    }
-//    
-//    public Task getTaskByWid(wid){
-//    	return new Task(etc., etc., etc.)
-//    }
-
->>>>>>> branch 'master' of https://github.com/CMPUT301F12T07/classproject.git
     /** constructor without tid */ 
     public Task(String uid, String title, String description, String dateCreate, 
     		String dateDue, String type, int visibility, int quantity, int qty_filled, int followed, int num_followed, String user_email){ 
@@ -189,7 +166,6 @@ public class Task {
 		this._quantity = _quantity;
 	}
 	
-<<<<<<< HEAD
 	public int get_qty_filled() {
 		return _qty_filled;
 	}
@@ -229,30 +205,4 @@ public class Task {
 	public void set_wid(String webid) {
 		this._wid = webid;
 	}
-=======
-	public int get_follows(){
-		return _follows;
-	}
-	
-	public void set_follows(int _follows){
-		this._follows = _follows;
-	}
-	
-	public int get_submitted(){
-		return _submitted;
-	}
-	
-	public void set_submitted(int _submitted){
-		this._submitted = _submitted;
-	}
-	
-	public Boolean get_followed(){
-		return _followed;
-	}
-	
-	public void set_followed(Boolean _followed){
-		this._followed = _followed;
-	}
-
->>>>>>> branch 'master' of https://github.com/CMPUT301F12T07/classproject.git
 }

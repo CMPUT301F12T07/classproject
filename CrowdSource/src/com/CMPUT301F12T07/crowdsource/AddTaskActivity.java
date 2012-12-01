@@ -191,8 +191,6 @@ public class AddTaskActivity extends Activity {
 					// TODO: PUT USER EMAIL IN newTask
 					dateDue = selectedDate.getText().toString();
 					Task newTask = new Task(deviceId, title, description, dateCreate, dateDue, type, visibility, Integer.parseInt(quantity), 0, 1, 1, "jsmereka@ualberta.ca");
-					Task newTask = new Task(deviceId, title, description, dateCreate, dateDue, type, visibility, Integer.parseInt(quantity));
-					newTask.set_followed(true);
 					db.createTask(newTask);
 					finish();
 				}
