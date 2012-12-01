@@ -84,10 +84,9 @@ public class TakePhotoActivity extends Activity {
      */
     private String getDateTime() {
     	final Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("MST"), Locale.CANADA);
-    	//Date date = new SimpleDateFormat("YYYYmmdd-HHmmss")
     	
     	return "" + cal.get(Calendar.YEAR) + (cal.get(Calendar.MONTH) + 1) + 
-    			cal.get(Calendar.DAY_OF_MONTH) + "-" + cal.getTimeInMillis();//cal.HOUR_OF_DAY + cal.MINUTE + cal.SECOND;
+    			cal.get(Calendar.DAY_OF_MONTH) + "-" + cal.getTimeInMillis();
     }
     
     @Override
