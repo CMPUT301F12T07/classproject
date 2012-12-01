@@ -60,7 +60,7 @@ public class ViewOtherTaskActivity extends Activity {
         this.taskQuantity = (TextView) findViewById(R.id.textViewQuantity);
         
         this.followTask = (Button) findViewById(R.id.buttonFollow);
-        if(currentTask.get_followed() == true) {
+        if(currentTask.get_followed() == 1) {
         	followTask.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_button_followed, 0, 0, 0);
         }
         else {
@@ -68,22 +68,22 @@ public class ViewOtherTaskActivity extends Activity {
         }
         followTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	if(currentTask.get_followed() == false) {
+            	if(currentTask.get_followed() == 0) {
                 	followTask.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_button_followed, 0, 0, 0);
-                	currentTask.set_followed(true);
-                	currentTask.set_follows(currentTask.get_follows() + 1);
+                	currentTask.set_followed(1);
+                	currentTask.set_num_followed(currentTask.get_num_followed() + 1);
                 }
                 else {
                 	followTask.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_button_unfollowed, 0, 0, 0);
-                	currentTask.set_followed(false);
-                	currentTask.set_follows(currentTask.get_follows() - 1);
+                	currentTask.set_followed(0);
+                	currentTask.set_num_followed(currentTask.get_num_followed() - 1);
                 }
             }
         });
         
 
         /** 
-         * Initiates Fulfill button, and buildds AlertDialogs for the three
+         * Initiates Fulfill button, and builds AlertDialogs for the three
          * fulfillment types. The fulfillment type is automatically configured
          * from retrieving from the database by calling currentTask.get_type().
          * */
@@ -126,8 +126,8 @@ public class ViewOtherTaskActivity extends Activity {
 									intent.putExtra("type",	type);
 									intent.putExtra("data", "n/a");
 									// text message is being sent
-									currentTask.set_followed(true);
-				                	currentTask.set_follows(currentTask.get_follows() + 1);
+									currentTask.set_followed(1);
+				                	currentTask.set_num_followed(currentTask.get_num_followed() + 1);
 									startActivity(intent);
 								}
 							}
@@ -192,8 +192,8 @@ public class ViewOtherTaskActivity extends Activity {
 	    			String image = data.getStringExtra("Photo");
 	    			sendMedia("Photo", image);
 	    			// photo message has been sent, follow task
-	    			currentTask.set_followed(true);
-                	currentTask.set_follows(currentTask.get_follows() + 1);
+	    			currentTask.set_followed(1);
+                	currentTask.set_num_followed(currentTask.get_num_followed() + 1);
 	    			
 	    			break;
 	    		
@@ -201,8 +201,8 @@ public class ViewOtherTaskActivity extends Activity {
 	    			String audio = data.getStringExtra("Audio");
 	    			sendMedia("Audio", audio);
 	    			// audio message has been sent, follow task
-	    			currentTask.set_followed(true);
-                	currentTask.set_follows(currentTask.get_follows() + 1);
+	    			currentTask.set_followed(1);
+                	currentTask.set_num_followed(currentTask.get_num_followed() + 1);
 	    			break;
 	
 	    		default:
