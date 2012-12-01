@@ -125,6 +125,9 @@ public class ViewOtherTaskActivity extends Activity {
 									Intent intent = new Intent(ViewOtherTaskActivity.this, EmailActivity.class);
 									intent.putExtra("type",	type);
 									intent.putExtra("data", "n/a");
+									// text message is being sent
+									currentTask.set_followed(true);
+				                	currentTask.set_follows(currentTask.get_follows() + 1);
 									startActivity(intent);
 								}
 							}
@@ -164,7 +167,8 @@ public class ViewOtherTaskActivity extends Activity {
     private void sendMedia(String type, String data) {
 		Intent intent = new Intent(ViewOtherTaskActivity.this, EmailActivity.class);
 		
-		intent.putExtra("email", "tfung@ualberta.ca");
+		
+		intent.putExtra("email", currentTask.get_email());
 		
 		intent.putExtra("type",	type);
 		intent.putExtra("data", data);
@@ -187,13 +191,18 @@ public class ViewOtherTaskActivity extends Activity {
 	    		case RETURN_PHOTO_CODE:
 	    			String image = data.getStringExtra("Photo");
 	    			sendMedia("Photo", image);
+	    			// photo message has been sent, follow task
+	    			currentTask.set_followed(true);
+                	currentTask.set_follows(currentTask.get_follows() + 1);
 	    			
 	    			break;
 	    		
 	    		case RETURN_AUDIO_CODE:
 	    			String audio = data.getStringExtra("Audio");
 	    			sendMedia("Audio", audio);
-	    			
+	    			// audio message has been sent, follow task
+	    			currentTask.set_followed(true);
+                	currentTask.set_follows(currentTask.get_follows() + 1);
 	    			break;
 	
 	    		default:
