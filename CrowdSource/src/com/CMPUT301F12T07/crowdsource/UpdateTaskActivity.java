@@ -29,7 +29,7 @@ public class UpdateTaskActivity extends Activity {
 //        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         db = new LocalDB(this);
-        this.currentTask = db.getTask(getIntent().getExtras().getInt("taskID"));
+        this.currentTask = db.getTask(getIntent().getExtras().getLong("taskID"));
         db.close();
         
         // Getting the task title field
@@ -85,7 +85,7 @@ public class UpdateTaskActivity extends Activity {
             	currentTask.set_quantity(Integer.parseInt(taskQuantity.getText().toString()));
             	currentTask.set_description(taskDesc.getText().toString());
             	
-            	db.updateTask(currentTask);
+            	db.updateTask(currentTask, "");
             	
             	finish();
             }

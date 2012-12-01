@@ -3,7 +3,7 @@ package com.CMPUT301F12T07.crowdsource.taskmodeldb;
 public class Task { 
 	
 	/** private variables */
-    int _tid; 
+    long _tid; 
     String _uid;
     String _title;
     String _description; 
@@ -12,32 +12,27 @@ public class Task {
     String _type;
     int _visibility;
     int _quantity;
+    int _qty_filled;
+    int _followed;
+    int _num_followed;
+    String _user_email;
+    String _wid;
     
     /** Empty constructor */
     public Task(){ } 
    
-// TODO: Number of Follows
-// TODO: Add Flag to Model and Database for Following
-// TODO: User Email Address
-// TODO: Number of Submitted
-// TODO: Add these for Model/Database Handler
-//    public Task(String webid, String title){ 
-//    	this._webid = webid;
-//    	this._title = title;
-//    }
-//    
-// TODO: These should be in Database Handler
-//    public Task getAllWebTasks(){    	
-//    	return new Task(parsedWebID, parsedTitle);
-//    }
-//    
-//    public Task getTaskByWid(wid){
-//    	return new Task(etc., etc., etc.)
-//    }
-
+    /** constructor with wid */
+    public Task(String webid, String title, String dateDue, int quantity, int qty_filled){ 
+    	this._wid = webid;
+    	this._title = title;
+    	this._dateDue = dateDue;
+    	this._quantity = quantity;
+    	this._qty_filled = qty_filled;
+    }
+    
     /** constructor without tid */ 
     public Task(String uid, String title, String description, String dateCreate, 
-    		String dateDue, String type, int visibility, int quantity){ 
+    		String dateDue, String type, int visibility, int quantity, int qty_filled, int followed, int num_followed, String user_email){ 
         this._uid = uid;
         this._title = title;
         this._description = description; 
@@ -46,11 +41,15 @@ public class Task {
         this._type = type;
         this._visibility = visibility;
         this._quantity = quantity;
+        this._qty_filled = qty_filled;
+        this._followed = followed;
+        this._num_followed = num_followed;
+        this._user_email = user_email;
     }
     
     /** constructor with tid */ 
-    public Task( int tid, String uid, String title, String description, String dateCreate, 
-    		String dateDue, String type, int visibility, int quantity){ 
+    public Task( long tid, String uid, String title, String description, String dateCreate, 
+    		String dateDue, String type, int visibility, int quantity, int qty_filled, int followed, int num_followed, String user_email){ 
     	this._tid = tid;
         this._uid = uid;
         this._title = title;
@@ -60,14 +59,37 @@ public class Task {
         this._type = type;
         this._visibility = visibility;
         this._quantity = quantity;
+        this._qty_filled = qty_filled;
+        this._followed = followed;
+        this._num_followed = num_followed;
+        this._user_email = user_email;
+    }
+    
+    /** constructor with tid & wid */ 
+    public Task( long tid, String uid, String title, String description, String dateCreate, 
+    		String dateDue, String type, int visibility, int quantity, int qty_filled, int followed, int num_followed, String user_email, String webid){ 
+    	this._tid = tid;
+        this._uid = uid;
+        this._title = title;
+        this._description = description; 
+        this._dateCreate = dateCreate; 
+        this._dateDue = dateDue;
+        this._type = type;
+        this._visibility = visibility;
+        this._quantity = quantity;
+        this._qty_filled = qty_filled;
+        this._followed = followed;
+        this._num_followed = num_followed;
+        this._user_email = user_email;
+        this._wid = webid;
     }
 
     /** getter and setter */
-	public int get_tid() {
+	public long get_tid() {
 		return _tid;
 	}
 
-	public void set_tid(int _tid) {
+	public void set_tid(long _tid) {
 		this._tid = _tid;
 	}
 
@@ -134,5 +156,44 @@ public class Task {
 	public void set_quantity(int _quantity) {
 		this._quantity = _quantity;
 	}
-
+	
+	public int get_qty_filled() {
+		return _qty_filled;
+	}
+	
+	public void set_qty_filled(int _qty_filled) {
+		this._qty_filled = _qty_filled;
+	}
+	
+	public int get_followed() {
+		return _followed;
+	}
+	
+	public void set_followed(int _followed) {
+		this._followed = _followed;
+	}
+	
+	public int get_num_followed() {
+		return _num_followed;
+	}
+	
+	public void set_num_followed(int _num_followed) {
+		this._num_followed = _num_followed;
+	}
+	
+	public String get_user_email() {
+		return _user_email;
+	}
+	
+	public void set_user_email(String user_email) {
+		this._user_email = user_email;
+	}
+	
+	public String get_wid() {
+		return _wid;
+	}
+	
+	public void set_wid(String webid) {
+		this._wid = webid;
+	}
 }

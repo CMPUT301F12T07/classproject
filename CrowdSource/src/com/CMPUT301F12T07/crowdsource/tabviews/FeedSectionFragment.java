@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.CMPUT301F12T07.crowdsource.R;
 import com.CMPUT301F12T07.crowdsource.ViewTaskActivity;
-import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
 import android.content.Intent;
@@ -22,7 +22,7 @@ public class FeedSectionFragment extends Fragment {
 	
 	private ListView myList;
 	private List<Task> tasks;
-	private LocalDB db;
+	private DBHandler db;
 	
     public FeedSectionFragment() {
     }
@@ -35,7 +35,7 @@ public class FeedSectionFragment extends Fragment {
     	
     	View myFeed = inflater.inflate(R.layout.activity_feed, container, false);
     	
-    	db = new LocalDB(inflater.getContext());
+    	db = new DBHandler(inflater.getContext());
         
         this.tasks = db.getAllTasks();
         

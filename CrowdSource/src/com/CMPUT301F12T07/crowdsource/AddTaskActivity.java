@@ -188,7 +188,9 @@ public class AddTaskActivity extends Activity {
 				else
 				{
 					LocalDB db = new LocalDB(v.getContext());
-					Task newTask = new Task(deviceId, title, description, dateCreate, dateDue, type, visibility, Integer.parseInt(quantity));
+					// TODO: PUT USER EMAIL IN newTask
+					dateDue = selectedDate.getText().toString();
+					Task newTask = new Task(deviceId, title, description, dateCreate, dateDue, type, visibility, Integer.parseInt(quantity), 0, 1, 1, "jsmereka@ualberta.ca");
 					
 					db.createTask(newTask);
 					finish();

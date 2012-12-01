@@ -32,7 +32,7 @@ public class ViewLoggedActivity extends Activity {
         setContentView(R.layout.activity_view_logged);
         
         db = new LocalDB(this);
-        this.currentTask = db.getTask(getIntent().getExtras().getInt("taskObject"));
+        this.currentTask = db.getTask(getIntent().getExtras().getLong("taskObject"));
         db.close();
         
         // Getting the task title field
