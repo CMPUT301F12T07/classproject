@@ -2,6 +2,9 @@ package com.CMPUT301F12T07.crowdsource;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import com.CMPUT301F12T07.crowdsource.R;
 
@@ -172,8 +175,19 @@ public class RecordAudioActivity extends Activity {
         File folderF = new File(folder);
         if (!folderF.exists()) folderF.mkdir();
         //TODO: change name
-		audioFile = File.createTempFile("ibm", ".3gp", folderF);
+		audioFile = File.createTempFile(getDateTime(), ".3gp", folderF);
 
+    }
+    
+    /**
+     * This returns the current date and time for photo name.
+     * @return Current date and time.
+     */
+    private String getDateTime() {
+    	final Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("MST"), Locale.CANADA);
+    	
+    	return "" + cal.get(Calendar.YEAR) + (cal.get(Calendar.MONTH) + 1) + 
+    			cal.get(Calendar.DAY_OF_MONTH) + "-" + cal.getTimeInMillis();
     }
     
     /**
