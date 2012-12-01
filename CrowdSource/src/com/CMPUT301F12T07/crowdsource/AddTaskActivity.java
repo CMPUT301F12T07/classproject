@@ -189,7 +189,7 @@ public class AddTaskActivity extends Activity {
 				{
 					LocalDB db = new LocalDB(v.getContext());
 					Task newTask = new Task(deviceId, title, description, dateCreate, dateDue, type, visibility, Integer.parseInt(quantity));
-					
+					newTask.set_followed(true);
 					db.createTask(newTask);
 					finish();
 				}

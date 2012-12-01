@@ -60,12 +60,24 @@ public class ViewOtherTaskActivity extends Activity {
         this.taskQuantity = (TextView) findViewById(R.id.textViewQuantity);
         
         this.followTask = (Button) findViewById(R.id.buttonFollow);
+        if(currentTask.get_followed() == true) {
+        	followTask.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_button_followed, 0, 0, 0);
+        }
+        else {
+        	followTask.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_button_unfollowed, 0, 0, 0);
+        }
         followTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	// TODO: pending implementation in task
-            	// currentTask.set_followed();
-            	// TODO: Put check if currently following and then use this below to set icon
-            	followTask.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_button_followed, 0, 0, 0);
+            	if(currentTask.get_followed() == false) {
+                	followTask.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_button_followed, 0, 0, 0);
+                	currentTask.set_followed(true);
+                	currentTask.set_follows(currentTask.get_follows() + 1);
+                }
+                else {
+                	followTask.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_button_unfollowed, 0, 0, 0);
+                	currentTask.set_followed(false);
+                	currentTask.set_follows(currentTask.get_follows() - 1);
+                }
             }
         });
         
