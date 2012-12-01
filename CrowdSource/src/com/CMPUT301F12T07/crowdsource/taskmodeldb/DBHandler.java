@@ -40,7 +40,7 @@ public class DBHandler {
 	public void deleteTask(long tid) throws Exception{
 		Task task = localDB.getTask(tid);
 		if ( (task.get_visibility() == 0) ){
-			if (task.get_wid().compareTo("") == 0) {
+			if (!task.get_wid().equals("")) {
 			// add deleteCommand to hashMap
 			webDB.deleteTask(task.get_wid());
 			}
@@ -51,9 +51,10 @@ public class DBHandler {
 	
 	// Update task from localDb and from webDB if public.
 	public void updateTask(Task task) throws Exception {
-		localDB.updateTask(task, LocalDB.FOR_PRIVATE);
+		long tid = localDB.updateTask(task, LocalDB.FOR_PRIVATE);
+		task = localDB.getTask(tid);
 		if ( (task.get_visibility() == 0) ){
-			if (task.get_wid().compareTo("") == 0) {
+			if (!task.get_wid().equals("")) {
 			// add updateCommand to hashMap
 			WebTask webTask = new WebTask(task, task.get_wid());
 			webDB.updateTask(webTask);

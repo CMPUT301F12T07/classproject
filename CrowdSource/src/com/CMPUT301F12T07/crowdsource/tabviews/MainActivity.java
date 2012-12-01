@@ -24,6 +24,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        // TEMP
+        LocalDB db = new LocalDB(this);
+       db.emptyDatabase();
+        
         // get permission to access network from UI thread.
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

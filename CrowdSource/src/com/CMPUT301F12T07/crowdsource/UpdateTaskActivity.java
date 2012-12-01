@@ -30,7 +30,7 @@ public class UpdateTaskActivity extends Activity {
 //        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         db = new DBHandler(this);
-        this.currentTask = db.getTask(getIntent().getExtras().getInt("taskID"));
+        this.currentTask = db.getTask(getIntent().getExtras().getLong("taskID"));
 //        db.close();
         
         // Getting the task title field
