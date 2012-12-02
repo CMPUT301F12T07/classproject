@@ -27,6 +27,7 @@ public class ViewTaskActivity extends Activity {
 	private TextView taskVisibility;
 	private TextView taskDesc;
 	private TextView taskQuantity;
+	private TextView taskFollowers;
 	private DBHandler db;
 
 	private Button updateTask;
@@ -58,6 +59,8 @@ public class ViewTaskActivity extends Activity {
         this.taskDesc = (TextView) findViewById(R.id.textViewDescription);
         // Getting the task quantity field
         this.taskQuantity = (TextView) findViewById(R.id.textViewQuantity);
+        // Getting the task followers field
+        this.taskFollowers = (TextView) findViewById(R.id.textViewFollowers);
         
         this.updateTask = (Button) findViewById(R.id.buttonUpdate);
         updateTask.setOnClickListener(new View.OnClickListener() {
@@ -239,7 +242,8 @@ public class ViewTaskActivity extends Activity {
     	taskTitle.setText(currentTask.get_title());
     	startDate.setText(currentTask.get_dateCreate());
     	endDate.setText(currentTask.get_dateDue());
-    	taskQuantity.setText(Integer.toString(currentTask.get_quantity()));
+    	taskQuantity.setText(Integer.toString(currentTask.get_qty_filled())+" of "+Integer.toString(currentTask.get_quantity())+" fulfilled");
+    	taskFollowers.setText(Integer.toString(currentTask.get_num_followed()));
     	if(currentTask.get_visibility() == 1)
     		taskVisibility.setText("Private");
     	else

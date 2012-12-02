@@ -3,24 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="17dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_tasktype_text_lg"
-        android:contentDescription="Task type Image" />
-
     <Button
         android:id="@+id/buttonFulfill"
         android:layout_width="105dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="@string/Fulfill"
-        android:drawableLeft="@drawable/ic_button_fulfill" />
+        android:drawableLeft="@drawable/ic_button_fulfill"
+        android:text="@string/Fulfill" />
 
     <Button
         android:id="@+id/buttonUpdate"
@@ -28,14 +18,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/Update"
-        android:drawableLeft="@drawable/ic_button_edit" />
+        android:drawableLeft="@drawable/ic_button_edit"
+        android:text="@string/Update" />
 
     <TextView
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="Title of Task"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -65,66 +56,9 @@
         android:id="@+id/textLabelDueDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/textViewDueDate"
         android:layout_below="@+id/textLabelCreatedDate"
-        android:textStyle="bold"
-        android:text="Due:" />
-
-    <TextView
-        android:id="@+id/textLabelDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textLabelDueDate"
-        android:layout_marginTop="30dp"
-        android:text="Description:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textViewDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textLabelDescription"
-        android:layout_toLeftOf="@+id/textViewVisibility"
-        android:text="this is a sample task with no set description"
-        tools:context=".ViewTask" />
-
-    <TextView
-        android:id="@+id/textViewVisibility"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/textLabelDescription"
-        android:text="Visibility Level"
-        tools:context=".ViewTask" />
-
-    <TextView
-        android:id="@+id/textLabelQuantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewDescription"
-        android:layout_marginTop="15dp"
-        android:text="Quantity:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textViewQuantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textLabelQuantity"
-        android:layout_toRightOf="@+id/textLabelQuantity"
-        android:text="unset quantity" />
-
-    <TextView
-        android:id="@+id/textViewDueDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textLabelCreatedDate"
-        android:layout_toRightOf="@+id/textLabelCreatedDate"
-        android:text="This date is unset"
-        tools:context=".ViewTask" />
+        android:text="Date Due:"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/buttonDelete"
@@ -134,5 +68,103 @@
         android:layout_centerHorizontal="true"
         android:drawableLeft="@drawable/ic_button_delete"
         android:text="@string/Delete" />
+
+    <TextView
+        android:id="@+id/textLabelDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textLabelDueDate"
+        android:layout_marginTop="67dp"
+        android:text="Description:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textLabelDescription"
+        android:text="this is a sample task with no set description"
+        tools:context=".ViewTask" />
+
+    <TextView
+        android:id="@+id/textLabelQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewDescription"
+        android:layout_marginTop="20dp"
+        android:text="Quantity:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textViewDueDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textLabelDescription"
+        android:layout_toRightOf="@+id/textLabelDueDate"
+        android:text="This date is unset"
+        tools:context=".ViewTask" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textViewTitle"
+        android:layout_marginRight="20dp"
+        android:contentDescription="Task type Image"
+        android:src="@drawable/ic_tasktype_text_lg" />
+
+    <TextView
+        android:id="@+id/textViewVisibility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@+id/textLabelDueDate"
+        android:text="Visibility Level"
+        tools:context=".ViewTask" />
+
+    <TextView
+        android:id="@+id/textViewFollowers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textViewVisibility"
+        android:layout_toRightOf="@+id/textLabelQuantity"
+        android:text="Followers" />
+
+    <TextView
+        android:id="@+id/textViewQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textLabelQuantity"
+        android:text="unset quantity" />
+
+    <TextView
+        android:id="@+id/textLabelVisibility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textViewFollowers"
+        android:layout_alignParentLeft="true"
+        android:text="Visibility:"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textLabelFollowers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewFollowers"
+        android:layout_alignBottom="@+id/textViewFollowers"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/textLabelQuantity"
+        android:text="Followers:"
+        android:textStyle="bold" />
 
 </RelativeLayout>
