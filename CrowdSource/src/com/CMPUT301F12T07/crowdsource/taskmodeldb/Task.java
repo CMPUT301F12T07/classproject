@@ -11,10 +11,10 @@ public class Task {
     String _dateDue;
     String _type;
     String _email;
-    int _visibility;
+    int _visibility; // 1 or 0
     int _quantity;
     int _qty_filled;
-    int _followed;
+    int _followed; // 1 or 0
     int _num_followed;
     String _user_email;
     String _wid;

@@ -48,11 +48,11 @@ public class DBHandler {
 		long tid = localDB.updateTask(task, LocalDB.PRIVATE_FLAG);
 		task = localDB.getTask(tid);
 		/*
-		 * four possible logic here: visibility == 1 && wid != null => task is
-		 * from public to private visibility == 1 && wid == null => task is
-		 * always private visibility == 0 && wid != null => task is always
-		 * public visibility == 0 && wid == null => task is from private to
-		 * public
+		 * four possible logic for the web service: 
+		 * visibility == 1 && wid != null => task is from public to private 
+		 * visibility == 1 && wid == null => task is always private 
+		 * visibility == 0 && wid != null => task is always public 
+		 * visibility == 0 && wid == null => task is from private to public
 		 */
 		if ((task.get_visibility() == 1)) {
 			if (task.get_wid() != null && !task.get_wid().isEmpty()) {
@@ -119,6 +119,7 @@ public class DBHandler {
 		return taskList;
 	}
 
+	// TODO: 
 	public List<Task> getLoggedTasks(String uid) {
 		// on github
 		List<Task> taskList = new ArrayList<Task>();
@@ -132,11 +133,11 @@ public class DBHandler {
 		return taskList;
 	}
 
+	// TODO: THIS 
 	public List<Task> getAllTasks() {
 		List<Task> taskList = new ArrayList<Task>();
 		taskList = localDB.getAllTasks();
 
-		// TODO: Add in Web DB + Cache Summary from WebDB
 		return taskList;
 	}
 
@@ -152,6 +153,7 @@ public class DBHandler {
 		return localDB.getTask(l);
 	}
 
+	// TODO: THIS 
 	public Task getRandomTask() {
 		return new Task();
 	}

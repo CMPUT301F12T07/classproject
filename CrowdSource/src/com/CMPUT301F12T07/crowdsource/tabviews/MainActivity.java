@@ -24,6 +24,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        // Used to upgrade database when adding new fields. Once you run it, re-comment it as it will not work otherwise.
         //LocalDB db = new LocalDB(this);
         //db.forceUpgrade();
         
