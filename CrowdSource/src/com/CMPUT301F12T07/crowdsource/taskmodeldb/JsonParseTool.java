@@ -29,7 +29,7 @@ public class JsonParseTool {
 			String wid = widElement.getAsString();
 
 			// Assume there is a constructor has only title and wid.
-			Task task = new Task(wid, title, "2012-12-12", 1, 1);
+			Task task = new Task(wid, title, "2012-12-12", 1, 1, "Audio");
 			taskList.add(task);
 		}
 		return taskList;
