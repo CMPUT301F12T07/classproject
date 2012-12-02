@@ -129,12 +129,10 @@ public class ViewTaskActivity extends Activity {
 				if (type.equals("Photo")) {
 					builder.setPositiveButton("Choose, and send", 
 							new DialogInterface.OnClickListener() {
-						
 								public void onClick(DialogInterface dialog, int which) {
 									Intent intent = new Intent(ViewTaskActivity.this, ChoosePictureActivity.class);
 									startActivityForResult(intent,RETURN_PHOTO_CODE);
 								}
-								
 						});
 				}
 				
@@ -155,6 +153,7 @@ public class ViewTaskActivity extends Activity {
 								}
 							}
 					});
+				
 				builder.setNegativeButton("Cancel", 
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {

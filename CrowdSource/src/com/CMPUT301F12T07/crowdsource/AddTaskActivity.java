@@ -1,14 +1,18 @@
 package com.CMPUT301F12T07.crowdsource;
 
 import java.util.Calendar;
+import java.util.regex.Pattern;
 
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
 import android.os.Bundle;
 import android.provider.Settings.Secure;
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -91,7 +95,7 @@ public class AddTaskActivity extends Activity {
 		cDay = day;
 
 		selectedDate.setText(year + "-" + (month + 1) + "-" + day);
-		dateCreate = year + "-" + (month + 1) + "-" + day;
+		dateCreate = "" + year + "-" + (month + 1) + "-" + day;
 
 		selectDate.setOnClickListener(new OnClickListener() {
 
@@ -115,7 +119,7 @@ public class AddTaskActivity extends Activity {
 			month = inmonth;
 			day = inday;
 
-			dateDue = year + "-" + (month + 1) + "-" + day;
+			dateDue = "" + year + "-" + (month + 1) + "-" + day;
 			selectedDate.setText(dateDue);
 
 			Toast.makeText(v.getContext(), "Date set to: " + dateDue,
@@ -163,6 +167,19 @@ public class AddTaskActivity extends Activity {
 		return true;
 	}
 
+	private String getEmail() {
+		Pattern emailPattern = Patterns.EMAIL_ADDRESS;
+		Account[] accounts = AccountManager.get(AddTaskActivity.this).getAccounts();
+		
+		for (Account account: accounts) {
+			if (emailPattern.matcher(account.name).matches()) {
+				return account.name;
+			}
+		}
+		
+		return "";
+	}
+	
 	/**
 	 * Initializes the save button, and adds constraints as to when it can be
 	 * saved. For the task to be saved it must not have empty fields, must have
@@ -202,10 +219,11 @@ public class AddTaskActivity extends Activity {
 				else {
 					DBHandler db = new DBHandler(v.getContext());
 					// TODO: PUT USER EMAIL IN newTask
-					dateDue = selectedDate.getText().toString();
+					//dateDue = selectedDate.getText().toString();
 					Task newTask = new Task(deviceId, title, description,
 							dateCreate, dateDue, type, visibility, Integer
 									.parseInt(quantity), 0, 1, 1,
+							// TODO: Replace with getEmail()
 							"jsmereka@ualberta.ca");
 					try {
 						db.createTask(newTask);

@@ -174,9 +174,7 @@ public class RecordAudioActivity extends Activity {
         
         File folderF = new File(folder);
         if (!folderF.exists()) folderF.mkdir();
-        //TODO: change name
 		audioFile = File.createTempFile(getDateTime(), ".3gp", folderF);
-
     }
     
     /**

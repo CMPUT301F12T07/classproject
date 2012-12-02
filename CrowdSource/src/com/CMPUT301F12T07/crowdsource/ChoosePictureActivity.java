@@ -19,14 +19,14 @@ public class ChoosePictureActivity extends Activity {
     }
     
     /**
-     * starts the builtin Android camera application, and captures photos.
+     * starts the built in Android camera application, and captures photos.
      * After capturing, it will call on ActivityResult.
      */
     private void startPicture() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         
-        startActivityForResult(intent,1);
+        startActivityForResult(intent,RETURN_IMAGE_CODE);
     }
 
     /**
