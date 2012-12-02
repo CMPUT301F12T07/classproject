@@ -12,7 +12,7 @@ import com.google.gson.JsonParser;
 public class JsonParseTool {
 	
 	// parse task list for HomeScreen
-	public List<Task> parseTaskList (String jsonStringVersion) {
+	public static List<Task> parseTaskList (String jsonStringVersion) {
 		List<Task> taskList = new ArrayList<Task>(); 
 		JsonElement jsonElement = new JsonParser().parse(jsonStringVersion);
 		JsonArray array = jsonElement.getAsJsonArray();
@@ -35,8 +35,8 @@ public class JsonParseTool {
 		return taskList;
 	}
 
-	// Parse a single RemoteTask for RemoteDB get method
-	public RemoteTask parseRemoteTask (String jsonStringVersion) {
+	// Parse a single RemoteTask
+	public static RemoteTask parseRemoteTask (String jsonStringVersion) {
 
 		long tid; 
 		String uid;

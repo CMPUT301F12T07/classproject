@@ -152,10 +152,7 @@ public class RemoteDB {
 
 	// Parse json string into light weight Task objects.
 	public List<Task> parseJson(String jsonStringVersion) {
-		// parse the string to get the list.!!!!!!!!!!!!!!!!!!!!!!
-		// Json has summary and id, parse one by one and store as a Task object
-		// which has only title and wid.
-		List<Task> taskList = new ArrayList();
+		List<Task> taskList  = JsonParseTool.parseTaskList(jsonStringVersion);
 		return taskList;
 	}
 
