@@ -31,7 +31,7 @@ public class LocalDB extends SQLiteOpenHelper {
 	private static final String KEY_DATECREATE = "dateCreate";
 	private static final String KEY_DATEDUE = "dateDue";
 	private static final String KEY_TYPE = "type";
-	private static final String KEY_VISIBILITY = "visibility";
+	private static final String KEY_VISIBILITY = "visibility"; // 1 for private, 0 for public
 	private static final String KEY_QUANTITY = "quantity";
 	
 	public static final String FOR_PUBLIC = "FOR_PUBLIC";

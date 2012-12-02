@@ -53,24 +53,6 @@ public class DBHandler {
 	public void updateTask(Task task) throws Exception {
 		long tid = localDB.updateTask(task, LocalDB.FOR_PRIVATE);
 		task = localDB.getTask(tid);
-		/*
-		if ( (task.get_visibility() == 0) ){
-			// if task has wid, update web as well
-			if (task.get_wid() != null && !task.get_wid().isEmpty()) {
-				// add updateCommand to hashMap
-				WebTask webTask = new WebTask(task, task.get_wid());
-				webDB.updateTask(webTask);
-			}
-			// if task doesn't have wid,  
-			else{
-
-				WebTask webTask = new WebTask(task);
-				webTask= webDB.createTask(webTask);
-				// copy wid from web to sqlite (task fail here, sqlite wid are all null)
-				task.set_wid(webTask.getId());
-				localDB.updateTask(task, LocalDB.FOR_PUBLIC);
-			}
-		}*/
 		/* four possible logic here:
 		 * visibility == 1 && wid != null => task is from public to private
 		 * visibility == 1 && wid == null => task is always private
@@ -139,7 +121,25 @@ public class DBHandler {
 
 	}
 	public List<Task> getPublicTasksByUid(String uid){
-		List<Task> taskList = localDB.getPublicTasksByUid(uid);
+		List<Task> taskList = localDB.getPublicTasksByUid(uid);		/*
+		if ( (task.get_visibility() == 0) ){
+		// if task has wid, update web as well
+		if (task.get_wid() != null && !task.get_wid().isEmpty()) {
+			// add updateCommand to hashMap
+			WebTask webTask = new WebTask(task, task.get_wid());
+			webDB.updateTask(webTask);
+		}
+		// if task doesn't have wid,  
+		else{
+
+			WebTask webTask = new WebTask(task);
+			webTask= webDB.createTask(webTask);
+			// copy wid from web to sqlite (task fail here, sqlite wid are all null)
+			task.set_wid(webTask.getId());
+			localDB.updateTask(task, LocalDB.FOR_PUBLIC);
+		}
+	}*/
+
 		return taskList;
 	}
 
