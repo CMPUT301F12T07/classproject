@@ -96,7 +96,8 @@ public class AddTaskActivity extends Activity {
 
 		selectedDate.setText(year + "-" + (month + 1) + "-" + day);
 		dateCreate = "" + year + "-" + (month + 1) + "-" + day;
-
+		dateDue = "" + year + "-" + (month + 1) + "-" + day;
+		
 		selectDate.setOnClickListener(new OnClickListener() {
 
 			@Override
