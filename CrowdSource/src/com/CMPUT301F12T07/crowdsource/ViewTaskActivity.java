@@ -153,6 +153,7 @@ public class ViewTaskActivity extends Activity {
 									intent.putExtra("type",	type);
 									intent.putExtra("data", "n/a");
 									startActivity(intent);
+									currentTask.set_qty_filled(currentTask.get_qty_filled()+1);
 								}
 							}
 					});
@@ -215,13 +216,13 @@ public class ViewTaskActivity extends Activity {
 	    		case RETURN_PHOTO_CODE:
 	    			String image = data.getStringExtra("Photo");
 	    			sendMedia("Photo", image);
-	    			
+	    			currentTask.set_qty_filled(currentTask.get_qty_filled()+1);
 	    			break;
 	    		
 	    		case RETURN_AUDIO_CODE:
 	    			String audio = data.getStringExtra("Audio");
 	    			sendMedia("Audio", audio);
-	    			
+	    			currentTask.set_qty_filled(currentTask.get_qty_filled()+1);
 	    			break;
 	
 	    		default:
