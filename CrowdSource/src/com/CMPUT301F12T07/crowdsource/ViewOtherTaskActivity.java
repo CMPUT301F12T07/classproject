@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
 public class ViewOtherTaskActivity extends Activity {
@@ -27,7 +27,7 @@ public class ViewOtherTaskActivity extends Activity {
 	private TextView taskVisibility;
 	private TextView taskDesc;
 	private TextView taskQuantity;
-	private LocalDB db;
+	private DBHandler db;
 
 	private Button followTask;
 	private Button fulfillTask;
@@ -42,9 +42,8 @@ public class ViewOtherTaskActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_task);
         
-        db = new LocalDB(this);
+        db = new DBHandler(this);
         this.currentTask = db.getTask(getIntent().getExtras().getLong("taskObject"));
-        db.close();
         
         // Getting the task title field
         this.taskTitle = (TextView) findViewById(R.id.textViewTitle);

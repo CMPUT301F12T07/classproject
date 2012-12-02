@@ -44,7 +44,8 @@ public class LocalDB extends SQLiteOpenHelper {
 	
 	
 	/* Data Flags */
-	public static final String PUBLIC_FLAG = "private";
+	public static final String PRIVATE_FLAG = "private";
+	public static final String PUBLIC_FLAG = "public";
 
 	/**
 	 * Database Constructor
@@ -409,9 +410,14 @@ public class LocalDB extends SQLiteOpenHelper {
 	 * @return Affected Row
 	 */
 	public int updateTask(Task task, String flag) { 
-		SQLiteDatabase db = this.getWritableDatabase(); 
-
+		SQLiteDatabase db = this.getWritableDatabase(); 	
 		ContentValues values = new ContentValues(); 
+		
+		if (flag.equals(LocalDB.PUBLIC_FLAG)){
+			values.put(KEY_WID, task.get_wid());
+			values.put(KEY_TID, task.get_tid());
+		}
+		
 		values.put(KEY_UID, task.get_uid());
 		values.put(KEY_TITLE, task.get_title());
 		values.put(KEY_DESCRIPTION, task.get_description());
@@ -509,7 +515,7 @@ public class LocalDB extends SQLiteOpenHelper {
 	 * DO NOT USE on live product
 	 */
 	public void createRandomTask() {
-		Task task = new Task("1234567890", "TITLE", "DESCRIPTION", "1", "1", "TYPE", 1, 1, 0, 1, 1, "jsmereka@ualberta.ca");
+		Task task = new Task("1234567890", "TITLE", "DESCRIPTION", "2012-11-11", "2012-12-30", "TYPE", 1, 1, 0, 1, 1, "jsmereka@ualberta.ca");
 		createTask(task);
 	}
 	

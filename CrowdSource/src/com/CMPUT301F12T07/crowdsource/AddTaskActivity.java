@@ -2,7 +2,7 @@ package com.CMPUT301F12T07.crowdsource;
 
 import java.util.Calendar;
 
-import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
 import android.os.Bundle;
@@ -200,14 +200,19 @@ public class AddTaskActivity extends Activity {
 							"Minimum date is " + dateCreate, Toast.LENGTH_SHORT)
 							.show();
 				else {
-					LocalDB db = new LocalDB(v.getContext());
+					DBHandler db = new DBHandler(v.getContext());
 					// TODO: PUT USER EMAIL IN newTask
 					dateDue = selectedDate.getText().toString();
 					Task newTask = new Task(deviceId, title, description,
 							dateCreate, dateDue, type, visibility, Integer
 									.parseInt(quantity), 0, 1, 1,
 							"jsmereka@ualberta.ca");
-					db.createTask(newTask);
+					try {
+						db.createTask(newTask);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					finish();
 				}
 

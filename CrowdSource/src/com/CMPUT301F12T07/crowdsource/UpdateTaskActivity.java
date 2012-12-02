@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -16,7 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
 public class UpdateTaskActivity extends Activity {
@@ -27,7 +28,7 @@ public class UpdateTaskActivity extends Activity {
 	private TextView endDate;
 	private EditText taskQuantity;
 	private EditText taskDesc;
-	private LocalDB db;
+	private DBHandler db;
 
 	private Button selectDate;
 
@@ -45,10 +46,8 @@ public class UpdateTaskActivity extends Activity {
 		setContentView(R.layout.activity_update_task);
 		// getActionBar().setDisplayHomeAsUpEnabled(true);
 
-		db = new LocalDB(this);
-		this.currentTask = db
-				.getTask(getIntent().getExtras().getLong("taskID"));
-		db.close();
+		db = new DBHandler(this);
+		this.currentTask = db.getTask(getIntent().getExtras().getLong("taskID"));
 
 		// Getting the task title field
 		this.taskTitle = (EditText) findViewById(R.id.textEditTitle);
@@ -106,8 +105,16 @@ public class UpdateTaskActivity extends Activity {
 							.getText().toString()));
 					currentTask.set_description(taskDesc.getText().toString());
 
-					db.updateTask(currentTask, "");
-
+					try {
+						db.updateTask(currentTask);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					Intent intent = new Intent(v.getContext(), ViewTaskActivity.class);
+					intent.putExtra("taskObject", currentTask.get_tid());
+					startActivity(intent);
 					finish();
 				}
 			}
