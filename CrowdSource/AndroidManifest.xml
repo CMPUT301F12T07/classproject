@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ViewTaskActivity"
+            android:name=".viewupdatetask.ViewTaskActivity"
             android:label="@string/title_activity_view_task"
             android:screenOrientation="portrait" >
         </activity>
@@ -43,7 +43,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".UpdateTaskActivity"
+            android:name=".viewupdatetask.UpdateTaskActivity"
             android:label="@string/title_activity_update_task"
             android:screenOrientation="portrait" >
             <meta-data
@@ -51,12 +51,12 @@
                 android:value="ViewTaskActivity" />
         </activity>
         <activity
-            android:name=".ViewLoggedActivity"
+            android:name=".viewupdatetask.ViewLoggedActivity"
             android:label="@string/title_activity_view_logged"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".ViewOtherTaskActivity"
+            android:name=".viewupdatetask.ViewOtherTaskActivity"
             android:label="@string/title_activity_view_other_task"
             android:screenOrientation="portrait" >
             <meta-data

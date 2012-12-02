@@ -23,12 +23,13 @@ public class Task {
     public Task(){ } 
    
     /** constructor with wid */
-    public Task(String webid, String title, String dateDue, int quantity, int qty_filled){ 
+    public Task(String webid, String title, String dateDue, int quantity, int qty_filled, String type) { 
     	this._wid = webid;
     	this._title = title;
     	this._dateDue = dateDue;
     	this._quantity = quantity;
     	this._qty_filled = qty_filled;
+    	this._type = type;
     }
     
     /** constructor without tid */ 
