@@ -54,11 +54,6 @@
             android:name=".ViewLoggedActivity"
             android:label="@string/title_activity_view_logged"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ViewOtherTaskActivity"
@@ -72,11 +67,6 @@
             android:name=".TakePhotoActivity"
             android:label="@string/title_activity_take_photo"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".taskmodeldb.TaskLoadHandler"
@@ -90,29 +80,14 @@
             android:name=".EmailActivity"
             android:label="@string/title_activity_email"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".RecordAudioActivity"
             android:label="@string/title_activity_record_audio" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ChoosePictureActivity"
             android:label="@string/title_activity_choose_picture" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

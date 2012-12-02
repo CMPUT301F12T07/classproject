@@ -8,19 +8,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:hint="Title of Task"
-        tools:context=".UpdateTaskActivity" />
-
-    <ImageView
-        android:id="@+id/imageView1"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="17dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_tasktype_text"
-        android:contentDescription="Task type Image" />
+        android:hint="@string/titleTextView_text"
+        tools:context=".UpdateTaskActivity" />
 
     <Button
         android:id="@+id/buttonCancel"
@@ -28,8 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="@string/Cancel"
-        android:drawableLeft="@drawable/ic_button_delete" />
+        android:drawableLeft="@drawable/ic_button_delete"
+        android:text="@string/Cancel" />
 
     <Button
         android:id="@+id/buttonSave"
@@ -37,46 +28,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/Save"
-        android:drawableLeft="@drawable/ic_button_save" />
-
-    <TextView
-        android:id="@+id/textLabelCreatedDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textEditTitle"
-        android:text="Created:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textEditCreatedDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textLabelCreatedDate"
-        android:layout_toRightOf="@+id/textLabelCreatedDate"
-        android:ems="10"
-        android:hint="Created: Date"
-        tools:context=".UpdateTaskActivity" />
-
-    <EditText
-        android:id="@+id/textEditDueDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textLabelCreatedDate"
-        android:layout_toRightOf="@+id/textLabelCreatedDate"
-        android:ems="10"
-        android:hint="Due: Date"
-        tools:context=".UpdateTaskActivity" />
+        android:drawableLeft="@drawable/ic_button_save"
+        android:text="@string/Save" />
 
     <TextView
         android:id="@+id/textLabelDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textEditDueDate"
         android:layout_marginTop="43dp"
-        android:text="Description:"
+        android:text="@string/descriptionTextView_text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
@@ -85,8 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textLabelDescription"
-        android:ems="10"
-        android:hint="Description"
+        android:ems="8"
+        android:hint="@string/descriptionTextView_text"
         tools:context=".UpdateTaskActivity" >
 
         <requestFocus />
@@ -98,16 +59,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textEditDescription"
-        android:text="Quantity:"
+        android:text="@string/quantityTextView_text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <CheckBox
-        android:id="@+id/checkboxPublic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/imageView1"
-        android:layout_below="@+id/textEditDueDate"
-        android:text="@string/MakePublic" />
 
     <EditText
         android:id="@+id/textEditQuantity"
@@ -116,16 +69,61 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textLabelQuantity"
         android:ems="10"
-        android:hint="Quantity"
+        android:hint="@string/quantityTextView_text"
         tools:context=".UpdateTaskActivity" />
 
     <TextView
         android:id="@+id/textLabelDueDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textLabelCreatedDate"
-        android:layout_toLeftOf="@+id/textEditDueDate"
-        android:text="Due:"
+        android:layout_above="@+id/textLabelDescription"
+        android:layout_alignParentLeft="true"
+        android:text="@string/dueDateTextView_text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textLabelCreatedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textEditTitle"
+        android:text="@string/createdDateTextView_text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textEditTitle"
+        android:contentDescription="@+id/tasktype_desc"
+        android:src="@drawable/ic_tasktype_text" />
+
+    <CheckBox
+        android:id="@+id/checkboxPublic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/imageView1"
+        android:text="@string/MakePublic" />
+
+    <TextView
+        android:id="@+id/textEditCreatedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:ems="8"
+        android:hint="@string/dueDateTextView_text"
+        tools:context=".UpdateTaskActivity" />
+
+    <EditText
+        android:id="@+id/textEditDueDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:ems="8"
+        android:hint="@string/dueDateTextView_text"
+        tools:context=".UpdateTaskActivity" />
 
 </RelativeLayout>
