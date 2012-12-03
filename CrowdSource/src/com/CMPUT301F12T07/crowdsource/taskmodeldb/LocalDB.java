@@ -1,6 +1,7 @@
 package com.CMPUT301F12T07.crowdsource.taskmodeldb;
 
 import java.util.ArrayList; 
+import java.util.Date;
 import java.util.List; 
 
 
@@ -64,8 +65,8 @@ public class LocalDB extends SQLiteOpenHelper {
 				+ KEY_UID + " INTEGER,"
 				+ KEY_TITLE + " TEXT," 
 				+ KEY_DESCRIPTION + " TEXT," 
-				+ KEY_DATECREATE + " TEXT,"
-				+ KEY_DATEDUE + " TEXT,"
+				+ KEY_DATECREATE + " INTEGER,"
+				+ KEY_DATEDUE + " INTEGER,"
 				+ KEY_TYPE + " TEXT,"
 				+ KEY_VISIBILITY + " NUMERIC,"
 				+ KEY_QUANTITY + " INTEGER," 
@@ -93,6 +94,7 @@ public class LocalDB extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASKS);
 		onCreate(db);
+		db.close();
 	}
 
 	/////////////////////////////////////////////////// 
@@ -101,9 +103,17 @@ public class LocalDB extends SQLiteOpenHelper {
 	// Operations 
 	//////////////////////////////////////////////////
 	
+	/**
+	 * 
+	 * @param uid
+	 * @return
+	 */
 	public List<Task> getAllTaskSummaries(String uid) {
 		List<Task> taskList = new ArrayList<Task>();
-		String selectQuery = "SELECT "+ KEY_WID +","+ KEY_TITLE +","+ KEY_TYPE +" FROM "+ TABLE_TASKS +" WHERE "+ KEY_UID +"!='"+ uid +"'";
+		
+		Date date = new Date();
+		long compareDate = date.getTime();
+		String selectQuery = "SELECT "+ KEY_WID +","+ KEY_TITLE +","+ KEY_TYPE +" FROM "+ TABLE_TASKS +" WHERE "+ KEY_UID +"!='"+ uid +"' AND "+ KEY_QUANTITY +">"+ KEY_QTY_FILLED +" AND "+ KEY_DATEDUE +">"+ compareDate +" ORDER BY "+ KEY_DATEDUE +" DESC";
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -122,6 +132,11 @@ public class LocalDB extends SQLiteOpenHelper {
 		return taskList;
 	}
 	
+	/**
+	 * 
+	 * @param wid
+	 * @return
+	 */
 	public Integer checkExists(String wid){
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT COUNT(*) FROM "+ TABLE_TASKS +" WHERE "+ KEY_WID +"='"+ wid +"'";
@@ -186,10 +201,6 @@ public class LocalDB extends SQLiteOpenHelper {
 	public Task getTask(long tid) { 
 		SQLiteDatabase db = this.getReadableDatabase(); 
 
-		//Cursor cursor = db.query(TABLE_TASKS, new String[] { 
-		//		KEY_TID, KEY_UID, KEY_TITLE, KEY_DESCRIPTION, KEY_DATECREATE,
-		//		KEY_DATEDUE, KEY_TYPE, KEY_VISIBILITY, KEY_QUANTITY, KEY_QTY_FILLED, KEY_FOLLOWED, KEY_NUM_FOLLOWED, KEY_USER_EMAIL, KEY_WID }, KEY_TID + "=?", 
-		//		new String[] { String.valueOf(tid) }, null, null, null, null); 
 		String selectQuery = "SELECT  * FROM " + TABLE_TASKS + " WHERE " + KEY_TID + "='" + tid + "'"; 
 		Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -222,8 +233,10 @@ public class LocalDB extends SQLiteOpenHelper {
 	 */
 	public List<Task> getAllTasks() { 
 		List<Task> taskList = new ArrayList<Task>(); 
-		// Select All Query 
-		String selectQuery = "SELECT  * FROM " + TABLE_TASKS; 
+
+		Date date = new Date();
+		long compareDate = date.getTime();
+		String selectQuery = "SELECT  * FROM " + TABLE_TASKS +" WHERE "+ KEY_QUANTITY +">"+ KEY_QTY_FILLED +" AND "+ KEY_DATEDUE +">"+ compareDate +" ORDER BY "+ KEY_DATEDUE +" ASC"; 
 
 		SQLiteDatabase db = this.getWritableDatabase(); 
 		Cursor cursor = db.rawQuery(selectQuery, null); 
@@ -231,22 +244,22 @@ public class LocalDB extends SQLiteOpenHelper {
 		// looping through all rows and adding to list 
 		if (cursor.moveToFirst()) { 
 			do { 
-				Task task = new Task(); 
-				task.set_tid(Long.parseLong(cursor.getString(0))); 
-				task.set_uid(cursor.getString(1)); 
-				task.set_title(cursor.getString(2)); 
-				task.set_description(cursor.getString(3)); 
-				task.set_dateCreate(cursor.getString(4)); 
-				task.set_dateDue(cursor.getString(5)); 
-				task.set_type(cursor.getString(6)); 
-				task.set_visibility(cursor.getInt(7));
-				task.set_quantity(cursor.getInt(8));
-				task.set_qty_filled(cursor.getInt(9));
-				task.set_followed(cursor.getInt(10));
-				task.set_num_followed(cursor.getInt(11));
-				task.set_user_email(cursor.getString(12));
-				// Adding contact to list 
-				taskList.add(task); 
+					Task task = new Task(); 
+					task.set_tid(Long.parseLong(cursor.getString(0))); 
+					task.set_uid(cursor.getString(1)); 
+					task.set_title(cursor.getString(2)); 
+					task.set_description(cursor.getString(3)); 
+					task.set_dateCreate(cursor.getString(4)); 
+					task.set_dateDue(cursor.getString(5)); 
+					task.set_type(cursor.getString(6)); 
+					task.set_visibility(cursor.getInt(7));
+					task.set_quantity(cursor.getInt(8));
+					task.set_qty_filled(cursor.getInt(9));
+					task.set_followed(cursor.getInt(10));
+					task.set_num_followed(cursor.getInt(11));
+					task.set_user_email(cursor.getString(12));
+					// Adding contact to list 
+					taskList.add(task); 
 			} while (cursor.moveToNext()); 
 		} 
 		
@@ -267,7 +280,9 @@ public class LocalDB extends SQLiteOpenHelper {
 	public List<Task> getAllTasksByUid(String uid) { 
 		List<Task> taskList = new ArrayList<Task>(); 
 
-		String selectQuery = "SELECT * FROM " + TABLE_TASKS + " WHERE " + KEY_UID + "='" + uid + "'";
+		Date date = new Date();
+		long compareDate = date.getTime();
+		String selectQuery = "SELECT * FROM " + TABLE_TASKS + " WHERE " + KEY_UID + "='" + uid + "' AND "+ KEY_QUANTITY +">"+ KEY_QTY_FILLED +" AND "+ KEY_DATEDUE +">"+ compareDate +" ORDER BY "+ KEY_DATEDUE +" DESC";
 
 		SQLiteDatabase db = this.getWritableDatabase(); 
 		Cursor cursor = db.rawQuery(selectQuery, null); 
@@ -310,7 +325,9 @@ public class LocalDB extends SQLiteOpenHelper {
 	public List<Task> getPublicTasksByUid(String uid){
 		List<Task> taskList = new ArrayList<Task>();
 		
-		String selectQuery = "SELECT * FROM "+ TABLE_TASKS +" WHERE "+ KEY_UID +"='"+ uid +"' AND "+ KEY_VISIBILITY +"='0'";
+		Date date = new Date();
+		long compareDate = date.getTime();
+		String selectQuery = "SELECT * FROM "+ TABLE_TASKS +" WHERE "+ KEY_UID +"='"+ uid +"' AND "+ KEY_VISIBILITY +"='0' AND "+ KEY_QUANTITY +">"+ KEY_QTY_FILLED +" AND "+ KEY_DATEDUE +">"+ compareDate +" ORDER BY "+ KEY_DATEDUE +" DESC";
 		
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
@@ -353,7 +370,9 @@ public class LocalDB extends SQLiteOpenHelper {
 	public List<Task> getPrivateTasksByUid(String uid){
 		List<Task> taskList = new ArrayList<Task>();
 		
-		String selectQuery = "SELECT * FROM "+ TABLE_TASKS +" WHERE "+ KEY_UID +"='"+ uid +"' AND "+ KEY_VISIBILITY +"='1'";
+		Date date = new Date();
+		long compareDate = date.getTime();
+		String selectQuery = "SELECT * FROM "+ TABLE_TASKS +" WHERE "+ KEY_UID +"='"+ uid +"' AND "+ KEY_VISIBILITY +"='1' AND "+ KEY_QUANTITY +">"+ KEY_QTY_FILLED +" AND "+ KEY_DATEDUE +">"+ compareDate +" ORDER BY "+ KEY_DATEDUE +" DESC";
 		
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
@@ -394,13 +413,38 @@ public class LocalDB extends SQLiteOpenHelper {
 	 * @return List of Tasks
 	 */
 	public List<Task> getLoggedTasks(String uid){
-		List<Task> taskList = new ArrayList<Task>();
+List<Task> taskList = new ArrayList<Task>();
 		
-		// TODO: Add Query with something like: SELECT * FROM TABLE_TASKS WHERE (KEY_FOLLOWED='1' AND KEY_DATEDUE<'TODAY') OR (KEY_FOLLOWED='1' AND KEY_QUANTITY='KEY_QUANTITY_FILLED') 
-		// Note: This will need the Followed field added on, as well as an update to Own Task creation so that
-		// we implicitly imply that tasks you own you follow. 
-		// I.E. I make task IMPLIES I follow task, and am unable to unfollow except when deleting task.
+		Date date = new Date();
+		long compareDate = date.getTime();
+		String selectQuery = "SELECT * FROM "+ TABLE_TASKS +" WHERE "+ KEY_FOLLOWED +"='1' AND ("+ KEY_DATEDUE +"<"+ compareDate +" OR "+ KEY_QUANTITY +"<="+ KEY_QTY_FILLED +") ORDER BY "+ KEY_DATEDUE +" DESC";
 		
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		
+		// looping through all rows and adding to list 
+		if (cursor.moveToFirst()) { 
+			do { 
+				Task task = new Task(); 
+				task.set_tid(Long.parseLong(cursor.getString(0))); 
+				task.set_uid(cursor.getString(1)); 
+				task.set_title(cursor.getString(2)); 
+				task.set_description(cursor.getString(3)); 
+				task.set_dateCreate(cursor.getString(4)); 
+				task.set_dateDue(cursor.getString(5)); 
+				task.set_type(cursor.getString(6)); 
+				task.set_visibility(cursor.getInt(7));
+				task.set_quantity(cursor.getInt(8));
+				task.set_qty_filled(cursor.getInt(9));
+				task.set_followed(cursor.getInt(10));
+				task.set_num_followed(cursor.getInt(11));
+				task.set_user_email(cursor.getString(12));
+				task.set_wid(cursor.getString(13));
+				// Adding contact to list 
+				taskList.add(task); 
+			} while (cursor.moveToNext()); 
+		} 
+		db.close();
 		return taskList;
 	}
 	
@@ -417,9 +461,36 @@ public class LocalDB extends SQLiteOpenHelper {
 	public List<Task> getFollowedTasks(String uid){
 		List<Task> taskList = new ArrayList<Task>();
 		
-		// TODO: Add Query with something like: SELECT * FROM TABLE_TASKS WHERE KEY_FOLLOWED='1' AND KEY_DATEDUE>='TODAY' AND KEY_QUANTITY='KEY_QUANTITY' AND KEY_UID!='uid'
-		// TODO: The quantity, Date Due SHOULD be added to everything.
+		Date date = new Date();
+		long compareDate = date.getTime();
+		String selectQuery = "SELECT * FROM "+ TABLE_TASKS +" WHERE "+ KEY_FOLLOWED +"='1' AND "+ KEY_DATEDUE +">"+ compareDate +" AND "+ KEY_QUANTITY +">"+ KEY_QTY_FILLED +" AND "+ KEY_UID +"!='"+ uid +"' ORDER BY "+ KEY_DATEDUE +" DESC";
 		
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		
+		// looping through all rows and adding to list 
+		if (cursor.moveToFirst()) { 
+			do { 
+				Task task = new Task(); 
+				task.set_tid(Long.parseLong(cursor.getString(0))); 
+				task.set_uid(cursor.getString(1)); 
+				task.set_title(cursor.getString(2)); 
+				task.set_description(cursor.getString(3)); 
+				task.set_dateCreate(cursor.getString(4)); 
+				task.set_dateDue(cursor.getString(5)); 
+				task.set_type(cursor.getString(6)); 
+				task.set_visibility(cursor.getInt(7));
+				task.set_quantity(cursor.getInt(8));
+				task.set_qty_filled(cursor.getInt(9));
+				task.set_followed(cursor.getInt(10));
+				task.set_num_followed(cursor.getInt(11));
+				task.set_user_email(cursor.getString(12));
+				task.set_wid(cursor.getString(13));
+				// Adding contact to list 
+				taskList.add(task); 
+			} while (cursor.moveToNext()); 
+		} 
+		db.close();
 		return taskList;
 	}
 	
@@ -571,7 +642,7 @@ public class LocalDB extends SQLiteOpenHelper {
 	 * DO NOT USE on live product
 	 */
 	public void createRandomTask() {
-		Task task = new Task("1234567890", "TITLE", "DESCRIPTION", "2012-11-11", "2012-12-30", "TYPE", 1, 1, 0, 1, 1, "jsmereka@ualberta.ca");
+		Task task = new Task("1234567890", "TITLE", "DESCRIPTION", "2012-11-11", "2012-11-30", "TYPE", 1, 1, 0, 1, 1, "jsmereka@ualberta.ca");
 		createTask(task);
 	}
 	

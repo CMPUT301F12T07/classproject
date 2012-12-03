@@ -6,7 +6,6 @@ import com.CMPUT301F12T07.crowdsource.R;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.TaskLoadHandler;
-import com.CMPUT301F12T07.crowdsource.viewupdatetask.ViewTaskActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,7 +46,6 @@ public class FeedSectionFragment extends Fragment {
         myList.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		Intent intent = new Intent(view.getContext(), TaskLoadHandler.class);
-        		// TODO: Put in if check to check if Web ID is set, if so pass that to intent, otherwise pass TID
         		if (tasks.get(position).get_dateCreate() != null) {
         			intent.putExtra("taskLocalObject", tasks.get(position).get_tid());
         		} else {

@@ -3,9 +3,9 @@ package com.CMPUT301F12T07.crowdsource.tabviews;
 import java.util.List;
 
 import com.CMPUT301F12T07.crowdsource.R;
-import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
-import com.CMPUT301F12T07.crowdsource.viewupdatetask.ViewTaskActivity;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.TaskLoadHandler;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +22,7 @@ public class LogSectionFragment extends Fragment {
 	
 	private ListView myList;
 	private List<Task> tasks;
-	private LocalDB db;
+	private DBHandler db;
 	
     public LogSectionFragment() {
     }
@@ -35,7 +35,7 @@ public class LogSectionFragment extends Fragment {
     	
     	View myFeed = inflater.inflate(R.layout.activity_logged_tasks, container, false);
     	
-    	db = new LocalDB(inflater.getContext());
+    	db = new DBHandler(inflater.getContext());
         
         this.tasks = db.getLoggedTasks(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
         
@@ -45,8 +45,12 @@ public class LogSectionFragment extends Fragment {
         // Adds listener for when a Task is clicked in the ListView
         myList.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-        		Intent intent = new Intent(view.getContext(), ViewTaskActivity.class);
-        		intent.putExtra("taskObject", tasks.get(position).get_tid());
+        		Intent intent = new Intent(view.getContext(), TaskLoadHandler.class);
+        		if (tasks.get(position).get_dateCreate() != null) {
+        			intent.putExtra("taskLocalObject", tasks.get(position).get_tid());
+        		} else {
+        			intent.putExtra("taskWebObject", tasks.get(position).get_wid());
+        		}
         		startActivity(intent);
         	}
         });

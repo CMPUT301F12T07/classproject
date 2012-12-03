@@ -11,8 +11,8 @@ public class DBHandler {
 	private LocalDB localDB;
 	private RemoteDB remoteDB;
 	
-	public static String LOCAL_FLAG = "local";
-	public static String REMOTE_FLAG = "remote";
+	public static final String LOCAL_FLAG = "local";
+	public static final String REMOTE_FLAG = "remote";
 	
 
 	public DBHandler(Context context) {
