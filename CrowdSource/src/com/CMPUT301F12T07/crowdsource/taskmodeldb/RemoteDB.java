@@ -189,7 +189,7 @@ public class RemoteDB {
 
 		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
 		nvps.add(new BasicNameValuePair("action", "post"));
-		nvps.add(new BasicNameValuePair("summary", remoteTask.getSummary()));
+		nvps.add(new BasicNameValuePair("summary", gson.toJson(remoteTask.getSummary())));
 		// nvps.add(new BasicNameValuePair("description",
 		// webTask.getDescription()));
 		nvps.add(new BasicNameValuePair("content", gson.toJson(remoteTask
@@ -221,7 +221,7 @@ public class RemoteDB {
 		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
 		nvps.add(new BasicNameValuePair("action", "update"));
 		nvps.add(new BasicNameValuePair("id", remoteTask.getId()));
-		nvps.add(new BasicNameValuePair("summary", remoteTask.getSummary()));
+		nvps.add(new BasicNameValuePair("summary", gson.toJson(remoteTask.getSummary())));
 		nvps.add(new BasicNameValuePair("description", remoteTask.getDescription()));
 		nvps.add(new BasicNameValuePair("content", gson.toJson(remoteTask
 				.getContent())));

@@ -2,6 +2,7 @@ package com.CMPUT301F12T07.crowdsource.taskmodeldb;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import android.content.Context;
 
@@ -133,12 +134,44 @@ public class DBHandler {
 		return taskList;
 	}
 
+	public Task getRandomTask(String uid) {
+
+		// Get all Task summaries from localDB
+		List<Task> taskList = new ArrayList<Task>();
+		taskList = localDB.getAllTaskSummaries(uid);
+
+		// Pick random task
+		int max = taskList.size();
+		Random generator = new Random();
+		int randomIndex = generator.nextInt(max);
+		Task task = taskList.get(randomIndex);
+
+		return task;
+	}
+	
 	// TODO: THIS 
 	public List<Task> getAllTasks() {
-		List<Task> taskList = new ArrayList<Task>();
-		taskList = localDB.getAllTasks();
+		// get remoteList
+		List<Task> remoteList = new ArrayList<Task>();
+		String jsonToParse = null;
+		try {
+			jsonToParse = remoteDB.listTasks();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		remoteList = remoteDB.parseJson(jsonToParse);
 
-		return taskList;
+		// Check each task exist in localDB or not
+		for (int i = 0; i < remoteList.size(); i++) {
+			Task task = remoteList.get(i);
+			String wid = task.get_wid();
+			if (localDB.checkExists(wid) == 0){
+				// add to localDB
+				localDB.createTask(task);
+			}
+		}
+
+		return localDB.getAllTasks();
 	}
 
 	public void emptyDatabase() {

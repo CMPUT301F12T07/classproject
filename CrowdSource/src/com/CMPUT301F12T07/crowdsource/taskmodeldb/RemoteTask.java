@@ -8,7 +8,7 @@ package com.CMPUT301F12T07.crowdsource.taskmodeldb;
  */
 public class RemoteTask {
 
-	private String summary;// desciption of Task object
+	private TaskSummary summary;// desciption of Task object
 	private Task content;
 	private String id;
 	private String description;// title of Task object
@@ -19,24 +19,26 @@ public class RemoteTask {
 
 	/** constructor without id */
 	public RemoteTask(Task task) {
-		this.setSummary(task.get_title());
+		TaskSummary taskSummary = new TaskSummary(task.get_wid(), task.get_title(), task.get_dateDue(), task.get_quantity(), task.get_qty_filled(), task.get_type());
+		this.setSummary(taskSummary);
 		this.setContent(task);
 		this.setDescription(task.get_description());
 	}
 
 	/** constructor with id */
 	public RemoteTask(Task task, String id) {
-		this.setSummary(task.get_title());
+		TaskSummary taskSummary = new TaskSummary(task.get_wid(), task.get_title(), task.get_dateDue(), task.get_quantity(), task.get_qty_filled(), task.get_type());
+		this.setSummary(taskSummary);
 		this.setContent(task);
 		this.setId(id);
 		this.setDescription(task.get_description());
 	}
 
-	public String getSummary() {
+	public TaskSummary getSummary() {
 		return summary;
 	}
 
-	public void setSummary(String summary) {
+	public void setSummary(TaskSummary summary) {
 		this.summary = summary;
 	}
 

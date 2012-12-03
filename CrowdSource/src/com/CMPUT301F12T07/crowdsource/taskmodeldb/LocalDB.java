@@ -100,7 +100,44 @@ public class LocalDB extends SQLiteOpenHelper {
 	// (Create, Read, Update, Delete)
 	// Operations 
 	//////////////////////////////////////////////////
+	
+	public List<Task> getAllTaskSummaries(String uid) {
+		List<Task> taskList = new ArrayList<Task>();
+		String selectQuery = "SELECT "+ KEY_WID +","+ KEY_TITLE +","+ KEY_TYPE +" FROM "+ TABLE_TASKS +" WHERE "+ KEY_UID +"!='"+ uid +"'";
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
 
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) {
+			do {
+				Task task = new Task();
+				task.set_wid(cursor.getString(0));
+				task.set_title(cursor.getString(1));
+				task.set_type(cursor.getString(2));
+				// Adding contact to list
+				taskList.add(task);
+			} while (cursor.moveToNext());
+		}
+		db.close();
+		return taskList;
+	}
+	
+	public Integer checkExists(String wid){
+		SQLiteDatabase db = this.getReadableDatabase();
+		String selectQuery = "SELECT COUNT(*) FROM "+ TABLE_TASKS +" WHERE "+ KEY_WID +"='"+ wid +"'";
+		Cursor cursor = db.rawQuery(selectQuery, null);
+
+		if (cursor != null)
+			cursor.moveToFirst();
+
+		Integer result = cursor.getInt(0);
+		if (result == null){
+			result = 0;
+		}
+
+		return result; // Returns 1 if in DB, otherwise return 0
+	}
+	
 	/**
 	 * Adding of Task to database
 	 * 
@@ -384,19 +421,6 @@ public class LocalDB extends SQLiteOpenHelper {
 		// TODO: The quantity, Date Due SHOULD be added to everything.
 		
 		return taskList;
-	}
-	
-	/**
-	 * Gets a Random not owned, incomplete Task
-	 * 
-	 * Queries database to get a random not owned
-	 * task which is incomplete and returns
-	 * the task object of it.
-	 * 
-	 * @return Task Object
-	 */
-	public Task getRandomTask(){
-		return new Task();
 	}
 	
 	/**
