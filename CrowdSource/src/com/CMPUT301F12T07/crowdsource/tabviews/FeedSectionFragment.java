@@ -8,7 +8,9 @@ import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.TaskLoadHandler;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.Settings.Secure;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +23,9 @@ import android.widget.ListView;
 public class FeedSectionFragment extends Fragment {
 	
 	private ListView myList;
+	private ListView randomTask;
 	private List<Task> tasks;
+	private List<Task> randTask;
 	private DBHandler db;
 	
     public FeedSectionFragment() {
@@ -55,24 +59,21 @@ public class FeedSectionFragment extends Fragment {
         	}
         });
         
-        final Button EmptyDB = (Button) myFeed.findViewById(R.id.DBDEBUG);
-        EmptyDB.setOnClickListener(new View.OnClickListener() {
-        	public void onClick(View v) {
-        		db.emptyDatabase();
-        		getActivity().finish();
-        		getActivity().startActivity(getActivity().getIntent());
+        this.randTask = db.getRandomTask(Secure.getString(inflater.getContext().getContentResolver(), Secure.ANDROID_ID));
+        randomTask = (ListView) myFeed.findViewById(R.id.randomTask);
+        randomTask.setBackgroundColor(Color.GRAY);
+        randomTask.setAdapter(new TaskListAdapter(inflater.getContext(), randTask));
+        randomTask.setOnItemClickListener(new OnItemClickListener() {
+        	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+        		Intent intent = new Intent(view.getContext(), TaskLoadHandler.class);
+        		if (randTask.get(position).get_dateCreate() != null) {
+        			intent.putExtra("taskLocalObject", tasks.get(position).get_tid());
+        		} else {
+        			intent.putExtra("taskWebObject", tasks.get(position).get_wid());
+        		}
+        		startActivity(intent);
         	}
         });
-        
-        final Button RandomTaskGen = (Button) myFeed.findViewById(R.id.RandTask);
-        RandomTaskGen.setOnClickListener(new View.OnClickListener() {
-        	public void onClick(View v) {
-        		db.createRandomTask();
-        		getActivity().finish();
-        		getActivity().startActivity(getActivity().getIntent());
-        	}
-        });
-    	
     	
     	
         

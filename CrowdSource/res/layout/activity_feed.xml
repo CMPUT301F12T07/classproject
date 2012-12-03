@@ -1,35 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-   	android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-               
-	<Button
-	    android:id="@+id/DBDEBUG"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="Empty DB" />
+    android:orientation="vertical" >
 
-	<ListView
-	    android:id="@+id/tasklist"
-	    android:layout_width="fill_parent"
-	    android:layout_height="400dp"
-	    android:layout_alignParentBottom="true"
-	    android:layout_alignParentLeft="true"
-	    android:layout_below="@+id/DBDEBUG"
-	    android:cacheColorHint="#00000000"
-	    android:listSelector="@android:color/transparent"
-	    android:transcriptMode="alwaysScroll" >
+    <ListView
+        android:id="@+id/randomTask"
+        android:layout_width="fill_parent"
+        android:layout_height="46dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:cacheColorHint="#00000000"
+        android:listSelector="@android:color/transparent"
+        android:transcriptMode="alwaysScroll" >
 
-	</ListView>
+    </ListView>
 
-	<Button
-	    android:id="@+id/RandTask"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentRight="true"
-	    android:layout_alignParentTop="true"
-	    android:text="Random Task" />
+    <ListView
+        android:id="@+id/tasklist"
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"
+        android:layout_below="@+id/randomTask"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:cacheColorHint="#00000000"
+        android:listSelector="@android:color/transparent"
+        android:transcriptMode="alwaysScroll" >
+    </ListView>
 
 </RelativeLayout>

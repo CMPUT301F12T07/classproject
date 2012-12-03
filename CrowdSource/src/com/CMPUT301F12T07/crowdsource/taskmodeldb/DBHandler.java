@@ -125,7 +125,7 @@ public class DBHandler {
 		return taskList;
 	}
 
-	public Task getRandomTask(String uid) {
+	public List<Task> getRandomTask(String uid) {
 
 		// Get all Task summaries from localDB
 		List<Task> taskList = new ArrayList<Task>();
@@ -135,9 +135,10 @@ public class DBHandler {
 		int max = taskList.size();
 		Random generator = new Random();
 		int randomIndex = generator.nextInt(max);
-		Task task = taskList.get(randomIndex);
+		List<Task> randomTask = new ArrayList<Task>();
+		randomTask.add(taskList.get(randomIndex));
 
-		return task;
+		return randomTask;
 	}
 	
 
