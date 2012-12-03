@@ -1,5 +1,10 @@
 package com.CMPUT301F12T07.crowdsource.taskmodeldb;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Task { 
 	
 	/** private variables */
@@ -7,8 +12,8 @@ public class Task {
     String _uid;
     String _title;
     String _description; 
-    String _dateCreate; 
-    String _dateDue;
+    long _dateCreate; 
+    long _dateDue;
     String _type;
     String _email;
     int _visibility; // 1 or 0
@@ -26,7 +31,7 @@ public class Task {
     public Task(String webid, String title, String dateDue, int quantity, int qty_filled, String type) { 
     	this._wid = webid;
     	this._title = title;
-    	this._dateDue = dateDue;
+    	set_dateDue(dateDue);
     	this._quantity = quantity;
     	this._qty_filled = qty_filled;
     	this._type = type;
@@ -38,8 +43,8 @@ public class Task {
         this._uid = uid;
         this._title = title;
         this._description = description; 
-        this._dateCreate = dateCreate; 
-        this._dateDue = dateDue;
+        set_dateCreate(dateCreate); 
+        set_dateDue(dateDue);
         this._type = type;
         this._visibility = visibility;
         this._quantity = quantity;
@@ -56,8 +61,8 @@ public class Task {
         this._uid = uid;
         this._title = title;
         this._description = description; 
-        this._dateCreate = dateCreate; 
-        this._dateDue = dateDue;
+        set_dateCreate(dateCreate); 
+        set_dateDue(dateDue);
         this._type = type;
         this._visibility = visibility;
         this._quantity = quantity;
@@ -74,8 +79,8 @@ public class Task {
         this._uid = uid;
         this._title = title;
         this._description = description; 
-        this._dateCreate = dateCreate; 
-        this._dateDue = dateDue;
+        set_dateCreate(dateCreate); 
+        set_dateDue(dateDue);
         this._type = type;
         this._visibility = visibility;
         this._quantity = quantity;
@@ -120,19 +125,41 @@ public class Task {
 	}
 
 	public String get_dateCreate() {
-		return _dateCreate;
+		Date date = new Date(_dateCreate);
+	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		return format.format(date).toString();
 	}
 
 	public void set_dateCreate(String _dateCreate) {
-		this._dateCreate = _dateCreate;
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = format.parse(_dateCreate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		cal.setTime(date);
+		this._dateCreate = cal.getTime().getTime();
 	}
 
 	public String get_dateDue() {
-		return _dateDue;
+		Date date = new Date(_dateDue);
+	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	    return format.format(date).toString();
 	}
 
 	public void set_dateDue(String _dateDue) {
-		this._dateDue = _dateDue;
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = format.parse(_dateDue);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		cal.setTime(date);
+		this._dateDue = cal.getTime().getTime();
 	}
 
 	public String get_type() {

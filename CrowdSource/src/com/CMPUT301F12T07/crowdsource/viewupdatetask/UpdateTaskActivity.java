@@ -18,9 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.CMPUT301F12T07.crowdsource.R;
-import com.CMPUT301F12T07.crowdsource.R.id;
-import com.CMPUT301F12T07.crowdsource.R.layout;
-import com.CMPUT301F12T07.crowdsource.R.menu;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
