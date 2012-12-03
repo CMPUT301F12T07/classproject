@@ -184,6 +184,17 @@ public class RemoteDB {
 
 	public RemoteTask createTask(RemoteTask remoteTask) throws Exception {
 
+		Task task = remoteTask.getContent();
+		String summary = task.get_title() + "" + task.get_dateDue();
+//				task.get_
+//				
+//		    	this._title = title;
+//		    	this._dateDue = dateDue;
+//		    	this._quantity = quantity;
+//		    	this._qty_filled = qty_filled;
+//		    	this._type = type;
+
+		
 		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
 		nvps.add(new BasicNameValuePair("action", "post"));
 		nvps.add(new BasicNameValuePair("summary", remoteTask.getSummary()));

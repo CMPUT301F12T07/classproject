@@ -137,8 +137,16 @@ public class DBHandler {
 	public List<Task> getAllTasks() {
 		List<Task> taskList = new ArrayList<Task>();
 		taskList = localDB.getAllTasks();
-
-		return taskList;
+		List<Task> remoteList = new ArrayList<Task>();
+		String jsonToParse = null;
+		try {
+			jsonToParse = remoteDB.listTasks();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		remoteList = remoteDB.parseJson(jsonToParse);
+		return remoteList;
 	}
 
 	public void emptyDatabase() {
