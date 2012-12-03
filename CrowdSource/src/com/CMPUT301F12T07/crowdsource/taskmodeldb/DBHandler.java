@@ -2,6 +2,7 @@ package com.CMPUT301F12T07.crowdsource.taskmodeldb;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import android.content.Context;
 
@@ -9,7 +10,7 @@ public class DBHandler {
 
 	private LocalDB localDB;
 	private RemoteDB remoteDB;
-	
+
 
 	public DBHandler(Context context) {
 		this.localDB = new LocalDB(context);
@@ -133,20 +134,34 @@ public class DBHandler {
 		return taskList;
 	}
 
-	// TODO: THIS 
+	// For HomeScreen 
+	// remoteList object only has:
+	// wid, title, dateDue, quantity, qty_filled and type
+	// store them to localDB
+	// check if wid exist then do nothing,  if not then add to localDB
 	public List<Task> getAllTasks() {
-		List<Task> taskList = new ArrayList<Task>();
-		taskList = localDB.getAllTasks();
+
+		// get remoteList
 		List<Task> remoteList = new ArrayList<Task>();
 		String jsonToParse = null;
 		try {
 			jsonToParse = remoteDB.listTasks();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		remoteList = remoteDB.parseJson(jsonToParse);
-		return remoteList;
+
+		// Check each task exist in localDB or not
+		for (int i = 0; i < remoteList.size(); i++) {
+			Task task = remoteList.get(i);
+			String wid = task.get_wid();
+			if (localDB.checkExists(wid) == 0){
+				// add to localDB
+				localDB.createTask(task);
+			}
+		}
+
+		return localDB.getAllTasks();
 	}
 
 	public void emptyDatabase() {
@@ -161,9 +176,19 @@ public class DBHandler {
 		return localDB.getTask(l);
 	}
 
-	// TODO: THIS 
-	public Task getRandomTask() {
-		return new Task();
+	public Task getRandomTask(String uid) {
+
+		// Get all Task summaries from localDB
+		List<Task> taskList = new ArrayList<Task>();
+		taskList = localDB.getAllTaskSummaries(uid);
+		
+		// Pick random task
+		int max = taskList.size();
+		Random generator = new Random(); 
+		int randomIndex = generator.nextInt(max);
+		Task task = taskList.get(randomIndex);
+
+		return task;
 	}
 
 }

@@ -11,7 +11,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class JsonParseTool {
-
+	
+	
+	// This function is not used anymore.
 	public static String parseRandomWid ( String jsonStringVersion) {
 
 		JsonElement jsonElement = new JsonParser().parse(jsonStringVersion);
@@ -74,7 +76,9 @@ public class JsonParseTool {
 
 			Task task = new Task(wid, title, dateDue, quantity, qty_filled, type);
 			taskList.add(task);
+						
 		}
+		
 		return taskList;
 	}
 
