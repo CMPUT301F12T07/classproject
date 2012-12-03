@@ -57,6 +57,27 @@ public class LocalDBTest extends ActivityInstrumentationTestCase2<MainActivity> 
 		assertEquals(task.get_quantity(), TASK_QUANTITY);
 	}
 	
+	public void test_update(){
+		// Push a task into the DB, then push an update to that task to the database.
+		db.emptyDatabase();
+		Task task = new Task(TASK_UID, TASK_NAME, TASK_DESC, TASK_DATE, TASK_DUE, TASK_TYPE, TASK_VISI, TASK_QUANTITY);
+		long id = db.createTask(task);
+		
+		task.set_title("New Title");
+		db.updateTask(task, db.PUBLIC_FLAG);
+		Task ret_task = db.getTask(id);
+		assertEquals(ret_task.get_title(), task.get_title());
+			
+	}
 	
+	public void test_delete(){
+		db.emptyDatabase();
+		Task task = new Task(TASK_UID, TASK_NAME, TASK_DESC, TASK_DATE, TASK_DUE, TASK_TYPE, TASK_VISI, TASK_QUANTITY);
+		long id = db.createTask(task);
+		
+		db.deleteTask(id);
+		assertEquals(db.checkExists(id), 0);
+		
+	}
 	
 }
