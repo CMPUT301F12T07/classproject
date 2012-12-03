@@ -57,8 +57,7 @@ public class AddTaskActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_task);
 
-		deviceId = Secure.getString(this.getContentResolver(),
-				Secure.ANDROID_ID);
+		deviceId = Secure.getString(this.getContentResolver(), Secure.ANDROID_ID);
 		initializeListeners();
 	}
 
@@ -219,17 +218,12 @@ public class AddTaskActivity extends Activity {
 							.show();
 				else {
 					DBHandler db = new DBHandler(v.getContext());
-					// TODO: PUT USER EMAIL IN newTask
-					//dateDue = selectedDate.getText().toString();
 					Task newTask = new Task(deviceId, title, description,
 							dateCreate, dateDue, type, visibility, Integer
-									.parseInt(quantity), 0, 1, 1,
-							// TODO: Replace with getEmail()
-							"jsmereka@ualberta.ca");
+									.parseInt(quantity), 0, 1, 1, getEmail());
 					try {
 						db.createTask(newTask);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					finish();

@@ -48,7 +48,8 @@ public class UpdateTaskActivity extends Activity {
 		// getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		db = new DBHandler(this);
-		this.currentTask = db.getTask(getIntent().getExtras().getLong("taskID"));
+		Long taskID = getIntent().getExtras().getLong("taskID");
+		this.currentTask = db.getTask(taskID.toString(), DBHandler.LOCAL_FLAG);
 
 		// Getting the task title field
 		this.taskTitle = (EditText) findViewById(R.id.textEditTitle);
@@ -117,7 +118,7 @@ public class UpdateTaskActivity extends Activity {
 					}
 					
 					Intent intent = new Intent(v.getContext(), ViewTaskActivity.class);
-					intent.putExtra("taskObject", currentTask.get_tid());
+					intent.putExtra("taskID", currentTask.get_tid());
 					startActivity(intent);
 					finish();
 				}

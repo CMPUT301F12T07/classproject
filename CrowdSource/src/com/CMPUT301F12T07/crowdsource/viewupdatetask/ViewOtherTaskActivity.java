@@ -48,7 +48,8 @@ public class ViewOtherTaskActivity extends Activity {
         setContentView(R.layout.activity_view_task);
         
         db = new DBHandler(this);
-        this.currentTask = db.getTask(getIntent().getExtras().getLong("taskObject"));
+        Long taskID = getIntent().getExtras().getLong("taskID");
+		this.currentTask = db.getTask(taskID.toString(), DBHandler.LOCAL_FLAG);
         
         // Getting the task title field
         this.taskTitle = (TextView) findViewById(R.id.textViewTitle);
@@ -172,7 +173,7 @@ public class ViewOtherTaskActivity extends Activity {
 		Intent intent = new Intent(ViewOtherTaskActivity.this, EmailActivity.class);
 		
 		
-		intent.putExtra("email", currentTask.get_email());
+		intent.putExtra("email", currentTask.get_user_email());
 		
 		intent.putExtra("type",	type);
 		intent.putExtra("data", data);
@@ -221,7 +222,8 @@ public class ViewOtherTaskActivity extends Activity {
     public void onResume() {
     	super.onResume();
 
-    	this.currentTask = db.getTask(getIntent().getExtras().getLong("taskObject"));
+    	Long taskID = getIntent().getExtras().getLong("taskID");
+		this.currentTask = db.getTask(taskID.toString(), DBHandler.LOCAL_FLAG);
     	
     	taskTitle.setText(currentTask.get_title());
     	startDate.setText(currentTask.get_dateCreate());

@@ -3,7 +3,6 @@ package com.CMPUT301F12T07.crowdsource.taskmodeldb;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -24,12 +23,12 @@ public class JsonParseTool {
 
 		String wid;
 		String title;
-		String dateDue;
+		long dateDue;
 		int quantity;
 		int qty_filled;
 		String type;
 
-		Iterator iterator = array.iterator();
+		Iterator<?> iterator = array.iterator();
 		while (iterator.hasNext()) {
 			JsonObject jsonObject = (JsonObject) iterator.next();
 
@@ -40,79 +39,59 @@ public class JsonParseTool {
 			// get summary
 			JsonObject summaryObject = jsonObject.getAsJsonObject("summary");
 			title = summaryObject.get("_title").getAsString();
-			dateDue = summaryObject.get("_dateDue").getAsString();
+			dateDue = summaryObject.get("_dateDue").getAsLong();
 			quantity = summaryObject.get("_quantity").getAsInt();
 			qty_filled = summaryObject.get("_qty_filled").getAsInt();
 			type = summaryObject.get("_type").getAsString();
 
-			Task task = new Task(wid, title, dateDue, quantity, qty_filled,
-					type);
+			Task task = new Task(wid, title, dateDue, quantity, qty_filled, type);
 			taskList.add(task);
 
 		}
 
 		return taskList;
 	}
+	
+	public static Task parseTask(String jsonStringVersion) {
+		Task remoteTask = new Task();
+		// TODO: Convert to a Regular Expression to remove "{ }" and \" \":
+		jsonStringVersion = jsonStringVersion.replace("\"{", "{");
+		jsonStringVersion = jsonStringVersion.replace("}\"", "}");
+		jsonStringVersion = jsonStringVersion.replace("\\", "");
+		JsonElement jsonElement = new JsonParser().parse(jsonStringVersion);
+		JsonObject jsonObject = jsonElement.getAsJsonObject();
 
-	/*
-	 * // Parse a single RemoteTask public static RemoteTask parseRemoteTask
-	 * (String jsonStringVersion) {
-	 * 
-	 * long tid; String uid; String title; String description; String
-	 * dateCreate; String dateDue; String type; int visibility; // 1 or 0 int
-	 * quantity; int qty_filled; int followed; // 1 or 0 int num_followed;
-	 * String user_email; String wid;
-	 * 
-	 * JsonObject jsonObject = (JsonObject) new
-	 * JsonParser().parse(jsonStringVersion);
-	 * 
-	 * JsonElement tidElement = jsonObject.get("tid"); tid =
-	 * tidElement.getAsLong();
-	 * 
-	 * JsonElement uidElement = jsonObject.get("uid"); uid =
-	 * uidElement.getAsString();
-	 * 
-	 * JsonElement titleElement = jsonObject.get("title"); title =
-	 * titleElement.getAsString();
-	 * 
-	 * JsonElement descriptionElement = jsonObject.get("description");
-	 * description = descriptionElement.getAsString();
-	 * 
-	 * JsonElement dateCreateElement = jsonObject.get("dateCreate"); dateCreate
-	 * = dateCreateElement.getAsString();
-	 * 
-	 * JsonElement dateDueElement = jsonObject.get("dateDue"); dateDue =
-	 * dateDueElement.getAsString();
-	 * 
-	 * JsonElement typeElement = jsonObject.get("type"); type =
-	 * typeElement.getAsString();
-	 * 
-	 * JsonElement visibilityElement = jsonObject.get("visibility"); visibility
-	 * = visibilityElement.getAsInt();
-	 * 
-	 * JsonElement quantityElement = jsonObject.get("quantity"); quantity =
-	 * quantityElement.getAsInt();
-	 * 
-	 * JsonElement qtyfilledElement = jsonObject.get("qty_filled"); qty_filled =
-	 * qtyfilledElement.getAsInt();
-	 * 
-	 * JsonElement followedElement = jsonObject.get("followed"); followed =
-	 * followedElement.getAsInt();
-	 * 
-	 * JsonElement numfollowedElement = jsonObject.get("num_followed");
-	 * num_followed = numfollowedElement.getAsInt();
-	 * 
-	 * JsonElement useremailElement = jsonObject.get("user_email"); user_email =
-	 * useremailElement.getAsString();
-	 * 
-	 * JsonElement widElement = jsonObject.get("wid"); wid =
-	 * widElement.getAsString();
-	 * 
-	 * // Create task object Task task = new Task(tid, uid, title, description,
-	 * dateCreate, dateDue, type, visibility, quantity, qty_filled, followed,
-	 * num_followed, user_email);
-	 * 
-	 * // Create RemoteTask object RemoteTask remoteTask = new RemoteTask(task,
-	 * wid); return remoteTask; }
-	 */
+			// get wid
+		JsonElement widElement = jsonObject.get("id");
+		remoteTask.set_wid(widElement.getAsString());
+
+		// get summary
+		JsonObject contentObject = jsonObject.getAsJsonObject("content");
+		JsonElement titleElement = contentObject.get("_title");
+		remoteTask.set_title(titleElement.getAsString());
+		JsonElement descElement = contentObject.get("_description");
+		remoteTask.set_description(descElement.getAsString());
+		JsonElement dateCreElement = contentObject.get("_dateCreate");
+		remoteTask.set_dateCreate(dateCreElement.getAsString());
+		JsonElement dateDueElement = contentObject.get("_dateDue");
+		remoteTask.set_dateDue(dateDueElement.getAsString());
+		remoteTask.set_followed(0);
+		JsonElement num_follElement = contentObject.get("_num_followed");
+		remoteTask.set_num_followed(num_follElement.getAsInt());
+		JsonElement qty_fillElement = contentObject.get("_qty_filled");
+		remoteTask.set_qty_filled(qty_fillElement.getAsInt());
+		JsonElement quantElement = contentObject.get("_quantity");
+		remoteTask.set_quantity(quantElement.getAsInt());
+		JsonElement typeElement = contentObject.get("_type");
+		remoteTask.set_type(typeElement.getAsString());
+		JsonElement uidElement = contentObject.get("_uid");
+		remoteTask.set_uid(uidElement.getAsString());
+		JsonElement emailElement = contentObject.get("_user_email");
+		remoteTask.set_user_email(emailElement.getAsString());
+		JsonElement visiElement = contentObject.get("_visibility");
+		remoteTask.set_visibility(visiElement.getAsInt());
+		
+		return remoteTask;
+	}
+	
 }

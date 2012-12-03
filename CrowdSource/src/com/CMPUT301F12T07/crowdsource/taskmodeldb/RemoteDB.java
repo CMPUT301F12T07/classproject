@@ -152,16 +152,18 @@ public class RemoteDB {
 
 	// Parse json string into light weight Task objects.
 	public List<Task> parseJson(String jsonStringVersion) {
-		// parse the string to get the list.!!!!!!!!!!!!!!!!!!!!!!
-		// Json has summary and id, parse one by one and store as a Task object
-		// which has only title and wid.
-		List<Task> taskList = new ArrayList();
+		List<Task> taskList = JsonParseTool.parseTaskList(jsonStringVersion);
 		return taskList;
 	}
+	
+	// Parse json string into heavy weight Task object.
+	public Task parseIndividualJson(String jsonStringVersion) {
+		Task remoteTask = JsonParseTool.parseTask(jsonStringVersion);
+		return remoteTask;
+	}
 
-	public RemoteTask getTask(String wid) throws Exception {
+	public String getTask(String wid) throws Exception {
 
-		RemoteTask responseTask = new RemoteTask();
 		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
 		nvps.add(new BasicNameValuePair("action", "get"));
 		nvps.add(new BasicNameValuePair("id", wid));
@@ -174,14 +176,13 @@ public class RemoteDB {
 
 		System.out.println(status);
 
+		String jsonStringVersion = new String();
 		if (entity != null) {
 			InputStream is = entity.getContent();
-			String jsonStringVersion = convertStreamToString(is);
-			Type taskType = RemoteTask.class;
-			responseTask = gson.fromJson(jsonStringVersion, taskType);
+			jsonStringVersion = convertStreamToString(is);
 		}
 		// EntityUtils.consume(entity);
-		return responseTask;
+		return jsonStringVersion;
 
 	}
 
@@ -258,11 +259,5 @@ public class RemoteDB {
 		// EntityUtils.consume(entity);
 		return responseTask;
 	}
-
-	// Main Test
-	// public static void main(String...args){
-
-	// WebDB webDB = new WebDB();
-	// webDB.testService();
-	// }
+	
 }

@@ -477,6 +477,38 @@ public class LocalDB extends SQLiteOpenHelper {
 				new String[] { String.valueOf(tid) }); 
 		db.close(); 		
 	}
+	
+	public long cacheWebTask(Task task) {
+		SQLiteDatabase db = this.getWritableDatabase(); 	
+		ContentValues values = new ContentValues(); 
+		
+		values.put(KEY_UID, task.get_uid());
+		values.put(KEY_TITLE, task.get_title());
+		values.put(KEY_DESCRIPTION, task.get_description());
+		values.put(KEY_DATECREATE, task.get_dateCreate());
+		values.put(KEY_DATEDUE, task.get_dateDue());
+		values.put(KEY_TYPE, task.get_type());
+		values.put(KEY_VISIBILITY, 1);
+		values.put(KEY_QUANTITY, task.get_quantity());
+		values.put(KEY_QTY_FILLED, task.get_qty_filled());
+		values.put(KEY_FOLLOWED, 0);
+		values.put(KEY_NUM_FOLLOWED, task.get_num_followed());
+		values.put(KEY_USER_EMAIL, task.get_user_email());
+		values.put(KEY_TID, task.get_tid());
+		
+		db.update(TABLE_TASKS, values, KEY_WID + " = ?", 
+				new String[] { String.valueOf(task.get_wid()) });
+		
+		String selectQuery = "SELECT "+ KEY_TID +" FROM "+ TABLE_TASKS +" WHERE "+ KEY_WID +"='"+ task.get_wid() +"'";
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		if (cursor != null) 
+			cursor.moveToFirst();
+		long tidOfTask = cursor.getLong(0);
+		
+		db.close();
+		// updating row 
+		return tidOfTask;
+	}
 		
 	/**
 	 * DEBUGGING: Prints all Tasks

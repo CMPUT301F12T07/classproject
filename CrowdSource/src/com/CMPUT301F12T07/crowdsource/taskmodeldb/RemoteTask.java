@@ -65,8 +65,4 @@ public class RemoteTask {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	// public String toString(){
-	// return summary+", "+task+", "+id+", "+description+", "+task.toString();
-	// }
 }

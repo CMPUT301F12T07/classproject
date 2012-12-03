@@ -8,14 +8,13 @@ import java.util.Date;
 public class Task { 
 	
 	/** private variables */
-    long _tid; 
+    Long _tid; 
     String _uid;
     String _title;
     String _description; 
     long _dateCreate; 
     long _dateDue;
     String _type;
-    String _email;
     int _visibility; // 1 or 0
     int _quantity;
     int _qty_filled;
@@ -28,10 +27,10 @@ public class Task {
     public Task(){ } 
    
     /** constructor with wid */
-    public Task(String webid, String title, String dateDue, int quantity, int qty_filled, String type) { 
+    public Task(String webid, String title, long dateDue, int quantity, int qty_filled, String type) { 
     	this._wid = webid;
     	this._title = title;
-    	set_dateDue(dateDue);
+    	this._dateDue = dateDue;
     	this._quantity = quantity;
     	this._qty_filled = qty_filled;
     	this._type = type;
@@ -92,11 +91,11 @@ public class Task {
     }
 
     /** getter and setter */
-	public long get_tid() {
+	public Long get_tid() {
 		return _tid;
 	}
 
-	public void set_tid(long _tid) {
+	public void set_tid(Long _tid) {
 		this._tid = _tid;
 	}
 
@@ -168,14 +167,6 @@ public class Task {
 
 	public void set_type(String _type) {
 		this._type = _type;
-	}
-	
-	public String get_email(){
-		return _email;
-	}
-	
-	public void set_email(String _email){
-		this._email = _email;
 	}
 	
 	public int get_visibility() {

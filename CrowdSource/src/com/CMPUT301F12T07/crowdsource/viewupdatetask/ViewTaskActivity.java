@@ -50,7 +50,8 @@ public class ViewTaskActivity extends Activity {
         setContentView(R.layout.activity_view_task);
         
         db = new DBHandler(this);
-        this.currentTask = db.getTask(getIntent().getExtras().getLong("taskObject"));
+        Long taskID = getIntent().getExtras().getLong("taskID");
+		this.currentTask = db.getTask(taskID.toString(), DBHandler.LOCAL_FLAG);
         
         // Getting the task title field
         this.taskTitle = (TextView) findViewById(R.id.textViewTitle);
@@ -242,7 +243,8 @@ public class ViewTaskActivity extends Activity {
     public void onResume() {
     	super.onResume();
 
-    	this.currentTask = db.getTask(getIntent().getExtras().getLong("taskObject"));
+    	Long taskID = getIntent().getExtras().getLong("taskID");
+		this.currentTask = db.getTask(taskID.toString(), DBHandler.LOCAL_FLAG);
     	
     	taskTitle.setText(currentTask.get_title());
     	startDate.setText(currentTask.get_dateCreate());

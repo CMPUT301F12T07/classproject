@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.CMPUT301F12T07.crowdsource.R;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
@@ -22,7 +23,7 @@ public class ViewLoggedActivity extends Activity {
 	private TextView taskVisibility;
 	private TextView taskDesc;
 	private TextView taskQuantity;
-	private LocalDB db;
+	private DBHandler db;
 
 	private Button deleteTask;
 	private Button viewFulfill;
@@ -32,9 +33,9 @@ public class ViewLoggedActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_logged);
         
-        db = new LocalDB(this);
-        this.currentTask = db.getTask(getIntent().getExtras().getLong("taskObject"));
-        db.close();
+        db = new DBHandler(this);
+        Long taskID = getIntent().getExtras().getLong("taskID");
+		this.currentTask = db.getTask(taskID.toString(), DBHandler.LOCAL_FLAG);
         
         // Getting the task title field
         this.taskTitle = (TextView) findViewById(R.id.textViewTitle);
@@ -74,7 +75,8 @@ public class ViewLoggedActivity extends Activity {
     public void onResume() {
     	super.onResume();
 
-    	this.currentTask = db.getTask(getIntent().getExtras().getInt("taskObject"));
+    	Long taskID = getIntent().getExtras().getLong("taskID");
+		this.currentTask = db.getTask(taskID.toString(), DBHandler.LOCAL_FLAG);
     	
     	taskTitle.setText(currentTask.get_title());
     	startDate.setText(currentTask.get_dateCreate());

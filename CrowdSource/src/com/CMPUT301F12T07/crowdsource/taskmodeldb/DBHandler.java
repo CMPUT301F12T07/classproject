@@ -11,6 +11,9 @@ public class DBHandler {
 	private LocalDB localDB;
 	private RemoteDB remoteDB;
 	
+	public static String LOCAL_FLAG = "local";
+	public static String REMOTE_FLAG = "remote";
+	
 
 	public DBHandler(Context context) {
 		this.localDB = new LocalDB(context);
@@ -24,11 +27,13 @@ public class DBHandler {
 
 			// copy tid from sqlite to web
 			task.set_tid(tid);
+			task.set_followed(0);
 			RemoteTask remoteTask = new RemoteTask(task);
 			remoteTask = remoteDB.createTask(remoteTask);
 			// copy wid from web to sqlite (task fail here, sqlite wid are all
 			// null)
 			task.set_wid(remoteTask.getId());
+			task.set_followed(1);
 			localDB.updateTask(task, LocalDB.PUBLIC_FLAG);
 		}
 		return tid;
@@ -78,18 +83,20 @@ public class DBHandler {
 				// task is from private to public
 				// create task to web
 				// set back wid to local
+				task.set_followed(0);
 				RemoteTask remoteTask = new RemoteTask(task);
 				remoteTask = remoteDB.createTask(remoteTask);
 				task.set_wid(remoteTask.getId());
+				task.set_followed(1);
 				localDB.updateTask(task, LocalDB.PUBLIC_FLAG);
 			}
 
 		}
 	}
 
+	// TODO: Rewrite This
 	public void followTask(String wid) throws Exception {
-		RemoteTask remoteTask = remoteDB.getTask(wid);
-		localDB.createTask(remoteTask.getContent());
+		
 	}
 
 	public List<Task> getAllMyTasks(String uid) {
@@ -113,24 +120,8 @@ public class DBHandler {
 		return taskList;
 	}
 
-	public List<Task> getAllWebTasks() throws Exception {
-		// String jsonStringVersion = webDB.listTasks();
-		// List<Task> taskList = webDB.parseJson(jsonStringVersion);
-		List<Task> taskList = remoteDB.parseJson("jsonStringVersion");
-		return taskList;
-	}
-
-	// TODO: 
 	public List<Task> getLoggedTasks(String uid) {
-		// on github
-		List<Task> taskList = new ArrayList<Task>();
-		// TODO: Add query with somthing like: SELECT * FROM TABLE_TASKS WHERE
-		// (KEY_FLOOWED='1' AND KEY_DATA...
-		// Note: this willl need the fllowed field added on, as well as an
-		// update to own task createion so that
-		// we implicity imply that tasks you own you fllow.
-		// IE. I make task IMPLIES I follow task, and am unable to unfollow
-		// except when deleting task.
+		List<Task> taskList = localDB.getLoggedTasks(uid);
 		return taskList;
 	}
 
@@ -149,7 +140,7 @@ public class DBHandler {
 		return task;
 	}
 	
-	// TODO: THIS 
+
 	public List<Task> getAllTasks() {
 		// get remoteList
 		List<Task> remoteList = new ArrayList<Task>();
@@ -182,13 +173,25 @@ public class DBHandler {
 		localDB.createRandomTask();
 	}
 
-	public Task getTask(long l) {
-		return localDB.getTask(l);
+	public Task getTask(String id, String visi_flag) {
+		if (visi_flag == LOCAL_FLAG) {
+			return localDB.getTask(Long.parseLong(id));
+		} else {
+			Task remoteTask = new Task();
+			String jsonToParse = null;
+			try {
+				jsonToParse = remoteDB.getTask(id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			remoteTask = remoteDB.parseIndividualJson(jsonToParse);
+			
+			return remoteTask;
+		}
 	}
-
-	// TODO: THIS 
-	public Task getRandomTask() {
-		return new Task();
+	
+	public long cacheTask(Task remoteTask) {
+		return localDB.cacheWebTask(remoteTask);
 	}
 
 }
