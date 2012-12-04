@@ -32,6 +32,7 @@ public class ViewOtherTaskActivity extends Activity {
 	private TextView taskVisibility;
 	private TextView taskDesc;
 	private TextView taskQuantity;
+	private TextView taskFollowers;
 	private DBHandler db;
 
 	private Button followTask;
@@ -45,7 +46,7 @@ public class ViewOtherTaskActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_task);
+        setContentView(R.layout.activity_view_other_task);
         
         db = new DBHandler(this);
         Long taskID = getIntent().getExtras().getLong("taskID");
@@ -63,6 +64,8 @@ public class ViewOtherTaskActivity extends Activity {
         this.taskDesc = (TextView) findViewById(R.id.textViewDescription);
         // Getting the task quantity field
         this.taskQuantity = (TextView) findViewById(R.id.textViewQuantity);
+        // Getting the task followers field
+        this.taskFollowers = (TextView) findViewById(R.id.textViewFollowers);
         
         this.followTask = (Button) findViewById(R.id.buttonFollow);
         if(currentTask.get_followed() == 1) {
@@ -71,88 +74,11 @@ public class ViewOtherTaskActivity extends Activity {
         else {
         	followTask.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_button_unfollowed, 0, 0, 0);
         }
-        followTask.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	if(currentTask.get_followed() == 0) {
-                	followTask.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_button_followed, 0, 0, 0);
-                	currentTask.set_followed(1);
-                	currentTask.set_num_followed(currentTask.get_num_followed() + 1);
-                }
-                else {
-                	followTask.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_button_unfollowed, 0, 0, 0);
-                	currentTask.set_followed(0);
-                	currentTask.set_num_followed(currentTask.get_num_followed() - 1);
-                }
-            }
-        });
-        
-
-        /** 
-         * Initiates Fulfill button, and builds AlertDialogs for the three
-         * fulfillment types. The fulfillment type is automatically configured
-         * from retrieving from the database by calling currentTask.get_type().
-         * */
-        this.fulfillTask = (Button) findViewById(R.id.buttonFulfill);
-        fulfillTask.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-				builder.setMessage("Choose an option.");
-				
-				final String type = currentTask.get_type();
-				String neutral = null;
-				
-				if (type.equals("Photo")) 		neutral = "Capture, and send";
-				else if (type.equals("Audio")) 	neutral = "Record, and send";
-				else 							neutral = "Send Text";
-				
-				if (type.equals("Photo")) {
-					builder.setPositiveButton("Choose, and send", 
-							new DialogInterface.OnClickListener() {
-						
-								public void onClick(DialogInterface dialog, int which) {
-									Intent intent = new Intent(ViewOtherTaskActivity.this, ChoosePictureActivity.class);
-									startActivityForResult(intent,RETURN_PHOTO_CODE);
-								}
-								
-						});
-				}
-				
-				builder.setNeutralButton(neutral, 
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								if (type.equals("Photo")) {
-									Intent intent = new Intent(ViewOtherTaskActivity.this, TakePhotoActivity.class);
-									startActivityForResult(intent,RETURN_PHOTO_CODE);
-								} else if (type.equals("Audio")) {
-									Intent intent = new Intent(ViewOtherTaskActivity.this, RecordAudioActivity.class);
-									startActivityForResult(intent,RETURN_AUDIO_CODE);
-								} else {
-									Intent intent = new Intent(ViewOtherTaskActivity.this, EmailActivity.class);
-									intent.putExtra("type",	type);
-									intent.putExtra("data", "n/a");
-									// text message is being sent
-									currentTask.set_followed(1);
-				                	currentTask.set_num_followed(currentTask.get_num_followed() + 1);
-									startActivity(intent);
-								}
-							}
-					});
-				builder.setNegativeButton("Cancel", 
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								dialog.cancel();
-							}
-						});
-				
-				AlertDialog alert = builder.create();
-				alert.show();
-				
-			}
-        });
         
         
+        launchListeners();
         
-        ImageView imageName = (ImageView) findViewById(R.id.imageView1);
+		ImageView imageName = (ImageView) findViewById(R.id.imageView1);
         
         if (currentTask.get_type().equals("Audio")){
         	imageName.setImageResource(R.drawable.ic_tasktype_audio_lg);
@@ -162,6 +88,119 @@ public class ViewOtherTaskActivity extends Activity {
         	imageName.setImageResource(R.drawable.ic_tasktype_text_lg);
         }
     }
+
+	private void launchListeners()
+	{
+
+		followTask.setOnClickListener(new View.OnClickListener()
+		{
+
+			public void onClick(View v)
+			{
+
+				if (currentTask.get_followed() == 0)
+				{
+					followTask.setCompoundDrawablesWithIntrinsicBounds(
+							R.drawable.ic_button_followed, 0, 0, 0);
+					currentTask.set_followed(1);
+					currentTask.set_num_followed(currentTask.get_num_followed() + 1);
+				} else
+				{
+					followTask.setCompoundDrawablesWithIntrinsicBounds(
+							R.drawable.ic_button_unfollowed, 0, 0, 0);
+					currentTask.set_followed(0);
+					currentTask.set_num_followed(currentTask.get_num_followed() - 1);
+				}
+			}
+		});
+		this.fulfillTask = (Button) findViewById(R.id.buttonFulfill);
+		fulfillTask.setOnClickListener(new OnClickListener()
+		{
+
+			public void onClick(View v)
+			{
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(v
+						.getContext());
+				builder.setMessage("Choose an option.");
+				final String type = currentTask.get_type();
+				String neutral = null;
+				if (type.equals("Photo"))
+					neutral = "Capture, and send";
+				else if (type.equals("Audio"))
+					neutral = "Record, and send";
+				else
+					neutral = "Send Text";
+				if (type.equals("Photo"))
+				{
+					builder.setPositiveButton("Choose, and send",
+							new DialogInterface.OnClickListener()
+							{
+
+								public void onClick(DialogInterface dialog,
+										int which)
+								{
+
+									Intent intent = new Intent(
+											ViewOtherTaskActivity.this,
+											ChoosePictureActivity.class);
+									startActivityForResult(intent,
+											RETURN_PHOTO_CODE);
+								}
+							});
+				}
+				builder.setNeutralButton(neutral,
+						new DialogInterface.OnClickListener()
+						{
+
+							public void onClick(DialogInterface dialog,
+									int which)
+							{
+
+								if (type.equals("Photo"))
+								{
+									Intent intent = new Intent(
+											ViewOtherTaskActivity.this,
+											TakePhotoActivity.class);
+									startActivityForResult(intent,
+											RETURN_PHOTO_CODE);
+								} else if (type.equals("Audio"))
+								{
+									Intent intent = new Intent(
+											ViewOtherTaskActivity.this,
+											RecordAudioActivity.class);
+									startActivityForResult(intent,
+											RETURN_AUDIO_CODE);
+								} else
+								{
+									Intent intent = new Intent(
+											ViewOtherTaskActivity.this,
+											EmailActivity.class);
+									intent.putExtra("type", type);
+									intent.putExtra("data", "n/a");
+									currentTask.set_followed(1);
+									currentTask.set_num_followed(currentTask
+											.get_num_followed() + 1);
+									startActivity(intent);
+								}
+							}
+						});
+				builder.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener()
+						{
+
+							public void onClick(DialogInterface dialog,
+									int which)
+							{
+
+								dialog.cancel();
+							}
+						});
+				AlertDialog alert = builder.create();
+				alert.show();
+			}
+		});
+	}
 
     /**
      * Takes input type and fulfillment and transfers its data to EmailActivity
@@ -192,22 +231,17 @@ public class ViewOtherTaskActivity extends Activity {
     	try{
 	    	if (resultCode == RESULT_CANCELED) {finish(); return;}
 	    	
-	    	switch (requestCode) {
+	    	setFollowed();
+	    	
+			switch (requestCode) {
 	    		case RETURN_PHOTO_CODE:
 	    			String image = data.getStringExtra("Photo");
 	    			sendMedia("Photo", image);
-	    			// photo message has been sent, follow task
-	    			currentTask.set_followed(1);
-                	currentTask.set_num_followed(currentTask.get_num_followed() + 1);
-	    			
 	    			break;
 	    		
 	    		case RETURN_AUDIO_CODE:
 	    			String audio = data.getStringExtra("Audio");
 	    			sendMedia("Audio", audio);
-	    			// audio message has been sent, follow task
-	    			currentTask.set_followed(1);
-                	currentTask.set_num_followed(currentTask.get_num_followed() + 1);
 	    			break;
 	
 	    		default:
@@ -217,6 +251,12 @@ public class ViewOtherTaskActivity extends Activity {
     		Log.v("ViewTaskActivity", "Error in ViewTaskActivity");
     	}
     }
+
+	private void setFollowed()
+	{
+		currentTask.set_followed(1);
+		currentTask.set_num_followed(currentTask.get_num_followed() + 1);
+	}
 
     @Override
     public void onResume() {
@@ -228,8 +268,9 @@ public class ViewOtherTaskActivity extends Activity {
     	taskTitle.setText(currentTask.get_title());
     	startDate.setText(currentTask.get_dateCreate());
     	endDate.setText(currentTask.get_dateDue());
-    	taskQuantity.setText(Integer.toString(currentTask.get_quantity()));
-    	if(currentTask.get_visibility() == 1)
+    	taskQuantity.setText(Integer.toString(currentTask.get_qty_filled())+" of "+Integer.toString(currentTask.get_quantity())+" fulfilled");
+    	taskFollowers.setText(Integer.toString(currentTask.get_num_followed()));
+    	if(currentTask.get_visibility() == 0)
     		taskVisibility.setText("Private");
     	else
     		taskVisibility.setText("Public");

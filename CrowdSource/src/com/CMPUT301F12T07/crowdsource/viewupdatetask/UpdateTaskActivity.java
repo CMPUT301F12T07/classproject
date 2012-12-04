@@ -51,6 +51,21 @@ public class UpdateTaskActivity extends Activity {
 		Long taskID = getIntent().getExtras().getLong("taskID");
 		this.currentTask = db.getTask(taskID.toString(), DBHandler.LOCAL_FLAG);
 
+		populateViews();
+
+		launchListeners();
+
+		saveButtonListener();
+
+		initializeDates();
+	}
+
+	/**
+	 * 
+	 */
+	public void populateViews()
+	{
+
 		// Getting the task title field
 		this.taskTitle = (EditText) findViewById(R.id.textEditTitle);
 		taskTitle.setText(currentTask.get_title());
@@ -69,8 +84,14 @@ public class UpdateTaskActivity extends Activity {
 
 		// Getting the task description field
 		this.taskDesc = (EditText) findViewById(R.id.textEditDescription);
-
 		taskDesc.setText(currentTask.get_description());
+	}
+
+	/**
+	 * 
+	 */
+	public void launchListeners()
+	{
 
 		final Button Cancel = (Button) findViewById(R.id.buttonCancel);
 		Cancel.setOnClickListener(new View.OnClickListener() {
@@ -81,19 +102,26 @@ public class UpdateTaskActivity extends Activity {
 				finish();
 			}
 		});
-
+		
 		final CheckBox Public = (CheckBox) findViewById(R.id.checkboxPublic);
-		if (currentTask.get_visibility() == 0)
+		if (currentTask.get_visibility() == 1)
 			Public.setChecked(true);
-
+		
 		Public.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (Public.isChecked())
-					currentTask.set_visibility(0);
-				else
 					currentTask.set_visibility(1);
+				else
+					currentTask.set_visibility(0);
 			}
 		});
+	}
+
+	/**
+	 * 
+	 */
+	public void saveButtonListener()
+	{
 
 		Button Save = (Button) findViewById(R.id.buttonSave);
 		Save.setOnClickListener(new View.OnClickListener() {
@@ -104,8 +132,8 @@ public class UpdateTaskActivity extends Activity {
 							.show();
 				} else {
 					currentTask.set_title(taskTitle.getText().toString());
-					currentTask.set_dateCreate(startDate.getText().toString());
-					currentTask.set_dateDue(endDate.getText().toString());
+					currentTask.set_dateCreate(startDate.getText().toString(), Task.TASK_LOCAL);
+					currentTask.set_dateDue(endDate.getText().toString(), Task.TASK_LOCAL);
 					currentTask.set_quantity(Integer.parseInt(taskQuantity
 							.getText().toString()));
 					currentTask.set_description(taskDesc.getText().toString());
@@ -124,8 +152,6 @@ public class UpdateTaskActivity extends Activity {
 				}
 			}
 		});
-
-		initializeDates();
 	}
 
 	/**
@@ -133,7 +159,7 @@ public class UpdateTaskActivity extends Activity {
 	 */
 	private void initializeDates() {
 		selectDate = (Button) findViewById(R.id.selectDate);
-		endDate = (TextView) findViewById(R.id.textEditDueDate);
+		java.util.Date d1 = dateParser();
 		final Calendar cal = Calendar.getInstance();
 
 		year = cal.get(Calendar.YEAR);
@@ -144,16 +170,6 @@ public class UpdateTaskActivity extends Activity {
 		cMonth = month;
 		cDay = day;
 		
-		// Parses Date and turns into readable/setable format
-		String stringToParse = endDate.getText().toString();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		java.util.Date d1 = null;
-		try {
-			d1 = format.parse(stringToParse);
-		} catch (java.text.ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		cal.setTime(d1);
 		year = cal.get(Calendar.YEAR);
 		month = cal.get(Calendar.MONTH);
@@ -169,6 +185,23 @@ public class UpdateTaskActivity extends Activity {
 			}
 
 		});
+	}
+
+	private java.util.Date dateParser()
+	{
+
+		endDate = (TextView) findViewById(R.id.textEditDueDate);
+		String stringToParse = endDate.getText().toString();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date d1 = null;
+		try
+		{
+			d1 = format.parse(stringToParse);
+		} catch (java.text.ParseException e)
+		{
+			e.printStackTrace();
+		}
+		return d1;
 	}
 
 	/**

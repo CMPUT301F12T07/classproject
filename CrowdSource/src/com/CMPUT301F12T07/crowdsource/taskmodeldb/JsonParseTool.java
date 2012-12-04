@@ -33,6 +33,7 @@ public class JsonParseTool {
 		int quantity;
 		int qty_filled;
 		String type;
+		String uid;
 
 		Iterator<?> iterator = array.iterator();
 		while (iterator.hasNext()) {
@@ -49,8 +50,9 @@ public class JsonParseTool {
 			quantity = summaryObject.get("_quantity").getAsInt();
 			qty_filled = summaryObject.get("_qty_filled").getAsInt();
 			type = summaryObject.get("_type").getAsString();
+			uid = summaryObject.get("_uid").getAsString();
 
-			Task task = new Task(wid, title, dateDue, quantity, qty_filled, type);
+			Task task = new Task(wid, title, dateDue, quantity, qty_filled, type, uid);
 			taskList.add(task);
 
 		}
@@ -83,9 +85,9 @@ public class JsonParseTool {
 		JsonElement descElement = contentObject.get("_description");
 		remoteTask.set_description(descElement.getAsString());
 		JsonElement dateCreElement = contentObject.get("_dateCreate");
-		remoteTask.set_dateCreate(dateCreElement.getAsString());
+		remoteTask.set_dateCreate(dateCreElement.getAsString(), Task.TASK_REMOTE);
 		JsonElement dateDueElement = contentObject.get("_dateDue");
-		remoteTask.set_dateDue(dateDueElement.getAsString());
+		remoteTask.set_dateDue(dateDueElement.getAsString(), Task.TASK_REMOTE);
 		remoteTask.set_followed(0);
 		JsonElement num_follElement = contentObject.get("_num_followed");
 		remoteTask.set_num_followed(num_follElement.getAsInt());

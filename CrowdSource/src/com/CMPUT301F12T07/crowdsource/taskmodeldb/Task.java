@@ -23,17 +23,21 @@ public class Task {
     String _user_email;
     String _wid;
     
+    public static final int TASK_REMOTE = 1;
+    public static final int TASK_LOCAL = 0;
+    
     /** Empty constructor */
     public Task(){ } 
    
     /** constructor with wid */
-    public Task(String webid, String title, long dateDue, int quantity, int qty_filled, String type) { 
+    public Task(String webid, String title, long dateDue, int quantity, int qty_filled, String type, String uid) { 
     	this._wid = webid;
     	this._title = title;
     	this._dateDue = dateDue;
     	this._quantity = quantity;
     	this._qty_filled = qty_filled;
     	this._type = type;
+    	this._uid = uid;
     }
     
     /** constructor without tid */ 
@@ -42,8 +46,8 @@ public class Task {
         this._uid = uid;
         this._title = title;
         this._description = description; 
-        set_dateCreate(dateCreate); 
-        set_dateDue(dateDue);
+        set_dateCreate(dateCreate, TASK_LOCAL); 
+        set_dateDue(dateDue, TASK_LOCAL);
         this._type = type;
         this._visibility = visibility;
         this._quantity = quantity;
@@ -60,8 +64,8 @@ public class Task {
         this._uid = uid;
         this._title = title;
         this._description = description; 
-        set_dateCreate(dateCreate); 
-        set_dateDue(dateDue);
+        set_dateCreate(dateCreate, TASK_LOCAL); 
+        set_dateDue(dateDue, TASK_LOCAL);
         this._type = type;
         this._visibility = visibility;
         this._quantity = quantity;
@@ -78,8 +82,8 @@ public class Task {
         this._uid = uid;
         this._title = title;
         this._description = description; 
-        set_dateCreate(dateCreate); 
-        set_dateDue(dateDue);
+        set_dateCreate(dateCreate, TASK_LOCAL); 
+        set_dateDue(dateDue, TASK_LOCAL);
         this._type = type;
         this._visibility = visibility;
         this._quantity = quantity;
@@ -125,22 +129,31 @@ public class Task {
 	}
 
 	public String get_dateCreate() {
-		Date date = new Date(_dateCreate);
-	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		return format.format(date).toString();
+		Long dateLong = _dateCreate;
+		if (dateLong == 0){
+			return dateLong.toString();
+		} else {
+			Date date = new Date(_dateCreate);
+	    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			return format.format(date).toString();
+		}
 	}
 
-	public void set_dateCreate(String _dateCreate) {
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = null;
-		try {
-			date = format.parse(_dateCreate);
-		} catch (ParseException e) {
-			e.printStackTrace();
+	public void set_dateCreate(String _dateCreate, int taskFlag) {
+		if (taskFlag == TASK_REMOTE){
+			this._dateCreate = Long.parseLong(_dateCreate);
+		} else {
+			Calendar cal = Calendar.getInstance();
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = null;
+			try {
+				date = format.parse(_dateCreate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			cal.setTime(date);
+			this._dateCreate = cal.getTime().getTime();
 		}
-		cal.setTime(date);
-		this._dateCreate = cal.getTime().getTime();
 	}
 
 	public String get_dateDue() {
@@ -149,17 +162,21 @@ public class Task {
 	    return format.format(date).toString();
 	}
 
-	public void set_dateDue(String _dateDue) {
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = null;
-		try {
-			date = format.parse(_dateDue);
-		} catch (ParseException e) {
-			e.printStackTrace();
+	public void set_dateDue(String _dateDue, int taskFlag) {
+		if (taskFlag == TASK_REMOTE){
+			this._dateDue = Long.parseLong(_dateDue);
+		} else {
+			Calendar cal = Calendar.getInstance();
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = null;
+			try {
+				date = format.parse(_dateDue);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			cal.setTime(date);
+			this._dateDue = cal.getTime().getTime();
 		}
-		cal.setTime(date);
-		this._dateDue = cal.getTime().getTime();
 	}
 
 	public String get_type() {

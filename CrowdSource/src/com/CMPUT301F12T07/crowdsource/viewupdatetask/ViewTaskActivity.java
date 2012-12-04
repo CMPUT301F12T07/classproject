@@ -217,18 +217,17 @@ public class ViewTaskActivity extends Activity {
     	
     	try{
 	    	if (resultCode == RESULT_CANCELED) {finish(); return;}
+	    	currentTask.set_qty_filled(currentTask.get_qty_filled()+1);
 	    	
 	    	switch (requestCode) {
 	    		case RETURN_PHOTO_CODE:
 	    			String image = data.getStringExtra("Photo");
 	    			sendMedia("Photo", image);
-	    			currentTask.set_qty_filled(currentTask.get_qty_filled()+1);
 	    			break;
 	    		
 	    		case RETURN_AUDIO_CODE:
 	    			String audio = data.getStringExtra("Audio");
 	    			sendMedia("Audio", audio);
-	    			currentTask.set_qty_filled(currentTask.get_qty_filled()+1);
 	    			break;
 	
 	    		default:
@@ -251,7 +250,7 @@ public class ViewTaskActivity extends Activity {
     	endDate.setText(currentTask.get_dateDue());
     	taskQuantity.setText(Integer.toString(currentTask.get_qty_filled())+" of "+Integer.toString(currentTask.get_quantity())+" fulfilled");
     	taskFollowers.setText(Integer.toString(currentTask.get_num_followed()));
-    	if(currentTask.get_visibility() == 1)
+    	if(currentTask.get_visibility() == 0)
     		taskVisibility.setText("Private");
     	else
     		taskVisibility.setText("Public");
