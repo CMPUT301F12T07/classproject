@@ -3,6 +3,7 @@ package com.CMPUT301F12T07.crowdsource.tabviews;
 import java.util.List;
 
 import com.CMPUT301F12T07.crowdsource.R;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 import com.CMPUT301F12T07.crowdsource.viewupdatetask.ViewTaskActivity;
@@ -26,7 +27,7 @@ public class MyTasksSectionFragment extends Fragment {
 	private ListView myPublicList;
 	private List<Task> publicTasks;
 	private List<Task> privateTasks;
-	private LocalDB db;
+	private DBHandler db;
 	
     public MyTasksSectionFragment() {
     }
@@ -39,7 +40,7 @@ public class MyTasksSectionFragment extends Fragment {
     	
     	View myFeed = inflater.inflate(R.layout.activity_my_tasks, container, false);
     	
-    	db = new LocalDB(inflater.getContext());
+    	db = new DBHandler(inflater.getContext());
         
         this.publicTasks = db.getPublicTasksByUid(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
         this.privateTasks = db.getPrivateTasksByUid(Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID));
@@ -59,7 +60,7 @@ public class MyTasksSectionFragment extends Fragment {
         myPrivateList.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		Intent intent = new Intent(view.getContext(), ViewTaskActivity.class);
-        		intent.putExtra("taskObject", privateTasks.get(position).get_tid());
+        		intent.putExtra("taskID", privateTasks.get(position).get_tid());
         		startActivity(intent);
         	}
         });
@@ -73,7 +74,7 @@ public class MyTasksSectionFragment extends Fragment {
         myPublicList.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		Intent intent = new Intent(view.getContext(), ViewTaskActivity.class);
-        		intent.putExtra("taskObject", publicTasks.get(position).get_tid());
+        		intent.putExtra("taskID", publicTasks.get(position).get_tid());
         		startActivity(intent);
         	}
         });

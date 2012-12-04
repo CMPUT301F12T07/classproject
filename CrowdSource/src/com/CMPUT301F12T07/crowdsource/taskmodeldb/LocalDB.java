@@ -255,15 +255,18 @@ public class LocalDB extends SQLiteOpenHelper {
 					task.set_uid(cursor.getString(1)); 
 					task.set_title(cursor.getString(2)); 
 					task.set_description(cursor.getString(3)); 
-					//task.set_dateCreate(cursor.getString(4)); 
+					if (cursor.getLong(4) == 0)
+						task.set_dateCreate(cursor.getString(4), Task.TASK_REMOTE); 
+					else 
+						task.set_dateCreate(cursor.getString(4), Task.TASK_LOCAL);
 					task.set_dateDue(cursor.getString(5), Task.TASK_LOCAL); 
 					task.set_type(cursor.getString(6)); 
-					//task.set_visibility(cursor.getInt(7));
+					task.set_visibility(cursor.getInt(7));
 					task.set_quantity(cursor.getInt(8));
 					task.set_qty_filled(cursor.getInt(9));
-					//task.set_followed(cursor.getInt(10));
+					task.set_followed(cursor.getInt(10));
 					task.set_num_followed(cursor.getInt(11));
-					//task.set_user_email(cursor.getString(12));
+					task.set_user_email(cursor.getString(12));
 					task.set_wid(cursor.getString(13));
 					// Adding contact to list 
 					taskList.add(task); 
@@ -334,7 +337,7 @@ public class LocalDB extends SQLiteOpenHelper {
 		
 		Date date = new Date();
 		long compareDate = date.getTime();
-		String selectQuery = "SELECT * FROM "+ TABLE_TASKS +" WHERE "+ KEY_UID +"='"+ uid +"' AND "+ KEY_VISIBILITY +"='1' AND "+ KEY_QUANTITY +">"+ KEY_QTY_FILLED +" AND "+ KEY_DATEDUE +">"+ compareDate +" ORDER BY "+ KEY_DATEDUE +" DESC";
+		String selectQuery = "SELECT * FROM "+ TABLE_TASKS +" WHERE "+ KEY_UID +"='"+ uid +"' AND "+ KEY_VISIBILITY +"='0' AND "+ KEY_QUANTITY +">"+ KEY_QTY_FILLED +" AND "+ KEY_DATEDUE +">"+ compareDate +" ORDER BY "+ KEY_DATEDUE +" DESC";
 		
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);

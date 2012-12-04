@@ -37,8 +37,10 @@ public class TaskLoadHandler extends Activity {
         		startActivity(intent);
         		finish();
         	} else {
+        		Task remoteTask = db.getTask(localTask.get_wid(), DBHandler.REMOTE_FLAG);
+        		long taskIdentifier = db.cacheTask(remoteTask);
         		Intent intent = new Intent(this, ViewOtherTaskActivity.class);
-        		intent.putExtra("taskID", localTask.get_tid());
+        		intent.putExtra("taskID", taskIdentifier);
         		startActivity(intent);
         		finish();
         	}
