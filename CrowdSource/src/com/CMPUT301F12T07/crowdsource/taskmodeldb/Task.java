@@ -163,7 +163,7 @@ public class Task {
 
 	public void set_dateDue(String _dateDue, int taskFlag) {
 		if (taskFlag == TASK_REMOTE){
-			this._dateCreate = Long.parseLong(_dateDue);
+			this._dateDue = Long.parseLong(_dateDue);
 		} else {
 			Calendar cal = Calendar.getInstance();
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

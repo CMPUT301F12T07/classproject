@@ -45,7 +45,7 @@ public class ViewOtherTaskActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_task);
+        setContentView(R.layout.activity_view_other_task);
         
         db = new DBHandler(this);
         Long taskID = getIntent().getExtras().getLong("taskID");
@@ -251,7 +251,6 @@ public class ViewOtherTaskActivity extends Activity {
 
 	private void setFollowed()
 	{
-
 		currentTask.set_followed(1);
 		currentTask.set_num_followed(currentTask.get_num_followed() + 1);
 	}
