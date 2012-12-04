@@ -163,6 +163,12 @@ public class ViewTaskActivity extends Activity {
 									intent.putExtra("email", currentTask.get_user_email());
 									startActivity(intent);
 									currentTask.set_qty_filled(currentTask.get_qty_filled()+1);
+									try {
+										db.updateTask(currentTask);
+									} catch (Exception e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
 								}
 							}
 					});
@@ -220,7 +226,6 @@ public class ViewTaskActivity extends Activity {
     	
     	try{
 	    	if (resultCode == RESULT_CANCELED) {finish(); return;}
-	    	currentTask.set_qty_filled(currentTask.get_qty_filled()+1);
 	    	
 	    	switch (requestCode) {
 	    		case RETURN_PHOTO_CODE:
@@ -236,6 +241,7 @@ public class ViewTaskActivity extends Activity {
 	    		default:
 	    			Log.v("default", "default case in ViewTaskActivity");
 	    	}
+	    	
     	} catch (Exception e) {
     		Log.v("ViewTaskActivity", "Error in ViewTaskActivity");
     	}
@@ -258,6 +264,11 @@ public class ViewTaskActivity extends Activity {
     	else
     		taskVisibility.setText("Public");
     	taskDesc.setText(currentTask.get_description());
+    	
+    	if (currentTask.get_quantity() <= currentTask.get_qty_filled()){
+    		fulfillTask.setEnabled(false);
+    		updateTask.setEnabled(false);
+    	}
     }
     
     

@@ -1,7 +1,10 @@
 package com.CMPUT301F12T07.crowdsource.viewupdatetask;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.provider.Settings.Secure;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,10 +25,10 @@ public class ViewLoggedActivity extends Activity {
 	private TextView taskVisibility;
 	private TextView taskDesc;
 	private TextView taskQuantity;
+	private TextView taskFollowers;
 	private DBHandler db;
 
 	private Button deleteTask;
-	private Button viewFulfill;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,26 +51,48 @@ public class ViewLoggedActivity extends Activity {
         this.taskDesc = (TextView) findViewById(R.id.textViewDescription);
         // Getting the task quantity field
         this.taskQuantity = (TextView) findViewById(R.id.textViewQuantity);
+        // Getting the task followers field
+        this.taskFollowers = (TextView) findViewById(R.id.textViewFollowers);
         
         this.deleteTask = (Button) findViewById(R.id.buttonDelete);
         deleteTask.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Toast.makeText(v.getContext(), 
-						"This feature has not been implemented yet.", 
-						Toast.LENGTH_SHORT).show();
-			}
-        });
+        	public void onClick(View v) {
+        		AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
 
-        this.viewFulfill = (Button) findViewById(R.id.buttonFulfill);
-        viewFulfill.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				// do toast
-				Toast.makeText(v.getContext(), 
-						"This feature has not been implemented yet.", 
-						Toast.LENGTH_SHORT).show();
-				
-			}
-        });
+        		// set title
+        		builder.setTitle("Delete");
+
+        		// set dialog message
+        		builder.setMessage("Are you sure you want to delete this task?");
+        		builder.setCancelable(false);
+        		builder.setPositiveButton(R.string.Delete, new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog,int id) {
+        				// if this button is clicked, delete the task and leave the activity
+        				try {
+							db.deleteTask(currentTask.get_tid());
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+        				finish();
+        			}
+        		});
+        		builder.setNegativeButton(R.string.Cancel,new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog,int id) {
+        				// if this button is clicked, just close
+        				// the dialog box and do nothing
+        				dialog.cancel();
+        			}
+        		});
+
+        		// create alert dialog
+        		AlertDialog alertDialog = builder.create();
+
+        		// show it
+        		alertDialog.show();
+        	}
+
+        });;
     }
     
     @Override
@@ -80,12 +105,17 @@ public class ViewLoggedActivity extends Activity {
     	taskTitle.setText(currentTask.get_title());
     	startDate.setText(currentTask.get_dateCreate());
     	endDate.setText(currentTask.get_dateDue());
-    	taskQuantity.setText(Integer.toString(currentTask.get_quantity()));
+    	taskQuantity.setText(Integer.toString(currentTask.get_qty_filled())+" of "+Integer.toString(currentTask.get_quantity())+" fulfilled");
+    	taskFollowers.setText(Integer.toString(currentTask.get_num_followed()));
     	if(currentTask.get_visibility() == 1)
     		taskVisibility.setText("Private");
     	else
     		taskVisibility.setText("Public");
     	taskDesc.setText(currentTask.get_description());
+    	
+    	if (!currentTask.get_uid().equals(Secure.getString(this.getContentResolver(), Secure.ANDROID_ID))){
+    		deleteTask.setEnabled(false);
+    	}
     }
 
     @Override

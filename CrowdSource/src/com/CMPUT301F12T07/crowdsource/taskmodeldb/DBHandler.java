@@ -192,11 +192,14 @@ public class DBHandler {
 		// Get all Task summaries from localDB
 		List<Task> taskList = new ArrayList<Task>();
 		taskList = localDB.getAllTaskSummaries(uid);
-
-		List<Task> randomTask = new ArrayList<Task>();
-		randomTask.add(taskList.get(0));
-
-		return randomTask;
+		
+		if (taskList.isEmpty()) {
+			return null;
+		} else {
+			List<Task> randomTask = new ArrayList<Task>();
+			randomTask.add(taskList.get(0));
+			return randomTask;
+		}
 	}
 	
 	/**

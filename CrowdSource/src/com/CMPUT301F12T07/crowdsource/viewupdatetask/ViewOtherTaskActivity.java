@@ -104,12 +104,24 @@ public class ViewOtherTaskActivity extends Activity {
 							R.drawable.ic_button_followed, 0, 0, 0);
 					currentTask.set_followed(1);
 					currentTask.set_num_followed(currentTask.get_num_followed() + 1);
+					try {
+						db.updateTask(currentTask);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				} else
 				{
 					followTask.setCompoundDrawablesWithIntrinsicBounds(
 							R.drawable.ic_button_unfollowed, 0, 0, 0);
 					currentTask.set_followed(0);
 					currentTask.set_num_followed(currentTask.get_num_followed() - 1);
+					try {
+						db.updateTask(currentTask);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		});
@@ -182,6 +194,13 @@ public class ViewOtherTaskActivity extends Activity {
 									currentTask.set_num_followed(currentTask
 											.get_num_followed() + 1);
 									startActivity(intent);
+									currentTask.set_qty_filled(currentTask.get_qty_filled()+1);
+									try {
+										db.updateTask(currentTask);
+									} catch (Exception e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
 								}
 							}
 						});
@@ -275,6 +294,10 @@ public class ViewOtherTaskActivity extends Activity {
     	else
     		taskVisibility.setText("Public");
     	taskDesc.setText(currentTask.get_description());
+    	
+    	if (currentTask.get_quantity() <= currentTask.get_qty_filled()){
+    		fulfillTask.setEnabled(false);
+    	}
     }
     
     
