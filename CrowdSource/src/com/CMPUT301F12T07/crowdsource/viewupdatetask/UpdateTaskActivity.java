@@ -104,15 +104,15 @@ public class UpdateTaskActivity extends Activity {
 		});
 		
 		final CheckBox Public = (CheckBox) findViewById(R.id.checkboxPublic);
-		if (currentTask.get_visibility() == 0)
+		if (currentTask.get_visibility() == 1)
 			Public.setChecked(true);
 		
 		Public.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (Public.isChecked())
-					currentTask.set_visibility(0);
-				else
 					currentTask.set_visibility(1);
+				else
+					currentTask.set_visibility(0);
 			}
 		});
 	}
