@@ -208,7 +208,7 @@ public class AddTaskActivity extends Activity {
 							"Description cannot be left blank.",
 							Toast.LENGTH_SHORT).show();
 				else if (quantity.compareTo("") == 0
-						|| quantity.compareTo("0") == 0/* quantity == 0 */)
+						|| quantity.compareTo("0") == 0)
 					Toast.makeText(v.getContext(),
 							"Quantity has to be at least one.",
 							Toast.LENGTH_SHORT).show();

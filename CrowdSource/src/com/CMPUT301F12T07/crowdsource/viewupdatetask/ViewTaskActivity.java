@@ -158,6 +158,7 @@ public class ViewTaskActivity extends Activity {
 									Intent intent = new Intent(ViewTaskActivity.this, EmailActivity.class);
 									intent.putExtra("type",	type);
 									intent.putExtra("data", "n/a");
+									intent.putExtra("title", currentTask.get_title());
 									startActivity(intent);
 									currentTask.set_qty_filled(currentTask.get_qty_filled()+1);
 								}
@@ -199,8 +200,8 @@ public class ViewTaskActivity extends Activity {
     private void sendMedia(String type, String data) {
 		Intent intent = new Intent(ViewTaskActivity.this, EmailActivity.class);
 		
-		intent.putExtra("email", "tfung@ualberta.ca");
-		
+		intent.putExtra("email", currentTask.get_user_email());
+		intent.putExtra("title", currentTask.get_title());
 		intent.putExtra("type",	type);
 		intent.putExtra("data", data);
 		startActivity(intent);

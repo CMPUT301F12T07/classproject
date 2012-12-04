@@ -27,10 +27,11 @@ public class EmailActivity extends Activity {
         
         String type = intent.getStringExtra("type");
         String email = intent.getStringExtra("email");
+        String title = intent.getStringExtra("title");
         
         try {
 	        Uri received = Uri.parse(intent.getStringExtra("data"));
-	        startEmailIntent(email, type, received);
+	        startEmailIntent(email, type, title, received);
         } catch (Exception e) {
         	Log.v("EmailActivity", "Error receiving Uri");
         }
@@ -46,12 +47,12 @@ public class EmailActivity extends Activity {
      * @param type	This would be the fulfillment type
      * @param input	This would the data of the fulfillment
      */
-    private void startEmailIntent(String email, String type, Uri input) {
+    private void startEmailIntent(String email, String type, String title, Uri input) {
     	Intent intent = new Intent(android.content.Intent.ACTION_SEND);
  
     	intent.setType("message/rfc822");
     	intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{email});
-    	intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject");
+    	intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "CrowdSource: "+title);
     	
     	// if type is not equal to Text, then do not attach
     	if (type.compareTo("Text") != 0) {
