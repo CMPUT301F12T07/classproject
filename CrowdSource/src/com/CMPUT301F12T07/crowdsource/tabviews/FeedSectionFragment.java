@@ -47,7 +47,8 @@ public class FeedSectionFragment extends Fragment {
         myList.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		Intent intent = new Intent(view.getContext(), TaskLoadHandler.class);
-        		if (tasks.get(position).get_dateCreate() == null) {
+        		// TODO: dateCreate = 0
+        		if (tasks.get(position).get_dateCreate().equals("0")) {
         			intent.putExtra("taskLocalObject", tasks.get(position).get_tid());
         		} else {
         			intent.putExtra("taskWebObject", tasks.get(position).get_wid());

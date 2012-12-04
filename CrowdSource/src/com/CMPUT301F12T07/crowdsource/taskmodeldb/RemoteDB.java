@@ -211,6 +211,9 @@ public class RemoteDB {
 			InputStream is = entity.getContent();
 			String jsonStringVersion = convertStreamToString(is);
 			Type taskType = RemoteTask.class;
+			jsonStringVersion = jsonStringVersion.replace("\"{", "{");
+			jsonStringVersion = jsonStringVersion.replace("}\"", "}");
+			jsonStringVersion = jsonStringVersion.replace("\\", "");
 			remoteTask = gson.fromJson(jsonStringVersion, taskType);
 		}
 		// EntityUtils.consume(entity);
