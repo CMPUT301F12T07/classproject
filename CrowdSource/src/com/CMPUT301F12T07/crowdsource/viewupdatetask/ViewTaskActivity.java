@@ -250,7 +250,7 @@ public class ViewTaskActivity extends Activity {
     	endDate.setText(currentTask.get_dateDue());
     	taskQuantity.setText(Integer.toString(currentTask.get_qty_filled())+" of "+Integer.toString(currentTask.get_quantity())+" fulfilled");
     	taskFollowers.setText(Integer.toString(currentTask.get_num_followed()));
-    	if(currentTask.get_visibility() == 0)
+    	if(currentTask.get_visibility() == 1)
     		taskVisibility.setText("Private");
     	else
     		taskVisibility.setText("Public");

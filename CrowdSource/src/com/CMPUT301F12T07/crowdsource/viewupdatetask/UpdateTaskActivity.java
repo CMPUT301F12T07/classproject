@@ -97,7 +97,7 @@ public class UpdateTaskActivity extends Activity {
 		Cancel.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), ViewTaskActivity.class);
-				intent.putExtra("taskObject", currentTask.get_tid());
+				intent.putExtra("taskID", currentTask.get_tid());
 				startActivity(intent);
 				finish();
 			}

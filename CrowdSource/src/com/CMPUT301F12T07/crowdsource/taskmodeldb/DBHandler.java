@@ -35,7 +35,7 @@ public class DBHandler {
 	 */
 	public long createTask(Task task) throws Exception {
 		long tid = localDB.createTask(task);
-		if (task.get_visibility() == 1) {
+		if (task.get_visibility() == 0) {
 			// add createCommand to hashMap
 
 			// copy tid from sqlite to web
@@ -61,7 +61,7 @@ public class DBHandler {
 	 */
 	public void deleteTask(long tid) throws Exception {
 		Task task = localDB.getTask(tid);
-		if (task.get_visibility() == 1) {
+		if (task.get_visibility() == 0) {
 			if (!task.get_wid().equals("")) {
 				// add deleteCommand to hashMap
 				remoteDB.deleteTask(task.get_wid());
@@ -87,7 +87,7 @@ public class DBHandler {
 		 * visibility == 1 && wid != null => task is always public 
 		 * visibility == 1 && wid == null => task is from private to public
 		 */
-		if ((task.get_visibility() == 0)) {
+		if ((task.get_visibility() == 1)) {
 			if (task.get_wid() != null && !task.get_wid().isEmpty()) {
 				// task is from public to private
 				// delete task from web
