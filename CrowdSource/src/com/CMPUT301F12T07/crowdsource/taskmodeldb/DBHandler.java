@@ -11,6 +11,9 @@ import android.content.Context;
  */
 public class DBHandler {
 
+	public Random randNum;
+	
+	
 	/**
 	 * private variables
 	 * @uml.property  name="localDB"
@@ -203,12 +206,8 @@ public class DBHandler {
 		List<Task> taskList = new ArrayList<Task>();
 		taskList = localDB.getAllTaskSummaries(uid);
 
-		// Pick random task
-		int max = taskList.size();
-		Random generator = new Random();
-		int randomIndex = generator.nextInt(max);
 		List<Task> randomTask = new ArrayList<Task>();
-		randomTask.add(taskList.get(randomIndex));
+		randomTask.add(taskList.get(0));
 
 		return randomTask;
 	}

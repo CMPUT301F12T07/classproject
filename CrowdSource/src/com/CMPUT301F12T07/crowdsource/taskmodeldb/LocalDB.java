@@ -119,7 +119,7 @@ public class LocalDB extends SQLiteOpenHelper {
 		
 		Date date = new Date();
 		long compareDate = date.getTime();
-		String selectQuery = "SELECT "+ KEY_WID +","+ KEY_TITLE +","+ KEY_TYPE +" FROM "+ TABLE_TASKS +" WHERE "+ KEY_UID +"!='"+ uid +"' AND "+ KEY_QUANTITY +">"+ KEY_QTY_FILLED +" AND "+ KEY_DATEDUE +">"+ compareDate +" ORDER BY "+ KEY_DATEDUE +" DESC";
+		String selectQuery = "SELECT "+ KEY_WID +","+ KEY_TITLE +","+ KEY_TYPE +" FROM "+ TABLE_TASKS +" WHERE "+ KEY_UID +"!='"+ uid +"' AND "+ KEY_QUANTITY +">"+ KEY_QTY_FILLED +" AND "+ KEY_DATEDUE +">"+ compareDate +" ORDER BY RANDOM()";
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
 
