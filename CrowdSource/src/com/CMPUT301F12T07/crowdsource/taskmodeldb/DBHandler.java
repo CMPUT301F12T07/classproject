@@ -87,14 +87,14 @@ public class DBHandler {
 	 * @throws Exception
 	 */
 	public void updateTask(Task task) throws Exception {
-		long tid = localDB.updateTask(task, LocalDB.PRIVATE_FLAG);
-		task = localDB.getTask(tid);
+		localDB.updateTask(task, LocalDB.PRIVATE_FLAG);
+		task = localDB.getTask(task.get_tid());
 		/*
 		 * four possible logic for the web service: 
-		 * visibility == 0 && wid != null => task is from public to private 
-		 * visibility == 0 && wid == null => task is always private 
-		 * visibility == 1 && wid != null => task is always public 
-		 * visibility == 1 && wid == null => task is from private to public
+		 * visibility == 1 && wid != null => task is from public to private 
+		 * visibility == 1 && wid == null => task is always private 
+		 * visibility == 0 && wid != null => task is always public 
+		 * visibility == 0 && wid == null => task is from private to public
 		 */
 		if ((task.get_visibility() == 1)) {
 			if (task.get_wid() != null && !task.get_wid().isEmpty()) {

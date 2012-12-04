@@ -142,6 +142,11 @@ public class UpdateTaskActivity extends Activity {
 							"Minimum date is " + startDate.getText().toString(), Toast.LENGTH_SHORT)
 							.show();
 				} else {
+					CheckBox Public = (CheckBox) findViewById(R.id.checkboxPublic);
+					if (Public.isChecked())
+						currentTask.set_visibility(1);
+					else 
+						currentTask.set_visibility(0);
 					currentTask.set_title(taskTitle.getText().toString());
 					currentTask.set_dateCreate(startDate.getText().toString(), Task.TASK_LOCAL);
 					currentTask.set_dateDue(endDate.getText().toString(), Task.TASK_LOCAL);
