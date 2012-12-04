@@ -21,19 +21,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
-/**
- * @author  jsmereka
- */
 public class MyTasksSectionFragment extends Fragment {
 	
 	private ListView myPrivateList;
 	private ListView myPublicList;
 	private List<Task> publicTasks;
 	private List<Task> privateTasks;
-	/**
-	 * @uml.property  name="db"
-	 * @uml.associationEnd  
-	 */
+
 	private DBHandler db;
 	
     public MyTasksSectionFragment() {

@@ -20,19 +20,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
-/**
- * @author  jsmereka
- */
 public class FeedSectionFragment extends Fragment {
 	
 	private ListView myList;
 	private ListView randomTask;
 	private List<Task> tasks;
 	private List<Task> randTask;
-	/**
-	 * @uml.property  name="db"
-	 * @uml.associationEnd  
-	 */
 	private DBHandler db;
 	
     public FeedSectionFragment() {

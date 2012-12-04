@@ -21,25 +21,14 @@ import com.CMPUT301F12T07.crowdsource.R;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
-/**
- * @author  jsmereka
- */
 public class UpdateTaskActivity extends Activity {
 
-	/**
-	 * @uml.property  name="currentTask"
-	 * @uml.associationEnd  
-	 */
 	private Task currentTask;
 	private EditText taskTitle;
 	private TextView startDate;
 	private TextView endDate;
 	private EditText taskQuantity;
 	private EditText taskDesc;
-	/**
-	 * @uml.property  name="db"
-	 * @uml.associationEnd  
-	 */
 	private DBHandler db;
 
 	private Button selectDate;

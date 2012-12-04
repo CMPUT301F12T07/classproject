@@ -13,19 +13,9 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 
-/**
- * @author  jsmereka
- */
 public class TaskLoadHandler extends Activity {
 
-	/**
-	 * Member variables
-	 */
 	private TextView taskTitle;
-	/**
-	 * @uml.property  name="db"
-	 * @uml.associationEnd  
-	 */
 	private DBHandler db;
     
     @Override

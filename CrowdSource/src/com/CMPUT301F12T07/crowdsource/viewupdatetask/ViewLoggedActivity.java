@@ -13,15 +13,8 @@ import com.CMPUT301F12T07.crowdsource.R;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
-/**
- * @author  jsmereka
- */
 public class ViewLoggedActivity extends Activity {
 
-	/**
-	 * @uml.property  name="currentTask"
-	 * @uml.associationEnd  
-	 */
 	private Task currentTask;
 	private TextView taskTitle;
 	private TextView startDate;
@@ -29,10 +22,6 @@ public class ViewLoggedActivity extends Activity {
 	private TextView taskVisibility;
 	private TextView taskDesc;
 	private TextView taskQuantity;
-	/**
-	 * @uml.property  name="db"
-	 * @uml.associationEnd  
-	 */
 	private DBHandler db;
 
 	private Button deleteTask;

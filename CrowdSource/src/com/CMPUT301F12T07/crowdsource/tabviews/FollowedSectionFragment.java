@@ -18,17 +18,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-/**
- * @author  jsmereka
- */
 public class FollowedSectionFragment extends Fragment {
 	
 	private ListView myList;
 	private List<Task> tasks;
-	/**
-	 * @uml.property  name="db"
-	 * @uml.associationEnd  
-	 */
 	private DBHandler db;
 	
     public FollowedSectionFragment() {

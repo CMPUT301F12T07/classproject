@@ -26,9 +26,6 @@ import com.google.gson.Gson;
  */
 public class RemoteDB {
 
-	/**
-	 *  private variables
-	 */
 	// Http Connector
 	private HttpClient httpclient = new DefaultHttpClient();
 	
