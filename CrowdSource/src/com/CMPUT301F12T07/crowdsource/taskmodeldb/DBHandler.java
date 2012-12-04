@@ -71,7 +71,9 @@ public class DBHandler {
 	}
 
 	/**
-	 * 
+	 * update task for user
+	 * update task in localDB
+	 * update task in remoteDB if public
 	 * @param task
 	 * @throws Exception
 	 */
@@ -124,32 +126,68 @@ public class DBHandler {
 		
 	}
 
+	/**
+	 * get all tasks of the user by uid
+	 * search in localDB
+	 * @param uid
+	 * @return tasklist
+	 */
 	public List<Task> getAllMyTasks(String uid) {
 		List<Task> taskList = localDB.getAllTasksByUid(uid);
 		return taskList;
 	}
 
+	/**
+	 * Get followed tasks of the user
+	 * search in localDB
+	 * @param uid
+	 * @return taskList
+	 */
 	public List<Task> getFollowedTasks(String uid) {
 		List<Task> taskList = localDB.getFollowedTasks(uid);
 		return taskList;
 	}
 
+	/**
+	 * Get private tasks(insivible to the public) of the user
+	 * search in localDB
+	 * @param uid
+	 * @return taskList
+	 */
 	public List<Task> getPrivateTasksByUid(String uid) {
 		List<Task> taskList = localDB.getPrivateTasksByUid(uid);
 		return taskList;
 
 	}
 
+	/**
+	 * Get private tasks(visible to the public) of the user
+	 * search in localDB
+	 * @param uid
+	 * @return taskList
+	 */
 	public List<Task> getPublicTasksByUid(String uid) {
 		List<Task> taskList = localDB.getPublicTasksByUid(uid);
 		return taskList;
 	}
 
+	/**
+	 * Get logged tasks list by uid
+	 * search in localDB
+	 * @param uid
+	 * @return taskList
+	 */
 	public List<Task> getLoggedTasks(String uid) {
 		List<Task> taskList = localDB.getLoggedTasks(uid);
 		return taskList;
 	}
 
+	/**
+	 * Get a random task from public by uid
+	 * search in localDB
+	 * @param uid
+	 * @return randomTask
+	 */
 	public List<Task> getRandomTask(String uid) {
 
 		// Get all Task summaries from localDB
@@ -166,7 +204,13 @@ public class DBHandler {
 		return randomTask;
 	}
 	
-
+	/**
+	 * Get tasklist of the whole database
+	 * fetch all tasks from remoteDB
+	 * then store in localDB
+	 * return all task in localDB
+	 * @return
+	 */
 	public List<Task> getAllTasks() {
 		// get remoteList
 		List<Task> remoteList = new ArrayList<Task>();
@@ -191,14 +235,28 @@ public class DBHandler {
 		return localDB.getAllTasks();
 	}
 
+	/**
+	 * empty the localDB
+	 */
 	public void emptyDatabase() {
 		localDB.emptyDatabase();
 	}
 
+	/**
+	 * Generate a random task from localDB
+	 */
 	public void createRandomTask() {
 		localDB.createRandomTask();
 	}
 
+	/**
+	 * Get a task
+	 * if flag is private, search localDB
+	 * otherwise search remoteDB
+	 * @param id
+	 * @param visi_flag
+	 * @return task
+	 */
 	public Task getTask(String id, String visi_flag) {
 		if (visi_flag == LOCAL_FLAG) {
 			return localDB.getTask(Long.parseLong(id));
@@ -215,7 +273,12 @@ public class DBHandler {
 			return remoteTask;
 		}
 	}
-	
+
+	/**
+	 * Store a remote task into localDB
+	 * @param remoteTask
+	 * @return tid
+	 */
 	public long cacheTask(Task remoteTask) {
 		return localDB.cacheWebTask(remoteTask);
 	}

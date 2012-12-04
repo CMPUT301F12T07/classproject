@@ -1,3 +1,9 @@
+/**
+ *  Structure design of LocalDB referencing the following source:  
+ *  http://www.androidhive.info/2011/11/android-sqlite-database-tutorial/
+ *  Author: Ravi Tamada <mailto:ravi8x@gmail.com>
+ */
+
 package com.CMPUT301F12T07.crowdsource.taskmodeldb;
 
 import java.util.ArrayList; 
