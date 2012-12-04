@@ -57,7 +57,6 @@ public class FeedSectionFragment extends Fragment {
         	}
         });
         
-        // TODO: MAKE THIS WORK
         this.randTask = db.getRandomTask(Secure.getString(inflater.getContext().getContentResolver(), Secure.ANDROID_ID));
         randomTask = (ListView) myFeed.findViewById(R.id.randomTask);
         randomTask.setBackgroundColor(Color.GRAY);

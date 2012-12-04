@@ -2,7 +2,9 @@ package com.CMPUT301F12T07.crowdsource.tabviews;
 
 import com.CMPUT301F12T07.crowdsource.AddTaskActivity;
 import com.CMPUT301F12T07.crowdsource.R;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.LocalDB;
+import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
