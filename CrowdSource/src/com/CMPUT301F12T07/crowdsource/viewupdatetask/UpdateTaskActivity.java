@@ -104,8 +104,8 @@ public class UpdateTaskActivity extends Activity {
 							.show();
 				} else {
 					currentTask.set_title(taskTitle.getText().toString());
-					currentTask.set_dateCreate(startDate.getText().toString());
-					currentTask.set_dateDue(endDate.getText().toString());
+					currentTask.set_dateCreate(startDate.getText().toString(), Task.TASK_LOCAL);
+					currentTask.set_dateDue(endDate.getText().toString(), Task.TASK_LOCAL);
 					currentTask.set_quantity(Integer.parseInt(taskQuantity
 							.getText().toString()));
 					currentTask.set_description(taskDesc.getText().toString());

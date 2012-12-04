@@ -41,16 +41,13 @@ public class FeedSectionFragment extends Fragment {
     	
     	db = new DBHandler(inflater.getContext());
         
-        this.tasks = db.getAllTasks();
-        
         myList = (ListView) myFeed.findViewById(R.id.tasklist);
-        myList.setAdapter(new TaskListAdapter(inflater.getContext(), tasks));
         
         // Adds listener for when a Task is clicked in the ListView
         myList.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		Intent intent = new Intent(view.getContext(), TaskLoadHandler.class);
-        		if (tasks.get(position).get_dateCreate() != null) {
+        		if (tasks.get(position).get_dateCreate() == null) {
         			intent.putExtra("taskLocalObject", tasks.get(position).get_tid());
         		} else {
         			intent.putExtra("taskWebObject", tasks.get(position).get_wid());
@@ -84,7 +81,6 @@ public class FeedSectionFragment extends Fragment {
     @Override
 	public void onResume() {
 		super.onResume();
-		// TODO: Add Sync Down of Data to here
 		this.tasks = db.getAllTasks();
 		myList.setAdapter(new TaskListAdapter(getActivity(), tasks));
 	}

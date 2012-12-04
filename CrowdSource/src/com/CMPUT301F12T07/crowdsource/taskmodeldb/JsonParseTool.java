@@ -72,9 +72,9 @@ public class JsonParseTool {
 		JsonElement descElement = contentObject.get("_description");
 		remoteTask.set_description(descElement.getAsString());
 		JsonElement dateCreElement = contentObject.get("_dateCreate");
-		remoteTask.set_dateCreate(dateCreElement.getAsString());
+		remoteTask.set_dateCreate(dateCreElement.getAsString(), Task.TASK_REMOTE);
 		JsonElement dateDueElement = contentObject.get("_dateDue");
-		remoteTask.set_dateDue(dateDueElement.getAsString());
+		remoteTask.set_dateDue(dateDueElement.getAsString(), Task.TASK_REMOTE);
 		remoteTask.set_followed(0);
 		JsonElement num_follElement = contentObject.get("_num_followed");
 		remoteTask.set_num_followed(num_follElement.getAsInt());

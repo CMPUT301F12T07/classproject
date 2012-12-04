@@ -249,15 +249,16 @@ public class LocalDB extends SQLiteOpenHelper {
 					task.set_uid(cursor.getString(1)); 
 					task.set_title(cursor.getString(2)); 
 					task.set_description(cursor.getString(3)); 
-					task.set_dateCreate(cursor.getString(4)); 
-					task.set_dateDue(cursor.getString(5)); 
+					//task.set_dateCreate(cursor.getString(4)); 
+					task.set_dateDue(cursor.getString(5), Task.TASK_LOCAL); 
 					task.set_type(cursor.getString(6)); 
-					task.set_visibility(cursor.getInt(7));
+					//task.set_visibility(cursor.getInt(7));
 					task.set_quantity(cursor.getInt(8));
 					task.set_qty_filled(cursor.getInt(9));
-					task.set_followed(cursor.getInt(10));
+					//task.set_followed(cursor.getInt(10));
 					task.set_num_followed(cursor.getInt(11));
-					task.set_user_email(cursor.getString(12));
+					//task.set_user_email(cursor.getString(12));
+					task.set_wid(cursor.getString(13));
 					// Adding contact to list 
 					taskList.add(task); 
 			} while (cursor.moveToNext()); 
@@ -295,8 +296,8 @@ public class LocalDB extends SQLiteOpenHelper {
 				task.set_uid(cursor.getString(1)); 
 				task.set_title(cursor.getString(2)); 
 				task.set_description(cursor.getString(3)); 
-				task.set_dateCreate(cursor.getString(4)); 
-				task.set_dateDue(cursor.getString(5)); 
+				task.set_dateCreate(cursor.getString(4), Task.TASK_LOCAL); 
+				task.set_dateDue(cursor.getString(5), Task.TASK_LOCAL); 
 				task.set_type(cursor.getString(6)); 
 				task.set_visibility(cursor.getInt(7));
 				task.set_quantity(cursor.getInt(8));
@@ -340,8 +341,8 @@ public class LocalDB extends SQLiteOpenHelper {
 				task.set_uid(cursor.getString(1)); 
 				task.set_title(cursor.getString(2)); 
 				task.set_description(cursor.getString(3)); 
-				task.set_dateCreate(cursor.getString(4)); 
-				task.set_dateDue(cursor.getString(5)); 
+				task.set_dateCreate(cursor.getString(4), Task.TASK_LOCAL); 
+				task.set_dateDue(cursor.getString(5), Task.TASK_LOCAL); 
 				task.set_type(cursor.getString(6)); 
 				task.set_visibility(cursor.getInt(7));
 				task.set_quantity(cursor.getInt(8));
@@ -385,8 +386,8 @@ public class LocalDB extends SQLiteOpenHelper {
 				task.set_uid(cursor.getString(1)); 
 				task.set_title(cursor.getString(2)); 
 				task.set_description(cursor.getString(3)); 
-				task.set_dateCreate(cursor.getString(4)); 
-				task.set_dateDue(cursor.getString(5)); 
+				task.set_dateCreate(cursor.getString(4), Task.TASK_LOCAL); 
+				task.set_dateDue(cursor.getString(5), Task.TASK_LOCAL); 
 				task.set_type(cursor.getString(6)); 
 				task.set_visibility(cursor.getInt(7));
 				task.set_quantity(cursor.getInt(8));
@@ -430,8 +431,8 @@ List<Task> taskList = new ArrayList<Task>();
 				task.set_uid(cursor.getString(1)); 
 				task.set_title(cursor.getString(2)); 
 				task.set_description(cursor.getString(3)); 
-				task.set_dateCreate(cursor.getString(4)); 
-				task.set_dateDue(cursor.getString(5)); 
+				task.set_dateCreate(cursor.getString(4), Task.TASK_LOCAL); 
+				task.set_dateDue(cursor.getString(5), Task.TASK_LOCAL); 
 				task.set_type(cursor.getString(6)); 
 				task.set_visibility(cursor.getInt(7));
 				task.set_quantity(cursor.getInt(8));
@@ -476,8 +477,8 @@ List<Task> taskList = new ArrayList<Task>();
 				task.set_uid(cursor.getString(1)); 
 				task.set_title(cursor.getString(2)); 
 				task.set_description(cursor.getString(3)); 
-				task.set_dateCreate(cursor.getString(4)); 
-				task.set_dateDue(cursor.getString(5)); 
+				task.set_dateCreate(cursor.getString(4), Task.TASK_LOCAL); 
+				task.set_dateDue(cursor.getString(5), Task.TASK_LOCAL); 
 				task.set_type(cursor.getString(6)); 
 				task.set_visibility(cursor.getInt(7));
 				task.set_quantity(cursor.getInt(8));
@@ -565,10 +566,9 @@ List<Task> taskList = new ArrayList<Task>();
 		values.put(KEY_FOLLOWED, 0);
 		values.put(KEY_NUM_FOLLOWED, task.get_num_followed());
 		values.put(KEY_USER_EMAIL, task.get_user_email());
-		values.put(KEY_TID, task.get_tid());
 		
 		db.update(TABLE_TASKS, values, KEY_WID + " = ?", 
-				new String[] { String.valueOf(task.get_wid()) });
+				new String[] { task.get_wid() });
 		
 		String selectQuery = "SELECT "+ KEY_TID +" FROM "+ TABLE_TASKS +" WHERE "+ KEY_WID +"='"+ task.get_wid() +"'";
 		Cursor cursor = db.rawQuery(selectQuery, null);
