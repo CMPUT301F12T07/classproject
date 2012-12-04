@@ -141,7 +141,6 @@ public class UpdateTaskActivity extends Activity {
 					try {
 						db.updateTask(currentTask);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					
@@ -245,15 +244,5 @@ public class UpdateTaskActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_update_task, menu);
 		return true;
 	}
-
-	// @Override
-	// public boolean onOptionsItemSelected(MenuItem item) {
-	// switch (item.getItemId()) {
-	// case android.R.id.home:
-	// NavUtils.navigateUpFromSameTask(this);
-	// return true;
-	// }
-	// return super.onOptionsItemSelected(item);
-	// }
 
 }

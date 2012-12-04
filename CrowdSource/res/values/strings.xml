@@ -2,7 +2,7 @@
 
     <string name="app_name">CrowdSource</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">CrowdSourced</string>
+    <string name="title_activity_main">CrowdSource</string>
     <string name="title_activity_view_task">View Task</string>
     <string name="TaskObject">taskObject</string>
     <string name="addtask_actionbar">Add Task</string>
@@ -38,22 +38,22 @@
     <string name="Fulfill">Fulfill</string>
     <string name="Delete">Delete</string>
     <string name="Update">Update</string>
-    <string name="MakePublic">Make Public</string>
+    <string name="MakePublic">Make Private</string>
     <string name="title_activity_update_task">Update Task</string>
     <string name="Save">Save</string>
     <string name="Cancel">Cancel</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_view_logged">ViewLoggedActivity</string>
+    <string name="title_activity_view_logged">Completed Tasks</string>
     <string name="myPrivateTasksText">Private Tasks</string>
     <string name="myPublicTasksText">Public Tasks</string>
-    <string name="title_activity_view_other_task">ViewOtherTaskActivity</string>
+    <string name="title_activity_view_other_task">View Task</string>
     <string name="Follow">Follow</string>
     <string name="tasktype_desc">Task Type</string>
-    <string name="title_activity_take_photo">TakePhoto</string>
-    <string name="title_activity_task_load_handler">TaskLoadHandler</string>
-    <string name="title_activity_email">EmailActivity</string>
-    <string name="title_activity_record_audio">RecordAudioActivity</string>
-    <string name="title_activity_choose_picture">ChoosePictureActivity</string>
+    <string name="title_activity_take_photo">Take Photo</string>
+    <string name="title_activity_task_load_handler">Loading Task</string>
+    <string name="title_activity_email">Email</string>
+    <string name="title_activity_record_audio">Record Audio</string>
+    <string name="title_activity_choose_picture">Choose Picture</string>
     <string name="createdDateTextView_text">Date Created:</string>
 
 </resources>
