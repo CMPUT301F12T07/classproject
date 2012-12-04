@@ -13,15 +13,17 @@ public class TaskSummary {
 	private int _quantity;
 	private int _qty_filled;
 	private String _type;
+	private String _uid;
 	
 	/** constructor with wid */
-    public TaskSummary(String webid, String title, String dateDue, int quantity, int qty_filled, String type) { 
+    public TaskSummary(String webid, String title, String dateDue, int quantity, int qty_filled, String type, String uid) { 
     	this._wid = webid;
     	this._title = title;
     	set_dateDue(dateDue);
     	this._quantity = quantity;
     	this._qty_filled = qty_filled;
     	this._type = type;
+    	this._uid = uid;
     }
     
     public String get_title() {
@@ -83,5 +85,12 @@ public class TaskSummary {
 		this._wid = webid;
 	}
 	
+	public String get_uid() {
+		return _uid;
+	}
+	
+	public void set_uid(String uid) {
+		this._uid = uid;
+	}
 	
 }

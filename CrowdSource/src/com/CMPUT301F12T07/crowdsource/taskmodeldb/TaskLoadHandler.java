@@ -43,11 +43,18 @@ public class TaskLoadHandler extends Activity {
         	String thisTask = getIntent().getExtras().getString("taskWebObject");
         	Task remoteTask = db.getTask(thisTask, DBHandler.REMOTE_FLAG);
         	taskTitle.setText(remoteTask.get_title());
-        	long taskIdentifier = db.cacheTask(remoteTask);
-        	Intent intent = new Intent(this, ViewOtherTaskActivity.class);
-    		intent.putExtra("taskID", taskIdentifier);
-    		startActivity(intent);
-    		finish();
+        	if (remoteTask.get_uid().equals(Secure.getString(this.getContentResolver(), Secure.ANDROID_ID))) {
+        		Intent intent = new Intent(this, ViewTaskActivity.class);
+        		intent.putExtra("taskID", remoteTask.get_tid());
+        		startActivity(intent);
+        		finish();
+        	} else {
+        		long taskIdentifier = db.cacheTask(remoteTask);
+        		Intent intent = new Intent(this, ViewOtherTaskActivity.class);
+        		intent.putExtra("taskID", taskIdentifier);
+        		startActivity(intent);
+        		finish();
+        	}
         }
     }
 

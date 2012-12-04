@@ -19,7 +19,7 @@ public class RemoteTask {
 
 	/** constructor without id */
 	public RemoteTask(Task task) {
-		TaskSummary taskSummary = new TaskSummary(task.get_wid(), task.get_title(), task.get_dateDue(), task.get_quantity(), task.get_qty_filled(), task.get_type());
+		TaskSummary taskSummary = new TaskSummary(task.get_wid(), task.get_title(), task.get_dateDue(), task.get_quantity(), task.get_qty_filled(), task.get_type(), task.get_uid());
 		this.setSummary(taskSummary);
 		this.setContent(task);
 		this.setDescription(task.get_description());
@@ -27,7 +27,7 @@ public class RemoteTask {
 
 	/** constructor with id */
 	public RemoteTask(Task task, String id) {
-		TaskSummary taskSummary = new TaskSummary(task.get_wid(), task.get_title(), task.get_dateDue(), task.get_quantity(), task.get_qty_filled(), task.get_type());
+		TaskSummary taskSummary = new TaskSummary(task.get_wid(), task.get_title(), task.get_dateDue(), task.get_quantity(), task.get_qty_filled(), task.get_type(), task.get_uid());
 		this.setSummary(taskSummary);
 		this.setContent(task);
 		this.setId(id);

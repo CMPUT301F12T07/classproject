@@ -27,6 +27,7 @@ public class JsonParseTool {
 		int quantity;
 		int qty_filled;
 		String type;
+		String uid;
 
 		Iterator<?> iterator = array.iterator();
 		while (iterator.hasNext()) {
@@ -43,8 +44,9 @@ public class JsonParseTool {
 			quantity = summaryObject.get("_quantity").getAsInt();
 			qty_filled = summaryObject.get("_qty_filled").getAsInt();
 			type = summaryObject.get("_type").getAsString();
+			uid = summaryObject.get("_uid").getAsString();
 
-			Task task = new Task(wid, title, dateDue, quantity, qty_filled, type);
+			Task task = new Task(wid, title, dateDue, quantity, qty_filled, type, uid);
 			taskList.add(task);
 
 		}

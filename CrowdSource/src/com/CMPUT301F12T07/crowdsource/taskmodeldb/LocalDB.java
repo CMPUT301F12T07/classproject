@@ -567,8 +567,7 @@ List<Task> taskList = new ArrayList<Task>();
 		values.put(KEY_NUM_FOLLOWED, task.get_num_followed());
 		values.put(KEY_USER_EMAIL, task.get_user_email());
 		
-		db.update(TABLE_TASKS, values, KEY_WID + " = ?", 
-				new String[] { task.get_wid() });
+		db.update(TABLE_TASKS, values, KEY_WID + " = ?", new String[] { task.get_wid() });
 		
 		String selectQuery = "SELECT "+ KEY_TID +" FROM "+ TABLE_TASKS +" WHERE "+ KEY_WID +"='"+ task.get_wid() +"'";
 		Cursor cursor = db.rawQuery(selectQuery, null);
