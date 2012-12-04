@@ -160,6 +160,7 @@ public class ViewTaskActivity extends Activity {
 									intent.putExtra("type",	type);
 									intent.putExtra("data", "n/a");
 									intent.putExtra("title", currentTask.get_title());
+									intent.putExtra("email", currentTask.get_user_email());
 									startActivity(intent);
 									currentTask.set_qty_filled(currentTask.get_qty_filled()+1);
 								}
