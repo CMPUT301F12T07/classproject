@@ -323,7 +323,7 @@ public class LocalDB extends SQLiteOpenHelper {
 	 * Gets all Public Tasks by UserID	
 	 * 
 	 * Queries database for all tasks where UserID=uid
-	 * and where Visibility=0 (public) then returns them 
+	 * and where Visibility=1 (public) then returns them 
 	 * in a list of Task objects.
 	 * 
 	 * @param uid - User Identifier
@@ -334,7 +334,7 @@ public class LocalDB extends SQLiteOpenHelper {
 		
 		Date date = new Date();
 		long compareDate = date.getTime();
-		String selectQuery = "SELECT * FROM "+ TABLE_TASKS +" WHERE "+ KEY_UID +"='"+ uid +"' AND "+ KEY_VISIBILITY +"='0' AND "+ KEY_QUANTITY +">"+ KEY_QTY_FILLED +" AND "+ KEY_DATEDUE +">"+ compareDate +" ORDER BY "+ KEY_DATEDUE +" DESC";
+		String selectQuery = "SELECT * FROM "+ TABLE_TASKS +" WHERE "+ KEY_UID +"='"+ uid +"' AND "+ KEY_VISIBILITY +"='1' AND "+ KEY_QUANTITY +">"+ KEY_QTY_FILLED +" AND "+ KEY_DATEDUE +">"+ compareDate +" ORDER BY "+ KEY_DATEDUE +" DESC";
 		
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
