@@ -15,6 +15,9 @@ import android.support.v4.app.NavUtils;
 
 public class TaskLoadHandler extends Activity {
 
+	/**
+	 * Member variables
+	 */
 	private TextView taskTitle;
 	private DBHandler db;
     

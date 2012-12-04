@@ -90,7 +90,8 @@ public class Task {
         this._wid = webid;
     }
 
-    /** getter and setter */
+    /** getters and setters */
+    
 	public Long get_tid() {
 		return _tid;
 	}

@@ -8,18 +8,31 @@ import android.content.Context;
 
 public class DBHandler {
 
+	/**
+	 * private variables
+	 */
 	private LocalDB localDB;
 	private RemoteDB remoteDB;
-	
 	public static final String LOCAL_FLAG = "local";
 	public static final String REMOTE_FLAG = "remote";
 	
-
+	/**
+	 * Constructor
+	 * @param context
+	 */
 	public DBHandler(Context context) {
 		this.localDB = new LocalDB(context);
 		this.remoteDB = new RemoteDB();
 	}
 
+	/**
+	 * Create task for user
+	 * insert task to localDB
+	 * insert task to remoteDB
+	 * @param task
+	 * @return tid
+	 * @throws Exception
+	 */
 	public long createTask(Task task) throws Exception {
 		long tid = localDB.createTask(task);
 		if (task.get_visibility() == 0) {
@@ -39,6 +52,13 @@ public class DBHandler {
 		return tid;
 	}
 
+	/**
+	 * delete task for user
+	 * delete task in localDB
+	 * delete task in remoteDB is public
+	 * @param tid
+	 * @throws Exception
+	 */
 	public void deleteTask(long tid) throws Exception {
 		Task task = localDB.getTask(tid);
 		if (task.get_visibility() == 0) {
@@ -50,6 +70,11 @@ public class DBHandler {
 		localDB.deleteTask(tid);
 	}
 
+	/**
+	 * 
+	 * @param task
+	 * @throws Exception
+	 */
 	public void updateTask(Task task) throws Exception {
 		long tid = localDB.updateTask(task, LocalDB.PRIVATE_FLAG);
 		task = localDB.getTask(tid);

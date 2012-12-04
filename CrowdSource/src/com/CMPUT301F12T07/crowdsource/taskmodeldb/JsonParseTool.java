@@ -11,7 +11,13 @@ import com.google.gson.JsonParser;
 
 public class JsonParseTool {
 
-	// parse task list for HomeScreen
+	/**
+	 * Parse Json string to get a list of task 
+	 * of the whole datebase 
+	 * including localDB and remoteDB
+	 * @param jsonStringVersion
+	 * @return List<Task>
+	 */
 	public static List<Task> parseTaskList(String jsonStringVersion) {
 		List<Task> taskList = new ArrayList<Task>();
 		// TODO: Convert to a Regular Expression to remove "{ }" and \" \":
@@ -52,6 +58,11 @@ public class JsonParseTool {
 		return taskList;
 	}
 	
+	/**
+	 * Parse Json string to get a single task
+	 * @param jsonStringVersion
+	 * @return Task
+	 */
 	public static Task parseTask(String jsonStringVersion) {
 		Task remoteTask = new Task();
 		// TODO: Convert to a Regular Expression to remove "{ }" and \" \":

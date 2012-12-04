@@ -16,17 +16,22 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import com.google.gson.Gson;
 
-// https://github.com/abramhindle/CrowdSourcer/blob/master/README
 /**
  * CrowdSource Service Client (Teaser)
  * 
  * @author Victor Guana - guana[at]ualberta.ca University of Alberta, Department
  *         of Computing Science
+ *         
+ * https://github.com/abramhindle/CrowdSourcer/blob/master/README
  */
 public class RemoteDB {
 
+	/**
+	 *  private variables
+	 */
 	// Http Connector
 	private HttpClient httpclient = new DefaultHttpClient();
+	
 	// private AndroidHttpClient httpclient =
 	// AndroidHttpClient.newInstance("Android");
 	// JSON Utilities
@@ -35,8 +40,6 @@ public class RemoteDB {
 	// POST Request
 	HttpPost httpPost = new HttpPost(
 			"http://crowdsourcer.softwareprocess.es/F12/CMPUT301F12T07/");
-
-	// http://crowdsourcer.softwareprocess.es/F12/CMPUT301F12T07/?action=list
 
 	/**
 	 * Sends messages to the crowd service and retrieves its responses
@@ -49,7 +52,7 @@ public class RemoteDB {
 			// this.testUpdateMethods("05d6023314c80dbafbaeb2b7d252d7a5e17fcfb6");
 			String lot = this.listTasks();
 			System.out
-					.println("List of remoteTasks in the CrowdSourcer -> " + lot);
+			.println("List of remoteTasks in the CrowdSourcer -> " + lot);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,6 +61,9 @@ public class RemoteDB {
 		}
 	}
 
+	/**
+	 * Test method for the createTask methods
+	 */
 	public void testCreateMethods() {
 
 		Task task = new Task(1111, "user1", "cat", "funny videos of cats",
@@ -74,6 +80,9 @@ public class RemoteDB {
 		}
 	}
 
+	/**
+	 * Test method for the updateTask methods
+	 */
 	public void testUpdateMethods(String id) {
 
 		Task task = new Task(1112, "user1-up", "cat-up",
@@ -90,13 +99,8 @@ public class RemoteDB {
 		}
 	}
 
-	/**
-	 * Initializes a simple mock task
-	 * 
-	 * @return
-	 */
 
-	/*
+	/**
 	 * To convert the InputStream to String we use the BufferedReader.readLine()
 	 * method. We iterate until the BufferedReader return null which means
 	 * there's no more data to read. Each line will appended to a StringBuilder
@@ -126,6 +130,12 @@ public class RemoteDB {
 		return sb.toString();
 	}
 
+	/**
+	 * Get String representing the a list Entities as JSON (GET)
+	 * The list contains the whole data of the remote database
+	 * @return
+	 * @throws Exception
+	 */
 	public String listTasks() throws Exception {
 
 		String jsonStringVersion = new String();
@@ -150,18 +160,28 @@ public class RemoteDB {
 		return jsonStringVersion;
 	}
 
-	// Parse json string into light weight Task objects.
+	/**
+	 *  Parse json string into light weight Task objects.
+	 */
 	public List<Task> parseJson(String jsonStringVersion) {
 		List<Task> taskList = JsonParseTool.parseTaskList(jsonStringVersion);
 		return taskList;
 	}
-	
-	// Parse json string into heavy weight Task object.
+
+	/**
+	 *  Parse json string into heavy weight Task object.
+	 */
 	public Task parseIndividualJson(String jsonStringVersion) {
 		Task remoteTask = JsonParseTool.parseTask(jsonStringVersion);
 		return remoteTask;
 	}
 
+	/**
+	 * Get String representing the an Entities as JSON (GET)
+	 * @param wid
+	 * @return
+	 * @throws Exception
+	 */
 	public String getTask(String wid) throws Exception {
 
 		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
@@ -186,6 +206,12 @@ public class RemoteDB {
 
 	}
 
+	/**
+	 * Insert a new entry to remote database
+	 * @param remoteTask
+	 * @return RemoteTask
+	 * @throws Exception
+	 */
 	public RemoteTask createTask(RemoteTask remoteTask) throws Exception {
 
 		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
@@ -217,6 +243,11 @@ public class RemoteDB {
 		return remoteTask;
 	}
 
+	/**
+	 * Update an entry of the remote database
+	 * @param remoteTask
+	 * @throws Exception
+	 */
 	public void updateTask(RemoteTask remoteTask) throws Exception {
 
 		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
@@ -235,6 +266,12 @@ public class RemoteDB {
 
 	}
 
+	/**
+	 * Delete an entry in the remote database
+	 * @param wid
+	 * @return RemoteTask
+	 * @throws Exception
+	 */
 	public RemoteTask deleteTask(String wid) throws Exception {
 
 		RemoteTask responseTask = new RemoteTask();
@@ -259,5 +296,5 @@ public class RemoteDB {
 		// EntityUtils.consume(entity);
 		return responseTask;
 	}
-	
+
 }

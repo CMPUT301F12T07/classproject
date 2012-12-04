@@ -7,6 +7,9 @@ import java.util.Date;
 
 public class TaskSummary {
 
+	/**
+	 * Private variables
+	 */
 	private String _wid;
 	private String _title;
 	private long _dateDue;
@@ -24,6 +27,10 @@ public class TaskSummary {
     	this._type = type;
     }
     
+    /**
+     * Getter and setter for TaskSummary
+     */
+
     public String get_title() {
 		return _title;
 	}
