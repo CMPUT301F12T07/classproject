@@ -22,9 +22,16 @@ import com.CMPUT301F12T07.crowdsource.TakePhotoActivity;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.DBHandler;
 import com.CMPUT301F12T07.crowdsource.taskmodeldb.Task;
 
+/**
+ * @author  jsmereka
+ */
 public class ViewOtherTaskActivity extends Activity {
 
 
+	/**
+	 * @uml.property  name="currentTask"
+	 * @uml.associationEnd  
+	 */
 	private Task currentTask;
 	private TextView taskTitle;
 	private TextView startDate;
@@ -33,6 +40,10 @@ public class ViewOtherTaskActivity extends Activity {
 	private TextView taskDesc;
 	private TextView taskQuantity;
 	private TextView taskFollowers;
+	/**
+	 * @uml.property  name="db"
+	 * @uml.associationEnd  
+	 */
 	private DBHandler db;
 
 	private Button followTask;
@@ -270,7 +281,7 @@ public class ViewOtherTaskActivity extends Activity {
     	endDate.setText(currentTask.get_dateDue());
     	taskQuantity.setText(Integer.toString(currentTask.get_qty_filled())+" of "+Integer.toString(currentTask.get_quantity())+" fulfilled");
     	taskFollowers.setText(Integer.toString(currentTask.get_num_followed()));
-    	if(currentTask.get_visibility() == 1)
+    	if(currentTask.get_visibility() == 0)
     		taskVisibility.setText("Private");
     	else
     		taskVisibility.setText("Public");

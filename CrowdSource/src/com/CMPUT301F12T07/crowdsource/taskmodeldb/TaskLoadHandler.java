@@ -13,12 +13,19 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 
+/**
+ * @author  jsmereka
+ */
 public class TaskLoadHandler extends Activity {
 
 	/**
 	 * Member variables
 	 */
 	private TextView taskTitle;
+	/**
+	 * @uml.property  name="db"
+	 * @uml.associationEnd  
+	 */
 	private DBHandler db;
     
     @Override
@@ -50,7 +57,11 @@ public class TaskLoadHandler extends Activity {
         	taskTitle.setText(remoteTask.get_title());
         	if (remoteTask.get_uid().equals(Secure.getString(this.getContentResolver(), Secure.ANDROID_ID))) {
         		Intent intent = new Intent(this, ViewTaskActivity.class);
-        		intent.putExtra("taskID", remoteTask.get_tid());
+        		if (remoteTask.get_tid() == null) {
+        			long taskIdentifier = db.cacheTask(remoteTask);
+        			intent.putExtra("taskID", taskIdentifier);
+        		} else 
+        			intent.putExtra("taskID", remoteTask.get_tid());
         		startActivity(intent);
         		finish();
         	} else {

@@ -6,12 +6,21 @@ import java.util.Random;
 
 import android.content.Context;
 
+/**
+ * @author  jsmereka
+ */
 public class DBHandler {
 
 	/**
 	 * private variables
+	 * @uml.property  name="localDB"
+	 * @uml.associationEnd  
 	 */
 	private LocalDB localDB;
+	/**
+	 * @uml.property  name="remoteDB"
+	 * @uml.associationEnd  
+	 */
 	private RemoteDB remoteDB;
 	public static final String LOCAL_FLAG = "local";
 	public static final String REMOTE_FLAG = "remote";
