@@ -13,6 +13,12 @@ import android.content.Intent;
 import android.view.Menu;
 import android.widget.Toast;
 
+/**
+ * Opens up photo to take a picture.
+ * @author thomasfung
+ *
+ */
+
 public class TakePhotoActivity extends Activity {
 
 	Uri imageFileUri;

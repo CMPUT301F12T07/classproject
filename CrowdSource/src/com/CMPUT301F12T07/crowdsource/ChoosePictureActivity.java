@@ -6,6 +6,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 
+/**
+ * Opens gallery and returns the chosen picture
+ * @author thomasfung
+ *
+ */
+
 public class ChoosePictureActivity extends Activity {
 
 	private static final int RETURN_IMAGE_CODE = 1;

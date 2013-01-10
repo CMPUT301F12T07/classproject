@@ -24,6 +24,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Creates a task from user input.
+ * @author thomasfung
+ *
+ */
+
 public class AddTaskActivity extends Activity {
 
 	private String deviceId;

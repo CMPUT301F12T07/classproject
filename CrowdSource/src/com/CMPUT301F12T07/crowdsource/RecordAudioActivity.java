@@ -23,6 +23,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Records audio and forwards its file to EmailActivity.
+ * @author thomasfung
+ *
+ */
+
 public class RecordAudioActivity extends Activity {
 
 	private TextView min;

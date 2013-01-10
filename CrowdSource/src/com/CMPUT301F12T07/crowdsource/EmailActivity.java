@@ -7,6 +7,12 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 
+/**
+ * Takes the media (Text, Audio, Photo) and sends it through email.
+ * @author thomasfung
+ *
+ */
+
 public class EmailActivity extends Activity {
 	
     @Override
