@@ -1,6 +1,7 @@
 package com.CMPUT301F12T07.crowdsource;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -10,6 +11,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
@@ -30,9 +32,15 @@ public class TakePhotoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_photo);
         
-        setUpFolder();
-        setUpPath();
-        capturePicture();
+        try {
+        	setUpFolder();
+        	setUpPath();
+        	capturePicture();
+        } catch (IOException e) {
+        	Log.v("TakePhotoActivity", "Cannot make folders");
+        	Toast.makeText(TakePhotoActivity.this, "Cannot initialize folder", Toast.LENGTH_SHORT).show();
+        	finish();
+        }
     }
 
     /**
@@ -58,17 +66,20 @@ public class TakePhotoActivity extends Activity {
     /**
      * Configure's folder for photos.
      */
-    private void setUpFolder() {
+    private void setUpFolder() throws IOException {
 		folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/crowdsource/photos";
 		
 		File folderF = new File(folder);
-		if (!folderF.exists()) folderF.mkdir();
+		Boolean dirSuccess = true;
+		
+		if (!folderF.exists()) dirSuccess = folderF.mkdirs();		
+		if (!dirSuccess) throw new IOException();
     }
     
     /**
      * Initializes the photos path, and name.
      */
-    private void setUpPath() {
+    private void setUpPath() throws IOException {
 		String imageFilePath = folder + "/" + getDateTime() + ".jpg";
 		File imageFile = new File(imageFilePath);
 		imageFileUri = Uri.fromFile(imageFile);

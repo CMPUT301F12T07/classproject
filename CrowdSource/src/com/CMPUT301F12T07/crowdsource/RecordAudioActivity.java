@@ -80,17 +80,26 @@ public class RecordAudioActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_audio);
         
-        setUpTimer();
-        setUpStart();
-        setUpStop();
-        setUpCancel();
+        try {
+	        setUpTimer();
+	        setUpPath();
+	        setUpStart();
+	        setUpStop();
+	        setUpCancel();
+        } catch (IOException e) {
+        	Toast.makeText(RecordAudioActivity.this, "Cannot initialize folder or audio file.", Toast.LENGTH_SHORT).show();
+        	finish();
+        } catch (IllegalStateException e) {
+        	Toast.makeText(RecordAudioActivity.this, "Cannot initialize audio file.", Toast.LENGTH_SHORT).show();
+        	finish();
+        }
         
     }
     
     /**
      * Initializes buttons, and timer display. 
      */
-    private void setUpStart() {
+    private void setUpStart() throws IOException, IllegalStateException {
     	start = (Button) findViewById(R.id.start);
     	start.setOnClickListener(new OnClickListener() {
     		public void onClick(View v) {		
@@ -100,10 +109,18 @@ public class RecordAudioActivity extends Activity {
     			
     			try {
     				setUpRecorder();
-    				setUpPath();
+    				audioFile = File.createTempFile(getDateTime(), ".3gp", new File(folder));
     				recordAudio();
     			} catch (IOException e) {
     				Log.e("RecordAudioActivity", "start recording error");
+    				try {
+						throw e;
+					} catch (IOException e1) {
+						Log.e("RecordAudioActivity", "cannot throw IOException");
+					}
+    			} catch (IllegalStateException e) {
+    				Log.e("RecordAudioActivity", "record audio setup incorrect order");
+    				throw e;
     			}
 
     		}
@@ -179,8 +196,10 @@ public class RecordAudioActivity extends Activity {
         folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/crowdsource/audio";
         
         File folderF = new File(folder);
-        if (!folderF.exists()) folderF.mkdir();
-		audioFile = File.createTempFile(getDateTime(), ".3gp", folderF);
+        Boolean dirSuccess = true;
+        
+        if (!folderF.exists()) dirSuccess = folderF.mkdirs();
+        if (!dirSuccess) throw new IOException();
     }
     
     /**
@@ -198,9 +217,8 @@ public class RecordAudioActivity extends Activity {
      * recordAudio will get called when the recording starts
      * @throws IOException
      */
-    private void recordAudio() throws IOException {
+    private void recordAudio() throws IllegalStateException, IOException {
         mRecorder.setOutputFile(audioFile.getAbsolutePath());
-        
         mRecorder.prepare();
         mRecorder.start();
     }
